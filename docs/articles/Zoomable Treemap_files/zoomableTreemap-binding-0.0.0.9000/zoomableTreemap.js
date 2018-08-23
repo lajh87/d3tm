@@ -10,7 +10,7 @@ HTMLWidgets.widget({
 
       renderValue: function(x) {
         var margin = {top: 20, right: 0, bottom: 0, left: 0},
-    width = 800,
+    width = 960,
     height = 500 - margin.top - margin.bottom,
     formatNumber = d3.format(",d"),
     transitioning;
@@ -31,7 +31,7 @@ var treemap = d3.layout.treemap()
     .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
     .round(false);
 
-var svg = d3.select("#zoomableTreemap-main").append("svg")
+var svg = d3.select(el).append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.bottom + margin.top)
     .style("margin-left", -margin.left + "px")

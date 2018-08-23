@@ -1,0 +1,31 @@
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Installation
+
+```{r}
+if(!"d3RZoomableTreemap" %in% installed.packages()[,"Package"])
+  devtools::install_git("https://gitlab.com/lajh87/d3RZoomableTreemap")
+```
+
+## Usage
+
+```{r}
+
+library(d3RZoomableTreemap)
+
+json <- jsonlite::fromJSON("data-raw/flare.json",
+                           flatten = F,simplifyVector = F,
+                           simplifyDataFrame = F,simplifyMatrix = F)
+
+zoomableTreemap(json)
+
+```
+
+<p>
+<br>

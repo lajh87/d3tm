@@ -4,10 +4,11 @@ Version: 0.0.0.9000
 Authors@R: c(person("Luke", "Heley", role = c("aut", "cre"),
                      email = "lajh87@me.com"))
 Description: What the package does (one paragraph).
-Depends: R (>= 3.5.1)
+Depends: R (>= 3.5.1), htmltools
 License: MIT
 Encoding: UTF-8
 LazyData: true
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+RoxygenNote: 6.1.0

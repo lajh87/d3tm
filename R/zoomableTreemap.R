@@ -6,21 +6,20 @@
 #'
 #' @export
 zoomableTreemap <- function(data, width = NULL, height = NULL, elementId = NULL) {
-
-  data <- jsonlite::toJSON(data,pretty = T,auto_unbox = T)
+  data <- jsonlite::toJSON(data, pretty = T, auto_unbox = T)
 
   # forward options using x
-  x = list(
+  x <- list(
     data = data
   )
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'zoomableTreemap',
+    name = "zoomableTreemap",
     x,
     width = width,
     height = height,
-    package = 'd3RZoomableTreemap',
+    package = "d3RZoomableTreemap",
     elementId = elementId
   )
 }
@@ -42,13 +41,26 @@ zoomableTreemap <- function(data, width = NULL, height = NULL, elementId = NULL)
 #' @name zoomableTreemap-shiny
 #'
 #' @export
-zoomableTreemapOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'zoomableTreemap', width, height, package = 'd3RZoomableTreemap')
+zoomableTreemapOutput <- function(outputId, width = "100%", height = "400px") {
+  htmlwidgets::shinyWidgetOutput(outputId, "zoomableTreemap", width, height, package = "d3RZoomableTreemap")
 }
 
 #' @rdname zoomableTreemap-shiny
 #' @export
 renderZoomableTreemap <- function(expr, env = parent.frame(), quoted = FALSE) {
-  if (!quoted) { expr <- substitute(expr) } # force quoted
+  if (!quoted) {
+    expr <- substitute(expr)
+  } # force quoted
   htmlwidgets::shinyRenderWidget(expr, zoomableTreemapOutput, env, quoted = TRUE)
+}
+
+zoomableTreemap_html <- function(id, style, class, ...) {
+  tagList(
+    tags$div(
+      id = id, class = class, style = style, style = "position:relative;"
+      , tags$div(
+        tags$div(class = "zoomableTreemap-main", id="zoomableTreemap-main")
+      )
+    )
+  )
 }
