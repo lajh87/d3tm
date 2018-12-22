@@ -22,9 +22,8 @@ json <- jsonlite::fromJSON("data-raw/flare.json",
                            flatten = F,simplifyVector = F,
                            simplifyDataFrame = F,simplifyMatrix = F)
 
-
-tree <- data.tree::FromListExplicit(json)
-print(tree, "value")
+# tree <- data.tree::FromListExplicit(json)
+# print(tree, "value")
 
 zoomableTreemap(json)
 

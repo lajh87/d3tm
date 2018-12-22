@@ -12,7 +12,7 @@ ui <- fluidPage(
     mainPanel = mainPanel(zoomableTreemapOutput("x1")),
     sidebarPanel = sidebarPanel(
       fluidRow(
-        tags$label("Selected Node:"),textOutput("event",inline = T)
+        tags$label("Selected Node:"),textOutput("selected_node",inline = T)
         )
       ),
       position = "right"

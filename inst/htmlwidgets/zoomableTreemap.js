@@ -96,7 +96,7 @@ HTMLWidgets.widget({
           }
         }
 
-       function communicateClick(d){
+       function click_to_shiny_input(d){
         // add a hook to Shiny
         if( HTMLWidgets.shinyMode ){
           Shiny.onInputChange(el.id + '_click', d.name);
@@ -108,7 +108,7 @@ HTMLWidgets.widget({
             .datum(d.parent)
             .on("click", function(d){
               transition(d);
-              communicateClick(d);
+              click_to_shiny_input(d);
             })
             .select("text")
             .text(name(d));
@@ -125,7 +125,7 @@ HTMLWidgets.widget({
             .classed("children", true)
             .on("click", function(d){
               transition(d);
-              communicateClick(d);
+              click_to_shiny_input(d);
             });
 
         g.selectAll(".child")
