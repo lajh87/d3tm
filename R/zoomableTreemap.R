@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-zoomableTreemap <- function(data, width = NULL, height = NULL, elementId = NULL) {
+zoomableTreemap <- function(data = flare, width = 800, height = 500, elementId = NULL) {
   data <- jsonlite::toJSON(data, pretty = T, auto_unbox = T)
 
   # forward options using x
@@ -19,6 +19,10 @@ zoomableTreemap <- function(data, width = NULL, height = NULL, elementId = NULL)
     x,
     width = width,
     height = height,
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      padding = 0,
+      browser.fill = TRUE
+      ),
     package = "d3RZoomableTreemap",
     elementId = elementId
   )
@@ -41,7 +45,7 @@ zoomableTreemap <- function(data, width = NULL, height = NULL, elementId = NULL)
 #' @name zoomableTreemap-shiny
 #'
 #' @export
-zoomableTreemapOutput <- function(outputId, width = "100%", height = "400px") {
+zoomableTreemapOutput <- function(outputId, width = 800, height = 500) {
   htmlwidgets::shinyWidgetOutput(outputId, "zoomableTreemap", width, height, package = "d3RZoomableTreemap")
 }
 
@@ -54,13 +58,3 @@ renderZoomableTreemap <- function(expr, env = parent.frame(), quoted = FALSE) {
   htmlwidgets::shinyRenderWidget(expr, zoomableTreemapOutput, env, quoted = TRUE)
 }
 
-zoomableTreemap_html <- function(id, style, class, ...) {
-  tagList(
-    tags$div(
-      id = id, class = class, style = style, style = "position:relative;"
-      , tags$div(
-        tags$div(class = "zoomableTreemap-main", id="zoomableTreemap-main")
-      )
-    )
-  )
-}

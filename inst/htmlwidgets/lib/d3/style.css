@@ -1,8 +1,11 @@
+/**
 #zoomableTreemap-main {
   width: 800px;
   height: 500px;
   background: #ddd;
 }
+
+**/
 
 text {
   pointer-events: none;
@@ -43,3 +46,4 @@ rect.parent,
 .children:hover rect.child {
   fill: #bbb;
 }
+

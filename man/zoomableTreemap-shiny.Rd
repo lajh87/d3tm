@@ -6,7 +6,7 @@
 \alias{renderZoomableTreemap}
 \title{Shiny bindings for zoomableTreemap}
 \usage{
-zoomableTreemapOutput(outputId, width = "100\%", height = "400px")
+zoomableTreemapOutput(outputId, width = 800, height = 500)
 
 renderZoomableTreemap(expr, env = parent.frame(), quoted = FALSE)
 }

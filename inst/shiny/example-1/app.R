@@ -1,15 +1,11 @@
 library(shiny)
 library(d3RZoomableTreemap)
 
-# Using flare as have different levels and removing any json modifications
-flare <- jsonlite::fromJSON(
-  txt = system.file("json/flare.json",package = "d3RZoomableTreemap"),
-  flatten = F, simplifyVector = F, simplifyDataFrame = F, simplifyMatrix = F
-  )
+data(flare)
 
 ui <- fluidPage(
   sidebarLayout(
-    mainPanel = mainPanel(zoomableTreemapOutput("x1")),
+    mainPanel = mainPanel(zoomableTreemapOutput("x1",width = "100%", height=500)),
     sidebarPanel = sidebarPanel(
       fluidRow(
         tags$label("Selected Node:"),textOutput("selected_node",inline = T)

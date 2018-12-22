@@ -3,7 +3,7 @@ Title: A Zoomable Treemap that Displays Uneven Hierarchical Data
 Version: 0.1
 Authors@R: c(person("Luke", "Heley", role = c("aut", "cre"),
                      email = "lajh87@me.com"))
-Description: What the package does (one paragraph).
+Description: Provides an R package to reveal incremenetally
 Depends: R (>= 3.5.1), htmltools
 License: MIT + file License
 Encoding: UTF-8
@@ -11,4 +11,4 @@ LazyData: true
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1

@@ -4,7 +4,7 @@
 \alias{zoomableTreemap}
 \title{Zoomable Treemap}
 \usage{
-zoomableTreemap(data, width = NULL, height = NULL, elementId = NULL)
+zoomableTreemap(data, width = 800, height = 500, elementId = NULL)
 }
 \description{
 R Implementation of Mike Bostock's zoomable treemap
