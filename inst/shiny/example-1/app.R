@@ -1,7 +1,11 @@
 library(shiny)
 library(d3RZoomableTreemap)
+library(data.tree)
 
 data(flare)
+# tree <- data.tree::FromListExplicit(flare,check = "no-warn")
+# tree$Set(color = "#98F6B3")
+# flare <- ToListExplicit(tree,unname = TRUE,nameName = "name",childrenName = "children")
 
 ui <- fluidPage(
   sidebarLayout(

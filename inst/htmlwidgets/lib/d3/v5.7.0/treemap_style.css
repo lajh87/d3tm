@@ -37,21 +37,6 @@
 	  opacity: 0;
 	}
 
-	.legend {
-	  margin-bottom:8px !important;
-	}
-
-	.legend rect {
-	  stroke-width: 0px;
-	}
-
-	.legend text {
-	  text-anchor: middle;
-	  pointer-events: auto;
-	  font-size: 13px;
-	  font-family: sans-serif;
-	  fill: black;
-	}
 
 	.form-group {
 	    text-align:left;

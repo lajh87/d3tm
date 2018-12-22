@@ -63,8 +63,7 @@ HTMLWidgets.widget({
             grandparent.append("rect")
                 .attr("y", -margin.top)
                 .attr("width", width)
-                .attr("height", margin.top)
-                .attr("fill", '#bbbbbb');
+                .attr("height", margin.top);
 
             grandparent.append("text")
                 .attr("x", 6)
@@ -201,6 +200,17 @@ HTMLWidgets.widget({
                 }
               };
 
+            function getRGBComponents(color) {
+               return d3.rgb(color);
+            }
+
+          function idealTextColor(bgColor) {
+              var nThreshold = 105;
+              var components = getRGBComponents(bgColor);
+              var bgDelta = (components.r * 0.299) + (components.g * 0.587) + (components.b * 0.114);
+              return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
+           }
+
             function text(text) {
                 text.attr("x", function (d) {
                     return x(d.x) + 6;
@@ -225,7 +235,7 @@ HTMLWidgets.widget({
                         return y(d.y1) - y(d.y0);
                     })
                     .attr("fill", function (d) {
-                        return '#bbbbbb';
+                        return d.data.color ? d.data.color : "#bbb";
                     });
             }
 
