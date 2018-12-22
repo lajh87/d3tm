@@ -5,7 +5,7 @@ data(flare)
 
 ui <- fluidPage(
   sidebarLayout(
-    mainPanel = mainPanel(zoomableTreemapOutput("x1",width = "100%", height=500)),
+    mainPanel = mainPanel(d3v5_zoomable_treemap_output("x1",width = "100%", height=500)),
     sidebarPanel = sidebarPanel(
       fluidRow(
         tags$label("Selected Node:"),textOutput("selected_node",inline = T)
@@ -17,8 +17,8 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
 
-  output$x1 <- renderZoomableTreemap({
-    d3RZoomableTreemap::zoomableTreemap(flare)
+  output$x1 <- render_d3v5_zoomable_treemap({
+    d3RZoomableTreemap::d3v5_zoomable_treemap(flare)
   })
 
   output$selected_node <- renderText({input$x1_click})

@@ -1,0 +1,64 @@
+#' d3v5 Zoomable Treemap
+#'
+#' Implementation of a d3 zoomable treemap
+#'
+#' @import htmlwidgets
+#' @export
+d3v5_zoomable_treemap <- function(data = flare,
+                                  width = 800,
+                                  height = 500,
+                                  elementId = NULL){
+
+  data <- jsonlite::toJSON(data, pretty = T, auto_unbox = T)
+
+  # forward options using x
+  x <- list(
+    data = data
+  )
+
+  # create widget
+  htmlwidgets::createWidget(
+    name = "d3v5_zoomable_treemap",
+    x,
+    width = width,
+    height = height,
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      padding = 0,
+      browser.fill = TRUE
+    ),
+    package = "d3RZoomableTreemap",
+    elementId = elementId
+  )
+
+}
+
+
+#' Shiny bindings for d3v5 zoomableTreemap
+#'
+#' Output and render functions for using zoomableTreemap within Shiny
+#' applications and interactive Rmd documents.
+#'
+#' @param outputId output variable to read from
+#' @param width,height Must be a valid CSS unit (like \code{'100\%'},
+#'   \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
+#'   string and have \code{'px'} appended.
+#' @param expr An expression that generates a zoomableTreemap
+#' @param env The environment in which to evaluate \code{expr}.
+#' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
+#'   is useful if you want to save an expression in a variable.
+#'
+#' @name d3v5_zoomable_treemap
+#'
+#' @export
+d3v5_zoomable_treemap_output <- function(outputId, width = 800, height = 500) {
+  htmlwidgets::shinyWidgetOutput(outputId, "d3v5_zoomable_treemap", width, height, package = "d3RZoomableTreemap")
+}
+
+#' @rdname d3v5_zoomable_treemap
+#' @export
+render_d3v5_zoomable_treemap <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) {
+    expr <- substitute(expr)
+  } # force quoted
+  htmlwidgets::shinyRenderWidget(expr, d3v5_zoomable_treemap_output, env, quoted = TRUE)
+}

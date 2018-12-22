@@ -54,8 +54,6 @@ HTMLWidgets.widget({
             .attr("y", 6 - margin.top)
             .attr("dy", ".75em");
 
-
-
         initialize(root);
         accumulate(root);
         layout(root);
@@ -206,7 +204,9 @@ HTMLWidgets.widget({
 
       },
 
-      resize: function(width, height, root) {
+      resize: function(width, height, treemap) {
+
+        treemap.size([width,heigth])
 
       //  d3.select(el).select("svg")
       //   .attr("width", width)
