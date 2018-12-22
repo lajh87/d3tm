@@ -4,10 +4,10 @@
 #'
 #' @import htmlwidgets
 #' @export
-d3v5_zoomable_treemap <- function(data = flare,
-                                  width = 800,
-                                  height = 500,
-                                  elementId = NULL){
+zoomable_treemap <- function(data = flare,
+                             width = 800,
+                             height = 500,
+                             elementId = NULL){
 
   data <- jsonlite::toJSON(data, pretty = T, auto_unbox = T)
 
@@ -47,18 +47,18 @@ d3v5_zoomable_treemap <- function(data = flare,
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
 #'
-#' @name d3v5_zoomable_treemap
+#' @name zoomable_treemap_shiny
 #'
 #' @export
-d3v5_zoomable_treemap_output <- function(outputId, width = 800, height = 500) {
+zoomable_treemap_output <- function(outputId, width = 800, height = 500) {
   htmlwidgets::shinyWidgetOutput(outputId, "d3v5_zoomable_treemap", width, height, package = "d3RZoomableTreemap")
 }
 
-#' @rdname d3v5_zoomable_treemap
+#' @rdname zoomable_treemap_shiny
 #' @export
-render_d3v5_zoomable_treemap <- function(expr, env = parent.frame(), quoted = FALSE) {
+render_zoomable_treemap <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) {
     expr <- substitute(expr)
   } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, d3v5_zoomable_treemap_output, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, zoomable_treemap_output, env, quoted = TRUE)
 }

@@ -6,10 +6,25 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
-    return {
-      renderValue: function(x) {
+    var instance = { };
 
-        //http://bl.ocks.org/guglielmo/16d880a6615da7f502116220cb551498
+    var el = el;
+
+    var draw = function(el, instance){
+
+      var x = instance.x;
+      d3.select( el ).selectAll("*").remove();
+
+      // if height or width = 0 then bail
+      //   this is important for flexdashboard and tabsets
+      if(
+        el.getBoundingClientRect().width === 0 ||
+        el.getBoundingClientRect().height === 0
+      ){
+        return;
+      }
+
+       //http://bl.ocks.org/guglielmo/16d880a6615da7f502116220cb551498
 
         var root = d3.hierarchy(x.data);
 
@@ -67,13 +82,6 @@ HTMLWidgets.widget({
 
             display(root);
 
-            function click_to_shiny_input(d){
-               // add a hook to Shiny
-              if( HTMLWidgets.shinyMode ){
-                Shiny.onInputChange(el.id + '_click', d.data.name);
-                }
-              };
-
             function display(d) {
                 // write text into grandparent
                 // and activate click's handler
@@ -85,6 +93,7 @@ HTMLWidgets.widget({
                     })
                     .select("text")
                     .text(name(d));
+
                 // grandparent color
                 grandparent
                     .datum(d.parent)
@@ -92,23 +101,25 @@ HTMLWidgets.widget({
                     .attr("fill", function () {
                         return 'orange'
                     });
+
                 var g1 = svg.insert("g", ".grandparent")
                     .datum(d)
                     .attr("class", "depth");
+
                 var g = g1.selectAll("g")
                     .data(d.children)
                     .enter().
                     append("g");
 
+                    g.on("click", function(d) {click_to_shiny_input(d);});
+
                     // add class and click handler to all g's with children
-                    g.filter(function (d) {
-                        return d.children;
-                    })
-                    .classed("children", true)
-                    .on("click", function(d){
-                        transition(d);
-                        click_to_shiny_input(d);
-                    });
+                    g.filter(function (d) {return d.children;})
+                     .classed("children", true)
+                     .on("click", function(d){
+                         transition(d);
+                         click_to_shiny_input(d);
+                     });
 
                 g.selectAll(".child")
                     .data(function (d) {
@@ -181,7 +192,15 @@ HTMLWidgets.widget({
                     });
                 }
                 return g;
-            }
+            };
+
+            function click_to_shiny_input(d){
+               // add a hook to Shiny
+              if( HTMLWidgets.shinyMode ){
+                Shiny.onInputChange(el.id + '_click', d.data.name);
+                }
+              };
+
             function text(text) {
                 text.attr("x", function (d) {
                     return x(d.x) + 6;
@@ -190,6 +209,7 @@ HTMLWidgets.widget({
                         return y(d.y) + 6;
                     });
             }
+
             function rect(rect) {
                 rect
                     .attr("x", function (d) {
@@ -208,6 +228,7 @@ HTMLWidgets.widget({
                         return '#bbbbbb';
                     });
             }
+
             function foreign(foreign) { /* added */
                 foreign
                     .attr("x", function (d) {
@@ -243,15 +264,24 @@ HTMLWidgets.widget({
                     .join(sep);
             }
 
+            return instance;
+    };
+
+
+
+    return {
+      renderValue: function(x) {
+
+        instance.x = x;
+        instance = draw(el, instance);
 
       },
 
-      resize: function(width, height, rect) {
-
-
-
+      resize: function(width, height) {
+        instance = draw(el, instance);
       },
 
+      instance: instance
 
     };
   }
