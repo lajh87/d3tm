@@ -16,16 +16,22 @@ if(!"d3RZoomableTreemap" %in% installed.packages()[,"Package"])
 ## Usage
 
 ```{r}
-
 library(d3RZoomableTreemap)
 
 json <- jsonlite::fromJSON("data-raw/flare.json",
                            flatten = F,simplifyVector = F,
                            simplifyDataFrame = F,simplifyMatrix = F)
 
+
+tree <- data.tree::FromListExplicit(json)
+print(tree, "value")
+
 zoomableTreemap(json)
 
 ```
 
-<p>
-<br>
+## Detail
+
+Introduced by [Ben Shneiderman](http://www.cs.umd.edu/hcil/treemap-history/) 
+in 1991, a treemap recursively subdivides area into rectangles according to each 
+node’s associated value. 
