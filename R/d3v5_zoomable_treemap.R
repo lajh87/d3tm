@@ -7,13 +7,17 @@
 zoomable_treemap <- function(data = flare,
                              width = 800,
                              height = 500,
-                             elementId = NULL){
+                             elementId = NULL,
+                             background = "#bbb",
+                             header_background = "orange"){
 
   data <- jsonlite::toJSON(data, pretty = T, auto_unbox = T)
 
   # forward options using x
   x <- list(
-    data = data
+    data = data,
+    background = background,
+    header_background = header_background
   )
 
   # create widget

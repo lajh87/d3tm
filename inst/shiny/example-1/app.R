@@ -3,9 +3,9 @@ library(d3RZoomableTreemap)
 library(data.tree)
 
 data(flare)
-# tree <- data.tree::FromListExplicit(flare,check = "no-warn")
-# tree$Set(color = "#98F6B3")
-# flare <- ToListExplicit(tree,unname = TRUE,nameName = "name",childrenName = "children")
+ # tree <- data.tree::FromListExplicit(flare,check = "no-warn")
+ #  tree$Set(color = "#FFFFFF")
+ # flare <- ToListExplicit(tree,unname = TRUE,nameName = "name",childrenName = "children")
 
 ui <- fluidPage(
   sidebarLayout(
@@ -22,7 +22,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   output$x1 <- render_zoomable_treemap({
-    d3RZoomableTreemap::zoomable_treemap(flare)
+    d3RZoomableTreemap::zoomable_treemap(flare, background = "#bbb", header_background = "orange")
   })
 
   output$selected_node <- renderText({input$x1_click})

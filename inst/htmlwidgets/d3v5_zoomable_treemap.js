@@ -12,7 +12,7 @@ HTMLWidgets.widget({
 
     var draw = function(el, instance){
 
-      var x = instance.x;
+      var xR = instance.x;
       d3.select( el ).selectAll("*").remove();
 
       // if height or width = 0 then bail
@@ -26,7 +26,7 @@ HTMLWidgets.widget({
 
        //http://bl.ocks.org/guglielmo/16d880a6615da7f502116220cb551498
 
-        var root = d3.hierarchy(x.data);
+        var root = d3.hierarchy(xR.data);
 
         var margin = {top: 25, right: 0, bottom: 0, left: 0},
             width = el.getBoundingClientRect().width,
@@ -91,14 +91,17 @@ HTMLWidgets.widget({
                         click_to_shiny_input(d);
                     })
                     .select("text")
-                    .text(name(d));
+                    .text(name(d))
+                    .attr("fill", function(d){
+                       return idealTextColor(xR.header_background);
+                    });
 
                 // grandparent color
                 grandparent
                     .datum(d.parent)
                     .select("rect")
                     .attr("fill", function () {
-                        return 'orange'
+                        return xR.header_background;
                     });
 
                 var g1 = svg.insert("g", ".grandparent")
@@ -112,7 +115,7 @@ HTMLWidgets.widget({
 
                     g.on("click", function(d) {click_to_shiny_input(d);});
 
-                    // add class and click handler to all g's with children
+                     // add class and click handler to all g's with children
                     g.filter(function (d) {return d.children;})
                      .classed("children", true)
                      .on("click", function(d){
@@ -120,16 +123,19 @@ HTMLWidgets.widget({
                          click_to_shiny_input(d);
                      });
 
-                g.selectAll(".child")
+                   g.selectAll(".child")
                     .data(function (d) {
                         return d.children || [d];
                     })
-                    .enter().append("rect")
-                    .attr("class", "child")
-                    .call(rect);
+                    .enter().append("g")
+                    .append("rect")
+                      .attr("class", "child")
+                      .call(rect)
+                      .append("svg:title")
+                      .text(function(d){return d.data.name + " " + formatNumber(d.value);});
 
-                // add title to parents
-                g.append("rect")
+                    // add title to parents
+                  g.append("rect")
                     .attr("class", "parent")
                     .call(rect)
                     .append("title")
@@ -137,7 +143,7 @@ HTMLWidgets.widget({
                         return d.data.name;
                     });
 
-                /* Adding a foreign object instead of a text object, allows for text wrapping */
+                    /* Adding a foreign object instead of a text object, allows for text wrapping */
                 g.append("foreignObject")
                     .call(rect)
                     .attr("class", "foreignobj")
@@ -145,11 +151,17 @@ HTMLWidgets.widget({
                     .attr("dy", ".75em")
                     .html(function (d) {
                         return '' +
+                            '<font color = ' +idealTextColor(d.data.color ? d.data.color : xR.background) + '>' +
                             '<p class="title"> ' + d.data.name + '</p>' +
-                            '<p>' + formatNumber(d.value) + '</p>'
+                            '<p>' + formatNumber(d.value) + '</p>' +
+                            '</font>'
                         ;
                     })
-                    .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
+                .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
+
+
+
+
 
                 function transition(d) {
                     if (transitioning || !d) return;
@@ -200,24 +212,25 @@ HTMLWidgets.widget({
                 }
               };
 
-            function getRGBComponents(color) {
-               return d3.rgb(color);
-            }
+              function getContrast50(hexcolor){
+                  return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff/3) ? 'black':'white';
+              }
 
-          function idealTextColor(bgColor) {
-              var nThreshold = 105;
-              var components = getRGBComponents(bgColor);
-              var bgDelta = (components.r * 0.299) + (components.g * 0.587) + (components.b * 0.114);
-              return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
-           }
+              function getRGBComponents(color) {
+                  return d3.rgb(color)
+              }
 
-            function text(text) {
-                text.attr("x", function (d) {
-                    return x(d.x) + 6;
-                })
-                    .attr("y", function (d) {
-                        return y(d.y) + 6;
-                    });
+              function idealTextColor(bgColor) {
+                  var nThreshold = 105;
+                  var components = getRGBComponents(bgColor);
+                  var bgDelta = (components.r * 0.299) + (components.g * 0.587) + (components.b * 0.114);
+                  return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
+              }
+
+
+           function text(text) {
+               text.attr("x", function (d) {return x(d.x) + 6;})
+                    .attr("y", function (d) {return y(d.y) + 6;})
             }
 
             function rect(rect) {
@@ -235,7 +248,7 @@ HTMLWidgets.widget({
                         return y(d.y1) - y(d.y0);
                     })
                     .attr("fill", function (d) {
-                        return d.data.color ? d.data.color : "#bbb";
+                        return d.data.color ? d.data.color : xR.background;
                     });
             }
 
@@ -254,6 +267,9 @@ HTMLWidgets.widget({
                         return y(d.y1) - y(d.y0);
                     });
             }
+
+
+
             function name(d) {
                 return breadcrumbs(d) +
                     (d.parent
