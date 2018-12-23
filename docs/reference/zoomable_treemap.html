@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • d3RZoomableTreemap</title>
+<title>D3 Zoomable Treemap — zoomable_treemap • d3RZoomableTreemap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="D3 Zoomable Treemap — zoomable_treemap" />
+
+<meta property="og:description" content="Implementation of a d3 zoomable treemap" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -46,7 +49,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -95,54 +98,70 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>D3 Zoomable Treemap</h1>
+    
+    <div class="hidden name"><code>zoomable_treemap.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Implementation of a d3 zoomable treemap</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="flare.html">flare</a></code> </p>
-        </td>
-        <td><p>flare</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="zoomable_treemap.html">zoomable_treemap()</a></code> </p>
-        </td>
-        <td><p>D3 Zoomable Treemap</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="zoomable_treemap_shiny.html">zoomable_treemap_output()</a></code> <code><a href="zoomable_treemap_shiny.html">render_zoomable_treemap()</a></code> </p>
-        </td>
-        <td><p>Shiny bindings for d3v5 zoomableTreemap</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>zoomable_treemap</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>flare</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>800</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+  <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#bbb"</span>,
+  <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th><code>data</code></th>
+      <td><p>A hierachical list with name, value, children</p></td>
+    </tr>
+    <tr>
+      <th><code>width</code></th>
+      <td><p>Width of the widget, in pixels</p></td>
+    </tr>
+    <tr>
+      <th><code>height</code></th>
+      <td><p>Height of the widget, in pixels</p></td>
+    </tr>
+    <tr>
+      <th><code>elementId</code></th>
+      <td><p>Element ID used for R Shiny package</p></td>
+    </tr>
+    <tr>
+      <th><code>background</code></th>
+      <td><p>Default background colour use if there is no color
+variable defined in the data. Takes hex of colour names.</p></td>
+    </tr>
+    <tr>
+      <th><code>header_background</code></th>
+      <td><p>The background colour either named of in a hex
+e.g. "#bbb"</p></td>
+    </tr>
     </table>
-  </div>
+    
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>flare</span>)
+<span class='fu'>zoomable_treemap</span>(<span class='no'>flare</span>)
+
+<span class='fu'>zoomable_treemap</span>(<span class='kw'>data</span><span class='kw'>=</span> <span class='no'>flare</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>500</span>,
+    <span class='kw'>background</span><span class='kw'>=</span><span class='st'>"#484848"</span>, <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"black"</span>)</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

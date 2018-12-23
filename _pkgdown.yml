@@ -3,8 +3,7 @@ authors:
     href: https://lajh87.gitlab.io
 navbar:
   structure:
-    left:
-    - home
+    left: home
     right: gitlab
   components:
     home:

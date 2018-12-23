@@ -3,13 +3,10 @@ library(d3RZoomableTreemap)
 library(data.tree)
 
 data(flare)
- # tree <- data.tree::FromListExplicit(flare,check = "no-warn")
- #  tree$Set(color = "#FFFFFF")
- # flare <- ToListExplicit(tree,unname = TRUE,nameName = "name",childrenName = "children")
 
 ui <- fluidPage(
   sidebarLayout(
-    mainPanel = mainPanel(zoomable_treemap_output("x1",width = "100%", height=500)),
+    mainPanel = mainPanel(zoomable_treemap_output("x1",width = "100%", height=500,width=810)),
     sidebarPanel = sidebarPanel(
       fluidRow(
         tags$label("Selected Node:"),textOutput("selected_node",inline = T)

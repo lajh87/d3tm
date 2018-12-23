@@ -28,3 +28,7 @@ is useful if you want to save an expression in a variable.}
 Output and render functions for using zoomableTreemap within Shiny
 applications and interactive Rmd documents.
 }
+\details{
+The name of the clicked node is avaiable based on the object name + _clicked
+e.g. input$treemap_clicked
+}

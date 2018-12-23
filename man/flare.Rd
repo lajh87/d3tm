@@ -4,7 +4,7 @@
 \name{flare}
 \alias{flare}
 \title{flare}
-\format{A list with two arrays name and children}
+\format{An object of class \code{list} of length 2.}
 \source{
 http://bl.ocks.org/mbostock/4063550
 }

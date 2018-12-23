@@ -1,9 +1,24 @@
-#' d3v5 Zoomable Treemap
+#' D3 Zoomable Treemap
 #'
 #' Implementation of a d3 zoomable treemap
 #'
+#' @param \code{data} A hierachical list with name, value, children
+#' @param \code{width} Width of the widget, in pixels
+#' @param \code{height} Height of the widget, in pixels
+#' @param \code{elementId} Element ID used for R Shiny package
+#' @param \code{background} Default background colour use if there is no color
+#'     variable defined in the data. Takes hex of colour names.
+#' @param \code{header_background} The background colour either named of in a hex
+#'     e.g. "#bbb"
+#'
 #' @import htmlwidgets
 #' @export
+#' @examples
+#' data(flare)
+#' zoomable_treemap(flare)
+#'
+#' zoomable_treemap(data= flare, width=500, height=500,
+#'     background="#484848", header_background = "black")
 zoomable_treemap <- function(data = flare,
                              width = 800,
                              height = 500,
@@ -41,6 +56,9 @@ zoomable_treemap <- function(data = flare,
 #'
 #' Output and render functions for using zoomableTreemap within Shiny
 #' applications and interactive Rmd documents.
+#'
+#' The name of the clicked node is avaiable based on the object name + _clicked
+#' e.g. input$treemap_clicked
 #'
 #' @param outputId output variable to read from
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},

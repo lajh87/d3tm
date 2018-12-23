@@ -2,11 +2,34 @@
 % Please edit documentation in R/d3v5_zoomable_treemap.R
 \name{zoomable_treemap}
 \alias{zoomable_treemap}
-\title{d3v5 Zoomable Treemap}
+\title{D3 Zoomable Treemap}
 \usage{
 zoomable_treemap(data = flare, width = 800, height = 500,
-  elementId = NULL)
+  elementId = NULL, background = "#bbb",
+  header_background = "orange")
+}
+\arguments{
+\item{\code{data}}{A hierachical list with name, value, children}
+
+\item{\code{width}}{Width of the widget, in pixels}
+
+\item{\code{height}}{Height of the widget, in pixels}
+
+\item{\code{elementId}}{Element ID used for R Shiny package}
+
+\item{\code{background}}{Default background colour use if there is no color
+variable defined in the data. Takes hex of colour names.}
+
+\item{\code{header_background}}{The background colour either named of in a hex
+e.g. "#bbb"}
 }
 \description{
 Implementation of a d3 zoomable treemap
+}
+\examples{
+data(flare)
+zoomable_treemap(flare)
+
+zoomable_treemap(data= flare, width=500, height=500,
+    background="#484848", header_background = "black")
 }

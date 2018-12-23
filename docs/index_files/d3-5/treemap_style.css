@@ -1,0 +1,60 @@
+
+	.grandparent text {
+	  font-weight: bold;
+	}
+
+	rect {
+	  stroke: #fff;
+	  stroke-width: 1px;
+	}
+
+	rect.parent,
+	.grandparent rect {
+	  stroke-width: 1px;
+	}
+
+	text {
+     pointer-events: none;
+  }
+
+  rect.parent {
+      pointer-events: none;
+  }
+
+  foreignObject.foreignobj {
+	  pointer-events: none;
+	}
+
+	.children rect.child {
+	  opacity: 1;
+	}
+
+	.children:hover rect.child {
+	  opacity: 1;
+	  stroke-width: 0.5px;
+	  }
+
+	.children:hover rect.parent{
+	  opacity: 0;
+	}
+
+	.textdiv {
+	    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+	    font-size: 14px;
+	    padding: 7px;
+	    overflow:none;
+	    pointer-events: none;
+	}
+
+	.textdiv .title {
+	    font-weight: bold;
+	    margin-top: 8px;
+	    font-size:11px !important;
+	}
+
+	.textdiv p{
+	    line-height: 13px;
+	    margin:0 0 4px !important;
+	    padding:0px;
+	    font-size:10px !important;
+	}
