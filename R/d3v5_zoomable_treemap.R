@@ -16,12 +16,11 @@
 #' @examples
 #' data(flare)
 #' zoomable_treemap(flare)
-#'
-#' zoomable_treemap(data= flare, width=500, height=500,
+#' zoomable_treemap(data= flare, width = 100%,
 #'     background="#484848", header_background = "black")
 zoomable_treemap <- function(data = flare,
-                             width = 800,
-                             height = 500,
+                             width = "100%",
+                             height = NULL,
                              elementId = NULL,
                              background = "#bbb",
                              header_background = "orange"){

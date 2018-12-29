@@ -29,7 +29,6 @@ Implementation of a d3 zoomable treemap
 \examples{
 data(flare)
 zoomable_treemap(flare)
-
-zoomable_treemap(data= flare, width=500, height=500,
+zoomable_treemap(data= flare, width = 100\%,
     background="#484848", header_background = "black")
 }

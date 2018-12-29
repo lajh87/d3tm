@@ -18,8 +18,7 @@ if(!"d3RZoomableTreemap" %in% installed.packages()[,"Package"])
 ```{r}
 library(d3RZoomableTreemap)
 data(flare)
-zoomable_treemap(data=flare,width = 500*1.618,
-                 height=500,
+zoomable_treemap(data=flare,width = "100%",
                  background = "#bbb",
                  header_background = "orange")
 

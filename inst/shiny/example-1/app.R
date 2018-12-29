@@ -6,7 +6,7 @@ data(flare)
 
 ui <- fluidPage(
   sidebarLayout(
-    mainPanel = mainPanel(zoomable_treemap_output("x1",width = "100%", height=500,width=810)),
+    mainPanel = mainPanel(zoomable_treemap_output("x1",width = "100%")),
     sidebarPanel = sidebarPanel(
       fluidRow(
         tags$label("Selected Node:"),textOutput("selected_node",inline = T)
