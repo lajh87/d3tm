@@ -107,6 +107,10 @@ HTMLWidgets.widget({
                         transition(d);
                         click_to_shiny_input(d);
                     })
+                    .on("mouseover", function(d){
+                        hover_to_shiny_input(d);
+                        })
+                    .on("mouseout", mouseout_to_shiny_input)
                     .select("text")
                     .text(name(d))
                     .attr("fill", function(d){
@@ -136,7 +140,11 @@ HTMLWidgets.widget({
                      .on("click", function(d){
                          transition(d);
                          click_to_shiny_input(d);
-                     });
+                     })
+                     .on("mouseover", function(d){
+                       hover_to_shiny_input(d);
+                     })
+                     .on("mouseout", mouseout_to_shiny_input);
 
                    g.selectAll(".child")
                     .data(function (d) {
@@ -219,18 +227,32 @@ HTMLWidgets.widget({
             function click_to_shiny_input(d){
                // add a hook to Shiny
               if( HTMLWidgets.shinyMode ){
-                //xR.click_event
                 Shiny.onInputChange(el.id + '_clicked_id', d.data.name);
                 Shiny.onInputChange(el.id + '_clicked_depth', d.depth);
                 }
-              };
+              }
+
+              function hover_to_shiny_input(d){
+              if( HTMLWidgets.shinyMode ){
+                Shiny.onInputChange(el.id + '_hover_id', d.data.name);
+                Shiny.onInputChange(el.id + '_hover_depth', d.depth);
+                }
+              }
+
+              function mouseout_to_shiny_input(df){
+                if( HTMLWidgets.shinyMode ){
+                Shiny.onInputChange(el.id + '_hover_id', null);
+                Shiny.onInputChange(el.id + '_hover_depth', null);
+                }
+              }
+
 
               function getContrast50(hexcolor){
                   return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff/3) ? 'black':'white';
               }
 
               function getRGBComponents(color) {
-                  return d3.rgb(color)
+                  return d3.rgb(color);
               }
 
               function idealTextColor(bgColor) {
