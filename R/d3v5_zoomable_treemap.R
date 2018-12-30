@@ -23,7 +23,9 @@ zoomable_treemap <- function(data = flare,
                              height = NULL,
                              elementId = NULL,
                              background = "#bbb",
-                             header_background = "orange"){
+                             header_background = "orange",
+                             header_height = 25,
+                             format_string = ","){
 
   data <- jsonlite::toJSON(data, pretty = T, auto_unbox = T)
 
@@ -31,7 +33,9 @@ zoomable_treemap <- function(data = flare,
   x <- list(
     data = data,
     background = background,
-    header_background = header_background
+    header_background = header_background,
+    header_height = header_height,
+    format_string = format_string
   )
 
   # create widget
@@ -71,7 +75,7 @@ zoomable_treemap <- function(data = flare,
 #' @name zoomable_treemap_shiny
 #'
 #' @export
-zoomable_treemap_output <- function(outputId, width = 800, height = 500) {
+zoomable_treemap_output <- function(outputId, width = "100%", height = 500) {
   htmlwidgets::shinyWidgetOutput(outputId, "d3v5_zoomable_treemap", width, height, package = "d3RZoomableTreemap")
 }
 

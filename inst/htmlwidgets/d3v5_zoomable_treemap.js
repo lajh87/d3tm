@@ -10,6 +10,23 @@ HTMLWidgets.widget({
 
     var el = el;
 
+    d3.formatDefaultLocale(
+      {
+        "decimal": ".",
+        "thousands": ",",
+        "grouping": [3],
+        "currency": ["£", ""],
+        "dateTime": "%a %b %e %X %Y",
+        "date": "%m/%d/%Y",
+        "time": "%H:%M:%S",
+        "periods": ["AM", "PM"],
+        "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "shortDays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      }
+    );
+
     var draw = function(el, instance){
 
       var xR = instance.x;
@@ -28,10 +45,10 @@ HTMLWidgets.widget({
 
         var root = d3.hierarchy(xR.data);
 
-        var margin = {top: 25, right: 0, bottom: 0, left: 0},
+        var margin = {top: xR.header_height, right: 0, bottom: 0, left: 0},
             width = el.getBoundingClientRect().width,
             height = el.getBoundingClientRect().height - margin.top - margin.bottom,
-            formatNumber = d3.format(","),
+            formatNumber = d3.format(xR.format_string),
             transitioning;
 
         // sets x and y scale to determine size of visible boxes
@@ -113,8 +130,6 @@ HTMLWidgets.widget({
                     .enter().
                     append("g");
 
-                    g.on("click", function(d) {click_to_shiny_input(d);});
-
                      // add class and click handler to all g's with children
                     g.filter(function (d) {return d.children;})
                      .classed("children", true)
@@ -132,7 +147,7 @@ HTMLWidgets.widget({
                       .attr("class", "child")
                       .call(rect)
                       .append("svg:title")
-                      .text(function(d){return d.data.name + " " + formatNumber(d.value);});
+                      .text(function(d){return d.data.name + " " + formatNumber(d.value).replace(/G/,"B");});
 
                     // add title to parents
                   g.append("rect")
@@ -153,15 +168,11 @@ HTMLWidgets.widget({
                         return '' +
                             '<font color = ' +idealTextColor(d.data.color ? d.data.color : xR.background) + '>' +
                             '<p class="title"> ' + d.data.name + '</p>' +
-                            '<p>' + formatNumber(d.value) + '</p>' +
+                            '<p>' + formatNumber(d.value).replace(/G/,"B") + '</p>' +
                             '</font>'
                         ;
                     })
                 .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
-
-
-
-
 
                 function transition(d) {
                     if (transitioning || !d) return;
@@ -208,7 +219,9 @@ HTMLWidgets.widget({
             function click_to_shiny_input(d){
                // add a hook to Shiny
               if( HTMLWidgets.shinyMode ){
-                Shiny.onInputChange(el.id + '_click', d.data.name);
+                //xR.click_event
+                Shiny.onInputChange(el.id + '_clicked_id', d.data.name);
+                Shiny.onInputChange(el.id + '_clicked_depth', d.depth);
                 }
               };
 
@@ -267,8 +280,6 @@ HTMLWidgets.widget({
                         return y(d.y1) - y(d.y0);
                     });
             }
-
-
 
             function name(d) {
                 return breadcrumbs(d) +
