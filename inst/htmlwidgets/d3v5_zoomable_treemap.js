@@ -306,14 +306,14 @@ HTMLWidgets.widget({
             function name(d) {
                 return breadcrumbs(d) +
                     (d.parent
-                    ? ""
+                    ?  ""
                     : "");
             }
             function breadcrumbs(d) {
                 var res = "";
-                var sep = ".";
+                var sep = " > ";
                 d.ancestors().reverse().forEach(function(i){
-                    res += i.data.name + sep;
+                    res += i.data.name + " (" + formatNumber(i.value).replace(/G/,"B") + ")" + sep;
                 });
                 return res
                     .split(sep)
