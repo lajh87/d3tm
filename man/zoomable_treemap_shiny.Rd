@@ -6,7 +6,7 @@
 \alias{render_zoomable_treemap}
 \title{Shiny bindings for d3v5 zoomableTreemap}
 \usage{
-zoomable_treemap_output(outputId, width = 800, height = 500)
+zoomable_treemap_output(outputId, width = "100\%", height = 500)
 
 render_zoomable_treemap(expr, env = parent.frame(), quoted = FALSE)
 }

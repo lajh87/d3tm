@@ -4,12 +4,13 @@
 \alias{zoomable_treemap}
 \title{D3 Zoomable Treemap}
 \usage{
-zoomable_treemap(data = flare, width = 800, height = 500,
-  elementId = NULL, background = "#bbb",
-  header_background = "orange")
+zoomable_treemap(data = jsonlite::toJSON(flare), width = "100\%",
+  height = NULL, elementId = NULL, background = "#bbb",
+  header_background = "orange", header_height = 25,
+  format_string = ",")
 }
 \arguments{
-\item{\code{data}}{A hierachical list with name, value, children}
+\item{\code{data}}{A json object}
 
 \item{\code{width}}{Width of the widget, in pixels}
 

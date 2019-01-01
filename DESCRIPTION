@@ -9,7 +9,9 @@ Description: The treemap above uses interaction to reveal the hierarchy
     for the current view, rather than computing a global layout. 
     It also allows the exploration of arbitrarily-large datasets: 
     data can be lazily-loaded and positioned on zoom.
-Imports: htmltools
+Imports: htmltools,
+    tidyr,
+    dplyr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
