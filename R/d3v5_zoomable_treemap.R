@@ -2,7 +2,7 @@
 #'
 #' Implementation of a d3 zoomable treemap
 #'
-#' @param \code{data} A hierachical list with name, value, children
+#' @param \code{data} A json object
 #' @param \code{width} Width of the widget, in pixels
 #' @param \code{height} Height of the widget, in pixels
 #' @param \code{elementId} Element ID used for R Shiny package
@@ -18,7 +18,7 @@
 #' zoomable_treemap(flare)
 #' zoomable_treemap(data= flare, width = 100%,
 #'     background="#484848", header_background = "black")
-zoomable_treemap <- function(data = flare,
+zoomable_treemap <- function(data = jsonlite::toJSON(flare,auto_unbox=T),
                              width = "100%",
                              height = NULL,
                              elementId = NULL,
@@ -26,8 +26,6 @@ zoomable_treemap <- function(data = flare,
                              header_background = "orange",
                              header_height = 25,
                              format_string = ","){
-
-  data <- jsonlite::toJSON(data, pretty = T, auto_unbox = T)
 
   # forward options using x
   x <- list(
