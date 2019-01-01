@@ -3,6 +3,13 @@
 	  font-weight: bold;
 	}
 
+  .headertextdiv {
+      vertical-align: top;
+	    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+	    white-space: initial;
+	    pointer-events: none;
+	  }
+
 	rect {
 	  stroke: #fff;
 	  stroke-width: 1px;

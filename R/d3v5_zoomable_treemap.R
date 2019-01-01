@@ -25,9 +25,10 @@ zoomable_treemap <- function(data = jsonlite::toJSON(flare),
                              background = "#bbb",
                              header_background = "orange",
                              header_height = 25,
+                             header_fontsize = "12px",
                              format_string = ",",
-                             zoom_in_helptext = " - Click on a Square to Zoom.",
-                             zoom_out_helptext = " - Click here to Zoom Out."){
+                             zoom_in_helptext = " - Click on a Square to Zoom",
+                             zoom_out_helptext = " - Click here to Zoom Out"){
 
   # forward options using x
   x <- list(
@@ -35,6 +36,7 @@ zoomable_treemap <- function(data = jsonlite::toJSON(flare),
     background = background,
     header_background = header_background,
     header_height = header_height,
+    header_fontsize = header_fontsize,
     format_string = format_string,
     zoom_in_helptext = zoom_in_helptext,
     zoom_out_helptext = zoom_out_helptext

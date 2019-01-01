@@ -93,6 +93,21 @@ HTMLWidgets.widget({
                 .attr("y", 6 - margin.top)
                 .attr("dy", ".75em");
 
+            grandparent.append("foreignObject")
+                   .attr("x", 6)
+                   .attr("y", - margin.top)
+                   .attr("dy", ".75em")
+                   .attr("width", width)
+                   .attr("height", margin.top)
+                   .attr("dy", ".75em")
+                   .attr("class", "foreignobj")
+                   .append("xhtml:div")
+                   .attr("class", "headertextdiv")
+                   .style("color", idealTextColor(xR.header_background))
+                   .style("font-size", xR.header_fontsize)
+                   .style("height", xR.header_height + "px");
+
+
             treemap(root
                 .sum(function (d) {
                     return d.value;
@@ -105,7 +120,8 @@ HTMLWidgets.widget({
             display(root);
 
             function display(d) {
-                // write text into grandparent
+
+               // write text into grandparent
                 // and activate click's handler
                 grandparent
                     .datum(d.parent)
@@ -116,12 +132,7 @@ HTMLWidgets.widget({
                     .on("mouseover", function(d){
                         hover_to_shiny_input(d);
                         })
-                    .on("mouseout", mouseout_to_shiny_input)
-                    .select("text")
-                    .text(name(d))
-                    .attr("fill", function(d){
-                       return idealTextColor(xR.header_background);
-                    });
+                    .on("mouseout", mouseout_to_shiny_input);
 
                 // grandparent color
                 grandparent
@@ -130,6 +141,16 @@ HTMLWidgets.widget({
                     .attr("fill", function () {
                         return xR.header_background;
                     });
+
+                 grandparent
+                   .datum(d.parent)
+                   .select(".headertextdiv")
+                   .html(function () {
+                       return '' +
+                          '<p class="title"> ' + name(d) + '</p>'
+                       ;
+                   });
+
 
                 var g1 = svg.insert("g", ".grandparent")
                     .datum(d)
@@ -173,7 +194,7 @@ HTMLWidgets.widget({
                     });
 
                     /* Adding a foreign object instead of a text object, allows for text wrapping */
-                g.append("foreignObject")
+                  g.append("foreignObject")
                     .call(rect)
                     .attr("class", "foreignobj")
                     .append("xhtml:div")
@@ -186,7 +207,7 @@ HTMLWidgets.widget({
                             '</font>'
                         ;
                     })
-                .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
+                  .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
 
                 function transition(d) {
                     if (transitioning || !d) return;
@@ -197,30 +218,40 @@ HTMLWidgets.widget({
                     // Update the domain only after entering new elements.
                     x.domain([d.x0, d.x1]);
                     y.domain([d.y0, d.y1]);
+
                     // Enable anti-aliasing during the transition.
                     svg.style("shape-rendering", null);
                     // Draw child nodes on top of parent nodes.
                     svg.selectAll(".depth").sort(function (a, b) {
                         return a.depth - b.depth;
                     });
+
+                     // Update Grandparent
+                    grandparent
+                      .select(".headertextdiv")
+                      .html(function () {
+                       return '' +
+                          '<p class="title"> ' + name(d) + '</p>'
+                       ;
+                      });
+
                     // Fade-in entering text.
                     g2.selectAll("text").style("fill-opacity", 0);
                     g2.selectAll("foreignObject div").style("display", "none");
-                    /*added*/
+
                     // Transition to the new view.
                     t1.selectAll("text").call(text).style("fill-opacity", 0);
                     t2.selectAll("text").call(text).style("fill-opacity", 1);
                     t1.selectAll("rect").call(rect);
                     t2.selectAll("rect").call(rect);
-                    /* Foreign object */
                     t1.selectAll(".textdiv").style("display", "none");
-                    /* added */
                     t1.selectAll(".foreignobj").call(foreign);
-                    /* added */
                     t2.selectAll(".textdiv").style("display", "block");
-                    /* added */
+                    t2.selectAll(".headertextdiv").style("display", "block");
                     t2.selectAll(".foreignobj").call(foreign);
-                    /* added */
+
+
+
                     // Remove the old node when the transition is finished.
                     t1.on("end.remove", function(){
                         this.remove();
@@ -251,7 +282,6 @@ HTMLWidgets.widget({
                 Shiny.onInputChange(el.id + '_hover_depth', null);
                 }
               }
-
 
               function getContrast50(hexcolor){
                   return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff/3) ? 'black':'white';
@@ -312,7 +342,7 @@ HTMLWidgets.widget({
             function name(d) {
                 return breadcrumbs(d) +
                     (d.parent
-                    ?  xR.zoom_out_helptext
+                    ? xR.zoom_out_helptext
                     : xR.zoom_in_helptext);
             }
             function breadcrumbs(d) {
