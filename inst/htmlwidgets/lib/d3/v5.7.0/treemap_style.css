@@ -8,6 +8,8 @@
 	    font-family: "Open Sans",Helvetica,Arial,sans-serif;
 	    white-space: initial;
 	    pointer-events: none;
+	    margin-top: 4px;
+	    margin-left: 2px;
 	  }
 
 	rect {

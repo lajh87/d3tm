@@ -94,7 +94,7 @@ HTMLWidgets.widget({
                 .attr("dy", ".75em");
 
             grandparent.append("foreignObject")
-                   .attr("x", 6)
+                   .attr("x", 0)
                    .attr("y", - margin.top)
                    .attr("dy", ".75em")
                    .attr("width", width)
