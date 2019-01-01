@@ -26,11 +26,12 @@ HTMLWidgets.widget({
         "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
       }
     );
-
+  if( HTMLWidgets.shinyMode ){
     Shiny.addCustomMessageHandler('resetInputValue',
                 function(variableName){
                   Shiny.onInputChange(variableName, null);
                   });
+  }
 
     var draw = function(el, instance){
 

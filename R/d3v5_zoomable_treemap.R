@@ -18,7 +18,7 @@
 #' zoomable_treemap(flare)
 #' zoomable_treemap(data= flare, width = 100%,
 #'     background="#484848", header_background = "black")
-zoomable_treemap <- function(data = jsonlite::toJSON(flare,auto_unbox=T),
+zoomable_treemap <- function(data = jsonlite::toJSON(flare),
                              width = "100%",
                              height = NULL,
                              elementId = NULL,
