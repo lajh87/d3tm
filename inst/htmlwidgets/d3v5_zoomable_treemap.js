@@ -312,8 +312,8 @@ HTMLWidgets.widget({
             function name(d) {
                 return breadcrumbs(d) +
                     (d.parent
-                    ?  ""
-                    : "");
+                    ?  xR.zoom_out_helptext
+                    : xR.zoom_in_helptext);
             }
             function breadcrumbs(d) {
                 var res = "";
