@@ -27,6 +27,11 @@ HTMLWidgets.widget({
       }
     );
 
+    Shiny.addCustomMessageHandler('resetInputValue',
+                function(variableName){
+                  Shiny.onInputChange(variableName, null);
+                  });
+
     var draw = function(el, instance){
 
       var xR = instance.x;
