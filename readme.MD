@@ -5,6 +5,8 @@
 * Added ability to have custom colours
 * Added mouseover to show the name and value of child
 * Added varaiables for background and header background colour
+* Added d3_nest function and include unique key
+* Added div to top bar to enable style
 
 # To Do
-* convert name to unique id and make shiny reference that
+* Update shiny application to test selecting nodes

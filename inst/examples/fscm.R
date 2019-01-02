@@ -24,14 +24,12 @@ costSquaresData <- filteredData %>%
   dplyr::group_by(domain, category, element_name, level5_detail) %>%
   dplyr::summarise(value = sum(value))
 
-
-
 data = costSquaresData
 value_cols = "value"
 root = "root"
 
 json <- d3_nest2(data = data,
-                 value_cols = value_cols,
+                 value_col = value_cols,
                  root = root)
 
 d3RZoomableTreemap::zoomable_treemap(
@@ -41,7 +39,4 @@ d3RZoomableTreemap::zoomable_treemap(
   zoom_in_helptext = "",
   zoom_out_helptext = ""
 )
-
-
-zoomable_treemap()
 

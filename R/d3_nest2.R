@@ -11,6 +11,7 @@
 d3_nest2 <- function(data, value_col = "value", root = "root"){
 
   if(!inherits(data, "data.frame")) stop("Input data must be a data.frame")
+  data <- as.data.frame(data)
 
   if(value_col != "value")
     data <- data %>% dplyr::rename(value = dplyr::contains(value_col))
@@ -31,6 +32,7 @@ d3_nest2 <- function(data, value_col = "value", root = "root"){
     return(x)
   }) %>%
     data.frame(stringsAsFactors = F)
+
   names(id_matrix) <- paste0(nonnest_cols, "_id")
   id_cols <- colnames(id_matrix)
 

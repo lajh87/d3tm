@@ -5,6 +5,8 @@
 ## Minor Changes
 * Added parameters for breadcrumb help text
 * Added parameter to enable custom number formating
+* Updated events to include hover and clicked and data for id, label and value
+* Fix bug where tibbles would not work with d3_nest2
 
 # d3RZoomableTreemap 0.1
 ## Features
