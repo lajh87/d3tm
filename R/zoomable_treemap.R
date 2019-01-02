@@ -13,11 +13,7 @@
 #'
 #' @import htmlwidgets
 #' @export
-#' @examples
-#' data(flare)
-#' zoomable_treemap(flare)
-#' zoomable_treemap(data= flare, width = 100%,
-#'     background="#484848", header_background = "black")
+#' @example inst/examples/flare.R
 zoomable_treemap <- function(data = jsonlite::toJSON(flare),
                              width = "100%",
                              height = NULL,

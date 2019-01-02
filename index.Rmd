@@ -5,7 +5,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 ## Installation
 
 ```{r}
@@ -17,10 +16,10 @@ if(!"d3RZoomableTreemap" %in% installed.packages()[,"Package"])
 
 ```{r}
 library(d3RZoomableTreemap)
-data(flare)
-zoomable_treemap(data=flare,width = "100%",
-                 background = "#bbb",
-                 header_background = "orange")
+data.frame(Titanic) %>%
+ dplyr::select(Class,Age,Survived,Sex,Freq) %>%
+  d3_nest2(value_col="Freq", root="Titanic") %>%
+  zoomable_treemap()
 
 ```
 

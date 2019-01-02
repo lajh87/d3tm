@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">d3RZoomableTreemap</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
       </span>
     </div>
 
@@ -111,16 +111,19 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>zoomable_treemap</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>flare</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>800</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>500</span>,
-  <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#bbb"</span>,
-  <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>)</pre>
+    <pre class="usage"><span class='fu'>zoomable_treemap</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='no'>flare</span>), <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>,
+  <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#bbb"</span>,
+  <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>header_height</span> <span class='kw'>=</span> <span class='fl'>25</span>,
+  <span class='kw'>header_fontsize</span> <span class='kw'>=</span> <span class='st'>"12px"</span>, <span class='kw'>format_string</span> <span class='kw'>=</span> <span class='st'>","</span>,
+  <span class='kw'>zoom_in_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click on a Square to Zoom"</span>,
+  <span class='kw'>zoom_out_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click here to Zoom Out"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th><code>data</code></th>
-      <td><p>A hierachical list with name, value, children</p></td>
+      <td><p>A json object</p></td>
     </tr>
     <tr>
       <th><code>width</code></th>
@@ -148,11 +151,11 @@ e.g. "#bbb"</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>flare</span>)
-<span class='fu'>zoomable_treemap</span>(<span class='no'>flare</span>)
+    <pre class="examples"><div class='input'><span class='co'># download.file("https://raw.githubusercontent.com/d3/d3-hierarchy/master/test/data/flare.json",</span>
+<span class='co'>#               "inst/examples/flare.json")</span>
 
-<span class='fu'>zoomable_treemap</span>(<span class='kw'>data</span><span class='kw'>=</span> <span class='no'>flare</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>height</span><span class='kw'>=</span><span class='fl'>500</span>,
-    <span class='kw'>background</span><span class='kw'>=</span><span class='st'>"#484848"</span>, <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"black"</span>)</div></pre>
+<span class='no'>json</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='fu'>system.file</span>(<span class='st'>"examples/flare.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3RZoomableTreemap"</span>))
+<span class='fu'>zoomable_treemap</span>(<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='no'>json</span>))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

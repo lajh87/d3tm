@@ -1,6 +1,6 @@
 Package: d3RZoomableTreemap
 Title: A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data
-Version: 0.1.1
+Version: 0.2
 Authors@R: c(person("Luke", "Heley", role = c("aut", "cre"),
                      email = "lajh87@me.com"))
 Description: The treemap above uses interaction to reveal the hierarchy 
@@ -9,9 +9,11 @@ Description: The treemap above uses interaction to reveal the hierarchy
     for the current view, rather than computing a global layout. 
     It also allows the exploration of arbitrarily-large datasets: 
     data can be lazily-loaded and positioned on zoom.
-Imports: htmltools,
+Imports: 
+    htmltools,
     tidyr,
-    dplyr
+    dplyr,
+    magrittr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

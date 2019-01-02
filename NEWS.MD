@@ -1,3 +1,11 @@
+# d3RZoomableTreemap 0.2
+## Major Changes
+* Added d3_nest2 to convert data to a hierarchy that d3 expects
+
+## Minor Changes
+* Added parameters for breadcrumb help text
+* Added parameter to enable custom number formating
+
 # d3RZoomableTreemap 0.1
 ## Features
 * Zoomable Treemap in [D3v5](https://d3js.org/) based on Mike Bostocks
