@@ -10,21 +10,30 @@
 #'     variable defined in the data. Takes hex of colour names.
 #' @param \code{header_background} The background colour either named of in a hex
 #'     e.g. "#bbb"
+#' @param \code{header_height}{header height, in pixels}
+#' @param \code{header_fontsize}{header fontsize, pixels}
+#' @param \code{format_string}{d3 number format}
+#' @param \code{zoom_in_helptext}{zoom in helptext}
+#' @param \code{zoom_out_helptext}{zoom out helptext}
+#' @param \code{tooltip_background}{tooltip background colour}
 #'
-#' @import htmlwidgets
 #' @export
 #' @example inst/examples/flare.R
-zoomable_treemap <- function(data = jsonlite::toJSON(flare),
-                             width = "100%",
-                             height = NULL,
-                             elementId = NULL,
-                             background = "#bbb",
-                             header_background = "orange",
-                             header_height = 25,
-                             header_fontsize = "12px",
-                             format_string = ",",
-                             zoom_in_helptext = " - Click on a Square to Zoom",
-                             zoom_out_helptext = " - Click here to Zoom Out"){
+zoomable_treemap <- function(
+  data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
+                                         package = "d3RZoomableTreemap"))),
+  width = "100%",
+  height = NULL,
+  elementId = NULL,
+  background = "#bbb",
+  header_background = "orange",
+  header_height = 25,
+  header_fontsize = "12px",
+  format_string = ",",
+  zoom_in_helptext = " - Click on a Square to Zoom",
+  zoom_out_helptext = " - Click here to Zoom Out",
+  tooltip_background = "orange"
+){
 
   # forward options using x
   x <- list(
@@ -35,7 +44,8 @@ zoomable_treemap <- function(data = jsonlite::toJSON(flare),
     header_fontsize = header_fontsize,
     format_string = format_string,
     zoom_in_helptext = zoom_in_helptext,
-    zoom_out_helptext = zoom_out_helptext
+    zoom_out_helptext = zoom_out_helptext,
+    tooltip_background = tooltip_background
   )
 
   # create widget

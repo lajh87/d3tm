@@ -69,14 +69,38 @@ HTMLWidgets.widget({
             .paddingInner(0)
             .round(false);
 
+    // create div tooltip to enable html text
+    var tooltip = d3.select(el).append("div")
+                    .attr("class","tooltip")
+                    .style("opacity", 0)
+                    .style("background", xR.tooltip_background)
+                    .style("color", idealTextColor(xR.tooltip_background));
+
+    function mouseover() {
+      tooltip.style("display", "inline");
+    }
+
+    function mousemove() {
+      tooltip
+      .style("left", (d3.event.pageX + 20) + "px")
+      .style("top", (d3.event.pageY + 20) + "px");
+     }
+
+    function mouseout() {
+      tooltip.style("display", "none");
+    }
+
     var svg = d3.select(el).append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.bottom + margin.top)
-        .style("margin-left", -margin.left + "px")
-        .style("margin.right", -margin.right + "px")
-        .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-            .style("shape-rendering", "crispEdges");
+                    .attr("height", height + margin.bottom + margin.top)
+                    .style("margin-left", -margin.left + "px")
+                    .style("margin.right", -margin.right + "px")
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                    .style("shape-rendering", "crispEdges")
+                    .on("mouseover", mouseover)
+                    .on("mousemove", mousemove)
+                    .on("mouseout", mouseout);
 
     var grandparent = svg.append("g")
             .attr("class", "grandparent");
@@ -104,7 +128,6 @@ HTMLWidgets.widget({
             .style("color", idealTextColor(xR.header_background))
             .style("font-size", xR.header_fontsize)
             .style("height", xR.header_height + "px");
-
 
         treemap(root
             .sum(function (d) {
@@ -163,11 +186,7 @@ HTMLWidgets.widget({
                  .on("click", function(d){
                      transition(d);
                      click_to_shiny_input(d);
-                 })
-                 .on("mouseover", function(d){
-                   hover_to_shiny_input(d);
-                 })
-                 .on("mouseout", mouseout_to_shiny_input);
+                 });
 
                g.selectAll(".child")
                 .data(function (d) {
@@ -176,26 +195,40 @@ HTMLWidgets.widget({
                 .enter().append("g")
                 .append("rect")
                   .attr("class", "child")
-                  .call(rect)
-                  .append("svg:title")
-                  .text(function(d){
-                           return d.data.name + " " + formatNumber(d.value).replace(/G/,"B");
-                         });
+                  .call(rect);
+
+              g.selectAll(".child")
+                .on("mouseover", function(d) {
+                  console.log(d);
+                     var tooltip_child = d.data.name;
+                         tooltip_parent = d.parent.data.name;
+                         tooltip_child_value = formatNumber(d.value).replace(/G/,"B");
+                         tooltip_parent_value = formatNumber(d.parent.value).replace(/G/,"B");
+                         parent_name = d.parent.data.col_name ? d.parent.data.col_name + ": " : "";
+                         child_name = d.data.col_name ? d.data.col_name + ": " : "";
+                     tooltip
+                       .html(function(d) {
+                       return  parent_name + "<b>" + tooltip_parent + "</b><br>" +
+                               child_name + "<b>" + tooltip_child  + "</b><br>" +
+                               "value: <b>" + tooltip_child_value + "</b>";
+                       })
+                      .style("opacity", 0.9);
+                     })
+                 .on("mouseout", function(d) {
+                     tooltip.style("opacity", 0);
+                     });
 
                 // add title to parents
               g.append("rect")
                 .attr("class", "parent")
                 .attr("id", function(d) { return d.data.key; })
-                .call(rect)
-                .append("title")
-                .text(function (d){
-                    return d.data.name;
-                });
+                .call(rect);
 
                 /* Adding a foreign object instead of a text object, allows for text wrapping */
-              g.append("foreignObject")
+                g.append("foreignObject")
                 .call(rect)
                 .attr("class", "foreignobj")
+                .style("pointer-events", "none")
                 .append("xhtml:div")
                 .attr("dy", ".75em")
                 .html(function (d) {
@@ -206,7 +239,8 @@ HTMLWidgets.widget({
                         '</font>'
                     ;
                 })
-              .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
+                .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
+
 
             function transition(d) {
                 if (transitioning || !d) return;

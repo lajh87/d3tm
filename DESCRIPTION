@@ -10,6 +10,7 @@ Description: The treemap above uses interaction to reveal the hierarchy
     It also allows the exploration of arbitrarily-large datasets: 
     data can be lazily-loaded and positioned on zoom.
 Imports: 
+    htmlwidgets,
     htmltools,
     tidyr,
     dplyr,
@@ -17,8 +18,10 @@ Imports:
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: knitr,
-    rmarkdown
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 URL: https://lajh87.gitlab.io/d3RZoomableTreemap/

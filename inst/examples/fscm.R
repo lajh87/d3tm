@@ -1,11 +1,10 @@
 library(fscm)
 library(d3RZoomableTreemap)
 
-data(fscm)
+data("fscm_costs")
+data("fscm_labels")
 
-fscm_lng <- fscm %>%
-  tidyr::gather( "year", "value", `2016`:`2065`,na.rm=TRUE) %>%
-  dplyr::mutate(year = as.numeric(year))
+fscm <- dplyr::left_join(fscm_labels, fscm_costs,  by="label_key")
 
 input <- list(year_range = c(2016, 2026),
               tlb = c("Centre", "Navy", "Land","Air","JFC", "DE&S",
@@ -13,7 +12,7 @@ input <- list(year_range = c(2016, 2026),
               cost_type = c("Adj", "Infra", "EPP","ESP", "MPW","NonEP"),
               quantity_type = c("GFE", "Shared", "Overhead"))
 
-filteredData <- fscm_lng %>%
+filteredData <- fscm %>%
   dplyr::filter(year >= input$year_range[1]
                 & year <= input$year_range[2]) %>%
   dplyr::filter(tlb %in% input$tlb) %>%
@@ -29,6 +28,7 @@ value_cols = "value"
 root = "root"
 
 json <- d3_nest2(data = data,
+                 id_vars = c("domain", "category", "element_name", "level5_detail"),
                  value_col = value_cols,
                  root = root)
 

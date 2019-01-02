@@ -4,7 +4,7 @@
 \alias{d3_nest2}
 \title{Convert a data.frame to a 'd3.js' Hierarchy}
 \usage{
-d3_nest2(data, value_col = "value", root = "root")
+d3_nest2(data, id_vars, value_col = "value", root = "root")
 }
 \arguments{
 \item{data}{A data frame}
@@ -20,9 +20,12 @@ Serialised json
 Convert a data.frame to a 'd3.js' Hierarchy
 }
 \examples{
+library(tidyverse)
+library(d3RZoomableTreemap)
 data.frame(Titanic) \%>\%
  dplyr::select(Class,Age,Survived,Sex,Freq) \%>\%
-  d3_nest2(value_col="Freq", root="Titanic") \%>\%
+  d3_nest2(value_col="Freq", root="Titanic",
+           id_vars = c("Class", "Age", "Survived", "Sex")) \%>\%
   zoomable_treemap()
 
 }
