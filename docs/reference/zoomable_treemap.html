@@ -111,12 +111,14 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>zoomable_treemap</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='no'>flare</span>), <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>,
-  <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#bbb"</span>,
+    <pre class="usage"><span class='fu'>zoomable_treemap</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='fu'>system.file</span>(<span class='st'>"examples/flare.json"</span>,
+  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3RZoomableTreemap"</span>))), <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#bbb"</span>,
   <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>header_height</span> <span class='kw'>=</span> <span class='fl'>25</span>,
   <span class='kw'>header_fontsize</span> <span class='kw'>=</span> <span class='st'>"12px"</span>, <span class='kw'>format_string</span> <span class='kw'>=</span> <span class='st'>","</span>,
   <span class='kw'>zoom_in_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click on a Square to Zoom"</span>,
-  <span class='kw'>zoom_out_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click here to Zoom Out"</span>)</pre>
+  <span class='kw'>zoom_out_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click here to Zoom Out"</span>,
+  <span class='kw'>tooltip_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +149,30 @@ variable defined in the data. Takes hex of colour names.</p></td>
       <td><p>The background colour either named of in a hex
 e.g. "#bbb"</p></td>
     </tr>
+    <tr>
+      <th><code>header_height</code></th>
+      <td><p>header height, in pixels</p></td>
+    </tr>
+    <tr>
+      <th><code>header_fontsize</code></th>
+      <td><p>header fontsize, pixels</p></td>
+    </tr>
+    <tr>
+      <th><code>format_string</code></th>
+      <td><p>d3 number format</p></td>
+    </tr>
+    <tr>
+      <th><code>zoom_in_helptext</code></th>
+      <td><p>zoom in helptext</p></td>
+    </tr>
+    <tr>
+      <th><code>zoom_out_helptext</code></th>
+      <td><p>zoom out helptext</p></td>
+    </tr>
+    <tr>
+      <th><code>tooltip_background</code></th>
+      <td><p>tooltip background colour</p></td>
+    </tr>
     </table>
     
 
@@ -154,8 +180,9 @@ e.g. "#bbb"</p></td>
     <pre class="examples"><div class='input'><span class='co'># download.file("https://raw.githubusercontent.com/d3/d3-hierarchy/master/test/data/flare.json",</span>
 <span class='co'>#               "inst/examples/flare.json")</span>
 
-<span class='no'>json</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='fu'>system.file</span>(<span class='st'>"examples/flare.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3RZoomableTreemap"</span>))
-<span class='fu'>zoomable_treemap</span>(<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='no'>json</span>))</div></pre>
+<span class='no'>json</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='fu'>system.file</span>(<span class='st'>"examples/flare.json"</span>,
+                                       <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3RZoomableTreemap"</span>)))
+<span class='fu'>zoomable_treemap</span>(<span class='no'>json</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

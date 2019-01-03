@@ -54,8 +54,6 @@ rect.parent,
 div.tooltip {
   position: absolute;
   text-align: left;
-  width: 200px;
-  height: 75px;
   padding: 2px;
   font: 12px sans-serif;
   border: 1px;

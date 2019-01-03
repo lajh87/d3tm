@@ -5,7 +5,7 @@
 \title{D3 Zoomable Treemap}
 \usage{
 
-  zoomable_treemap(data = jsonlite::toJSON(readr::read_file(system.file("examples/flare.json",
+  zoomable_treemap(data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
   package = "d3RZoomableTreemap"))), width = "100\%", height = NULL,
   elementId = NULL, background = "#bbb",
   header_background = "orange", header_height = 25,
@@ -29,17 +29,17 @@ variable defined in the data. Takes hex of colour names.}
 \item{\code{header_background}}{The background colour either named of in a hex
 e.g. "#bbb"}
 
-\item{\code{header_height}{header}{height, in pixels}}
+\item{\code{header_height}}{header height, in pixels}
 
-\item{\code{header_fontsize}{header}{fontsize, pixels}}
+\item{\code{header_fontsize}}{header fontsize, pixels}
 
-\item{\code{format_string}{d3}{number format}}
+\item{\code{format_string}}{d3 number format}
 
-\item{\code{zoom_in_helptext}{zoom}{in helptext}}
+\item{\code{zoom_in_helptext}}{zoom in helptext}
 
-\item{\code{zoom_out_helptext}{zoom}{out helptext}}
+\item{\code{zoom_out_helptext}}{zoom out helptext}
 
-\item{\code{tooltip_background}{tooltip}{background colour}}
+\item{\code{tooltip_background}}{tooltip background colour}
 }
 \description{
 Implementation of a d3 zoomable treemap
@@ -48,6 +48,7 @@ Implementation of a d3 zoomable treemap
 # download.file("https://raw.githubusercontent.com/d3/d3-hierarchy/master/test/data/flare.json",
 #               "inst/examples/flare.json")
 
-json <- jsonlite::fromJSON(system.file("examples/flare.json", package = "d3RZoomableTreemap"))
-zoomable_treemap(jsonlite::toJSON(json))
+json <- jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
+                                       package = "d3RZoomableTreemap")))
+zoomable_treemap(json)
 }

@@ -74,16 +74,36 @@ HTMLWidgets.widget({
                     .attr("class","tooltip")
                     .style("opacity", 0)
                     .style("background", xR.tooltip_background)
-                    .style("color", idealTextColor(xR.tooltip_background));
+                    .style("color", idealTextColor(xR.tooltip_background))
+                    .style("width", "200px")
+                    .style("height", "75px");
 
     function mouseover() {
       tooltip.style("display", "inline");
     }
 
+    var tooltip_bb = tooltip.node().getBoundingClientRect() ;
+
+
     function mousemove() {
+
+      var rect = el.getBoundingClientRect(),
+      ox = d3.event.pageX - rect.left,
+      oy = d3.event.pageY;
+
+      // stop tooltip overflowing the element
+
+      if(ox > (rect.left + rect.width - tooltip_bb.width * 2)){
+        ox = d3.event.pageX - rect.left - tooltip_bb.width;
+      }
+
+      if(oy > rect.bottom){
+        oy = d3.event.pageY - tooltip_bb.height;
+      }
+
       tooltip
-      .style("left", (d3.event.pageX + 20) + "px")
-      .style("top", (d3.event.pageY + 20) + "px");
+      .style("left", (ox) + 25 + "px")
+      .style("top", (oy) - 25 + "px");
      }
 
     function mouseout() {
@@ -199,7 +219,6 @@ HTMLWidgets.widget({
 
               g.selectAll(".child")
                 .on("mouseover", function(d) {
-                  console.log(d);
                      var tooltip_child = d.data.name;
                          tooltip_parent = d.parent.data.name;
                          tooltip_child_value = formatNumber(d.value).replace(/G/,"B");

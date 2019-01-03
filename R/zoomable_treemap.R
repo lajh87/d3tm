@@ -10,12 +10,12 @@
 #'     variable defined in the data. Takes hex of colour names.
 #' @param \code{header_background} The background colour either named of in a hex
 #'     e.g. "#bbb"
-#' @param \code{header_height}{header height, in pixels}
-#' @param \code{header_fontsize}{header fontsize, pixels}
-#' @param \code{format_string}{d3 number format}
-#' @param \code{zoom_in_helptext}{zoom in helptext}
-#' @param \code{zoom_out_helptext}{zoom out helptext}
-#' @param \code{tooltip_background}{tooltip background colour}
+#' @param \code{header_height} header height, in pixels
+#' @param \code{header_fontsize} header fontsize, pixels
+#' @param \code{format_string} d3 number format
+#' @param \code{zoom_in_helptext} zoom in helptext
+#' @param \code{zoom_out_helptext} zoom out helptext
+#' @param \code{tooltip_background} tooltip background colour
 #'
 #' @export
 #' @example inst/examples/flare.R

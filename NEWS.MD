@@ -1,7 +1,7 @@
 # d3RZoomableTreemap 0.2
 ## Major Changes
 * Added d3_nest2 to convert data to a hierarchy that d3 expects
-* Added tooltip to treemap that consider col_name
+* Added tooltip to treemap that consider col_name (60a8a24d7b0fa3e32975199735c419bf38545260)
 
 ## Minor Changes
 * Added parameters for breadcrumb help text
