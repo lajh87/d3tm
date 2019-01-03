@@ -32,7 +32,8 @@ zoomable_treemap <- function(
   format_string = ",",
   zoom_in_helptext = " - Click on a Square to Zoom",
   zoom_out_helptext = " - Click here to Zoom Out",
-  tooltip_background = "orange"
+  tooltip_background = "orange",
+  rmarkdown = FALSE
 ){
 
   # forward options using x
@@ -45,7 +46,8 @@ zoomable_treemap <- function(
     format_string = format_string,
     zoom_in_helptext = zoom_in_helptext,
     zoom_out_helptext = zoom_out_helptext,
-    tooltip_background = tooltip_background
+    tooltip_background = tooltip_background,
+    rmarkdown = rmarkdown
   )
 
   # create widget

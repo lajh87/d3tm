@@ -87,24 +87,31 @@ HTMLWidgets.widget({
 
     function mousemove() {
 
-      var rect = el.getBoundingClientRect(),
-      ox = d3.event.pageX - rect.left,
-      oy = d3.event.pageY;
+      var rect = this.getBoundingClientRect();
 
-      // stop tooltip overflowing the element
-
-      if(ox > (rect.left + rect.width - tooltip_bb.width * 2)){
-        ox = d3.event.pageX - rect.left - tooltip_bb.width;
+      // hacky fix for wierd rmarkdown behaviour
+      if(xR.rmarkdown){
+       var
+        ox = d3.mouse(this)[0],
+         oy = d3.mouse(this)[1] + rect.height;
+      } else{
+        var
+         ox = d3.mouse(this)[0],
+         oy = d3.mouse(this)[1];
       }
 
-      if(oy > rect.bottom){
-        oy = d3.event.pageY - tooltip_bb.height;
+      if(d3.mouse(this)[0]  > ( rect.width - tooltip_bb.width * 2)){
+        var ox = ox - tooltip_bb.width;
+      }
+
+      if(d3.mouse(this)[1] > (rect.height - tooltip_bb.height*2)){
+        var oy = oy - tooltip_bb.height;
       }
 
       tooltip
       .style("left", (ox) + 25 + "px")
       .style("top", (oy) - 25 + "px");
-     }
+       }
 
     function mouseout() {
       tooltip.style("display", "none");
