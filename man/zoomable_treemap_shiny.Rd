@@ -4,7 +4,7 @@
 \alias{zoomable_treemap_shiny}
 \alias{zoomable_treemap_output}
 \alias{render_zoomable_treemap}
-\title{Shiny bindings for d3v5 zoomableTreemap}
+\title{Shiny bindings for zoomable treemap}
 \usage{
 zoomable_treemap_output(outputId, width = "100\%", height = 500)
 
@@ -25,10 +25,28 @@ string and have \code{'px'} appended.}
 is useful if you want to save an expression in a variable.}
 }
 \description{
-Output and render functions for using zoomableTreemap within Shiny
+Output and render functions for using zoomable treemap within Shiny
 applications and interactive Rmd documents.
 }
 \details{
-The name of the clicked node is avaiable based on the object name + _clicked
-e.g. input$treemap_clicked
+zoomable_treemap objects send input values to Shiny as the user interacts
+with them.
+
+Object input names generally use this pattern:
+
+\code{input$OBJECTID_EVENT_OBJCATEGORY}
+
+So for \code{zoomable_treemap_output("ztm")} clicking on a square would
+return the name of the node to \code{input$ztm_clicked_label}.
+
+The full list of current supported events are:
+
+\code{input$OBJECTID_clicked_id}
+\code{input$OBJECTID_clicked_depth}
+\code{input$OBJECTID_clicked_label}
+\code{input$OBJECTID_hover_id}
+\code{input$OBJECTID_hover_depth}
+\code{input$OBJECTID_hover_label}
+
+If an event has not been triggered it is set to \code{NULL}.
 }

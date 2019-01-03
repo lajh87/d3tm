@@ -3,8 +3,9 @@ library(d3RZoomableTreemap)
 
 data("Titanic")
 json <- data.frame(Titanic) %>%
-  dplyr::select(Class,Age,Survived,Sex,Freq) %>%
-  d3_nest2(value_col="Freq", root="Titanic")
+  dplyr::select(Class,Sex,Age,Survived,Freq) %>%
+  d3_nest2(id_vars = c("Class", "Sex", "Age"),
+           value_col="Freq", root="Titanic")
 
 ui <- fluidPage(
   sidebarLayout(

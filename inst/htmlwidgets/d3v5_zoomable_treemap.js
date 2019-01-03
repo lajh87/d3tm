@@ -82,31 +82,48 @@ HTMLWidgets.widget({
       tooltip.style("display", "inline");
     }
 
+
     var tooltip_bb = tooltip.node().getBoundingClientRect() ;
 
 
     function mousemove() {
 
-      var rect = this.getBoundingClientRect();
+    var rect = this.getBoundingClientRect();
 
+   /* function mouse_x(){
+      d3.mouse(this)[0];
+    }
+
+    function mouse_y(){
+      if(xR.rmarkdown){
+        d3.mouse(this)[1] + rect.height;
+      } else{
+        d3.mouse(this)[1];
+      }
+    } */
       // hacky fix for wierd rmarkdown behaviour
       if(xR.rmarkdown){
        var
         ox = d3.mouse(this)[0],
-         oy = d3.mouse(this)[1] + rect.height;
+        oy = d3.mouse(this)[1] + rect.height;
       } else{
         var
          ox = d3.mouse(this)[0],
          oy = d3.mouse(this)[1];
       }
 
-      if(d3.mouse(this)[0]  > ( rect.width - tooltip_bb.width * 2)){
+      if(ox  > ( rect.width - tooltip_bb.width * 2)){
         var ox = ox - tooltip_bb.width;
       }
 
-      if(d3.mouse(this)[1] > (rect.height - tooltip_bb.height*2)){
-        var oy = oy - tooltip_bb.height/2;
+      if(oy > (rect.height - tooltip_bb.height*2)){
+        var oy = oy - (tooltip_bb.height/2) +25 ;
+      } else{
+        if(oy < rect.height - tooltip_bb.height){
+        var oy = oy + tooltip_bb.height;
+        }
       }
+
 
       tooltip
       .style("left", (ox) + 25 + "px")
@@ -224,14 +241,19 @@ HTMLWidgets.widget({
                   .attr("class", "child")
                   .call(rect);
 
+              /*   g.selectAll(".child")
+                  .on("mouseover",hover_to_shiny_input)
+                  .on("mouseout", mouseout_to_shiny_input);*/
+
               g.selectAll(".child")
                 .on("mouseover", function(d) {
-                     var tooltip_child = d.data.name;
-                         tooltip_parent = d.parent.data.name;
-                         tooltip_child_value = formatNumber(d.value).replace(/G/,"B");
-                         tooltip_parent_value = formatNumber(d.parent.value).replace(/G/,"B");
-                         parent_name = d.parent.data.col_name ? d.parent.data.col_name + ": " : "";
-                         child_name = d.data.col_name ? d.data.col_name + ": " : "";
+                    hover_to_shiny_input(d);
+                    var tooltip_child = d.data.name;
+                        tooltip_parent = d.parent.data.name;
+                        tooltip_child_value = formatNumber(d.value).replace(/G/,"B");
+                        tooltip_parent_value = formatNumber(d.parent.value).replace(/G/,"B");
+                        parent_name = d.parent.data.col_name ? d.parent.data.col_name + ": " : "";
+                        child_name = d.data.col_name ? d.data.col_name + ": " : "";
                      tooltip
                        .html(function(d) {
                        return  parent_name + "<b>" + tooltip_parent + "</b><br>" +
@@ -241,8 +263,11 @@ HTMLWidgets.widget({
                       .style("opacity", 0.9);
                      })
                  .on("mouseout", function(d) {
-                     tooltip.style("opacity", 0);
-                     });
+                   mouseout_to_shiny_input(d);
+                   tooltip.style("opacity", 0);
+                   });
+
+
 
                 // add title to parents
               g.append("rect")

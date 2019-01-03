@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Shiny bindings for d3v5 zoomableTreemap — zoomable_treemap_shiny • d3RZoomableTreemap</title>
+<title>Shiny bindings for zoomable treemap — zoomable_treemap_shiny • d3RZoomableTreemap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Shiny bindings for d3v5 zoomableTreemap — zoomable_treemap_shiny" />
+<meta property="og:title" content="Shiny bindings for zoomable treemap — zoomable_treemap_shiny" />
 
-<meta property="og:description" content="Output and render functions for using zoomableTreemap within Shiny
+<meta property="og:description" content="Output and render functions for using zoomable treemap within Shiny
 applications and interactive Rmd documents." />
 <meta name="twitter:card" content="summary" />
 
@@ -101,14 +101,14 @@ applications and interactive Rmd documents." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Shiny bindings for d3v5 zoomableTreemap</h1>
+    <h1>Shiny bindings for zoomable treemap</h1>
     
     <div class="hidden name"><code>zoomable_treemap_shiny.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Output and render functions for using zoomableTreemap within Shiny
+    <p>Output and render functions for using zoomable treemap within Shiny
 applications and interactive Rmd documents.</p>
     
     </div>
@@ -147,8 +147,20 @@ is useful if you want to save an expression in a variable.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The name of the clicked node is avaiable based on the object name + _clicked
-e.g. input$treemap_clicked</p>
+    <p>zoomable_treemap objects send input values to Shiny as the user interacts
+with them.</p>
+<p>Object input names generally use this pattern:</p>
+<p><code>input$OBJECTID_EVENT_OBJCATEGORY</code></p>
+<p>So for <code>zoomable_treemap_output("ztm")</code> clicking on a square would
+return the name of the node to <code>input$ztm_clicked_label</code>.</p>
+<p>The full list of current supported events are:</p>
+<p><code>input$OBJECTID_clicked_id</code>
+<code>input$OBJECTID_clicked_depth</code>
+<code>input$OBJECTID_clicked_label</code>
+<code>input$OBJECTID_hover_id</code>
+<code>input$OBJECTID_hover_depth</code>
+<code>input$OBJECTID_hover_label</code></p>
+<p>If an event has not been triggered it is set to <code>NULL</code>.</p>
     
 
   </div>

@@ -67,13 +67,10 @@ zoomable_treemap <- function(
 }
 
 
-#' Shiny bindings for d3v5 zoomableTreemap
+#' Shiny bindings for zoomable treemap
 #'
-#' Output and render functions for using zoomableTreemap within Shiny
+#' Output and render functions for using zoomable treemap within Shiny
 #' applications and interactive Rmd documents.
-#'
-#' The name of the clicked node is avaiable based on the object name + _clicked
-#' e.g. input$treemap_clicked
 #'
 #' @param outputId output variable to read from
 #' @param width,height Must be a valid CSS unit (like \code{'100\%'},
@@ -84,11 +81,35 @@ zoomable_treemap <- function(
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
 #'
+#' @details
+#'
+#' zoomable_treemap objects send input values to Shiny as the user interacts
+#' with them.
+#'
+#' Object input names generally use this pattern:
+#'
+#' \code{input$OBJECTID_EVENT_OBJCATEGORY}
+#'
+#' So for \code{zoomable_treemap_output("ztm")} clicking on a square would
+#' return the name of the node to \code{input$ztm_clicked_label}.
+#'
+#' The full list of current supported events are:
+#'
+#' \code{input$OBJECTID_clicked_id}
+#' \code{input$OBJECTID_clicked_depth}
+#' \code{input$OBJECTID_clicked_label}
+#' \code{input$OBJECTID_hover_id}
+#' \code{input$OBJECTID_hover_depth}
+#' \code{input$OBJECTID_hover_label}
+#'
+#' If an event has not been triggered it is set to \code{NULL}.
+#'
 #' @name zoomable_treemap_shiny
 #'
 #' @export
 zoomable_treemap_output <- function(outputId, width = "100%", height = 500) {
-  htmlwidgets::shinyWidgetOutput(outputId, "d3v5_zoomable_treemap", width, height, package = "d3RZoomableTreemap")
+  htmlwidgets::shinyWidgetOutput(outputId, "d3v5_zoomable_treemap", width, height,
+                                 package = "d3RZoomableTreemap")
 }
 
 #' @rdname zoomable_treemap_shiny

@@ -20,8 +20,6 @@ Serialised json
 Convert a data.frame to a 'd3.js' Hierarchy
 }
 \examples{
-library(tidyverse)
-library(d3RZoomableTreemap)
 data.frame(Titanic) \%>\%
  dplyr::select(Class,Age,Survived,Sex,Freq) \%>\%
   d3_nest2(value_col="Freq", root="Titanic",
