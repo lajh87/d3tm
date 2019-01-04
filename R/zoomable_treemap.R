@@ -1,6 +1,8 @@
-#' D3 Zoomable Treemap
+#' Zoomable Treemap
 #'
-#' Implementation of a d3 zoomable treemap
+#' Implementation of a Mike Bostock's d3
+#'  \href{https://bost.ocks.org/mike/treemap/}{zoomable treemap}
+#'  as an htmlwidget in d3v5.
 #'
 #' @param \code{data} A json object
 #' @param \code{width} Width of the widget, in pixels
@@ -10,15 +12,17 @@
 #'     variable defined in the data. Takes hex of colour names.
 #' @param \code{header_background} The background colour either named of in a hex
 #'     e.g. "#bbb"
-#' @param \code{header_height} header height, in pixels
-#' @param \code{header_fontsize} header fontsize, pixels
-#' @param \code{format_string} d3 number format
-#' @param \code{zoom_in_helptext} zoom in helptext
-#' @param \code{zoom_out_helptext} zoom out helptext
-#' @param \code{tooltip_background} tooltip background colour
+#' @param \code{header_height} Height of the title, in pixels
+#' @param \code{header_fontsize} Font size of the title, in pixels
+#' @param \code{format_string} D3 number format
+#' @param \code{zoom_in_helptext} The help text displayed on the header bar
+#' @param \code{zoom_out_helptext} Zoom out helptext
+#' @param \code{tooltip_background}  Background colour of the tooltip
+#' @param \code{rmarkdown} Specific whether is an Rmarkdown document, to correct
+#'     tooltip location.
 #'
 #' @export
-#' @example inst/examples/flare.R
+#' @example inst/examples/titanic.R
 zoomable_treemap <- function(
   data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
                                          package = "d3RZoomableTreemap"))),

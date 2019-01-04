@@ -2,7 +2,7 @@
 % Please edit documentation in R/zoomable_treemap.R
 \name{zoomable_treemap}
 \alias{zoomable_treemap}
-\title{D3 Zoomable Treemap}
+\title{Zoomable Treemap}
 \usage{
 
   zoomable_treemap(data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
@@ -29,26 +29,31 @@ variable defined in the data. Takes hex of colour names.}
 \item{\code{header_background}}{The background colour either named of in a hex
 e.g. "#bbb"}
 
-\item{\code{header_height}}{header height, in pixels}
+\item{\code{header_height}}{Height of the title, in pixels}
 
-\item{\code{header_fontsize}}{header fontsize, pixels}
+\item{\code{header_fontsize}}{Font size of the title, in pixels}
 
-\item{\code{format_string}}{d3 number format}
+\item{\code{format_string}}{D3 number format}
 
-\item{\code{zoom_in_helptext}}{zoom in helptext}
+\item{\code{zoom_in_helptext}}{The help text displayed on the header bar}
 
-\item{\code{zoom_out_helptext}}{zoom out helptext}
+\item{\code{zoom_out_helptext}}{Zoom out helptext}
 
-\item{\code{tooltip_background}}{tooltip background colour}
+\item{\code{tooltip_background}}{Background colour of the tooltip}
+
+\item{\code{rmarkdown}}{Specific whether is an Rmarkdown document, to correct
+tooltip location.}
 }
 \description{
-Implementation of a d3 zoomable treemap
+Implementation of a Mike Bostock's d3
+ \href{https://bost.ocks.org/mike/treemap/}{zoomable treemap}
+ as an htmlwidget in d3v5.
 }
 \examples{
-# download.file("https://raw.githubusercontent.com/d3/d3-hierarchy/master/test/data/flare.json",
-#               "inst/examples/flare.json")
+data.frame(Titanic) \%>\%
+ dplyr::select(Class,Age,Survived,Sex,Freq) \%>\%
+  d3_nest2(value_col="Freq", root="Titanic",
+           id_vars = c("Class", "Age", "Survived", "Sex")) \%>\%
+  zoomable_treemap()
 
-json <- jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
-                                       package = "d3RZoomableTreemap")))
-zoomable_treemap(json)
 }

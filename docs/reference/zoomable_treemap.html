@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>D3 Zoomable Treemap — zoomable_treemap • d3RZoomableTreemap</title>
+<title>Zoomable Treemap — zoomable_treemap • d3RZoomableTreemap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="D3 Zoomable Treemap — zoomable_treemap" />
+<meta property="og:title" content="Zoomable Treemap — zoomable_treemap" />
 
-<meta property="og:description" content="Implementation of a d3 zoomable treemap" />
+<meta property="og:description" content="Implementation of a Mike Bostock's d3
+ zoomable treemap
+ as an htmlwidget in d3v5." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -61,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">d3RZoomableTreemap</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.1</span>
       </span>
     </div>
 
@@ -100,14 +102,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>D3 Zoomable Treemap</h1>
+    <h1>Zoomable Treemap</h1>
     
     <div class="hidden name"><code>zoomable_treemap.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Implementation of a d3 zoomable treemap</p>
+    <p>Implementation of a Mike Bostock's d3
+ <a href='https://bost.ocks.org/mike/treemap/'>zoomable treemap</a>
+ as an htmlwidget in d3v5.</p>
     
     </div>
 
@@ -151,38 +155,42 @@ e.g. "#bbb"</p></td>
     </tr>
     <tr>
       <th><code>header_height</code></th>
-      <td><p>header height, in pixels</p></td>
+      <td><p>Height of the title, in pixels</p></td>
     </tr>
     <tr>
       <th><code>header_fontsize</code></th>
-      <td><p>header fontsize, pixels</p></td>
+      <td><p>Font size of the title, in pixels</p></td>
     </tr>
     <tr>
       <th><code>format_string</code></th>
-      <td><p>d3 number format</p></td>
+      <td><p>D3 number format</p></td>
     </tr>
     <tr>
       <th><code>zoom_in_helptext</code></th>
-      <td><p>zoom in helptext</p></td>
+      <td><p>The help text displayed on the header bar</p></td>
     </tr>
     <tr>
       <th><code>zoom_out_helptext</code></th>
-      <td><p>zoom out helptext</p></td>
+      <td><p>Zoom out helptext</p></td>
     </tr>
     <tr>
       <th><code>tooltip_background</code></th>
-      <td><p>tooltip background colour</p></td>
+      <td><p>Background colour of the tooltip</p></td>
+    </tr>
+    <tr>
+      <th><code>rmarkdown</code></th>
+      <td><p>Specific whether is an Rmarkdown document, to correct
+tooltip location.</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># download.file("https://raw.githubusercontent.com/d3/d3-hierarchy/master/test/data/flare.json",</span>
-<span class='co'>#               "inst/examples/flare.json")</span>
-
-<span class='no'>json</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='fu'>system.file</span>(<span class='st'>"examples/flare.json"</span>,
-                                       <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3RZoomableTreemap"</span>)))
-<span class='fu'>zoomable_treemap</span>(<span class='no'>json</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>data.frame</span>(<span class='no'>Titanic</span>) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>Class</span>,<span class='no'>Age</span>,<span class='no'>Survived</span>,<span class='no'>Sex</span>,<span class='no'>Freq</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='d3_nest2.html'>d3_nest2</a></span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>,
+           <span class='kw'>id_vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Class"</span>, <span class='st'>"Age"</span>, <span class='st'>"Survived"</span>, <span class='st'>"Sex"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>zoomable_treemap</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

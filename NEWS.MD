@@ -1,13 +1,19 @@
+# d3RZoomableTreemap 0.2.1
+## Bug Fixes (#a16ac5b)
+* Fixed shiny hover inputs
+* Fixed tooltip bounding so it does not overflow container.
+* Ammended documentation
+
 # d3RZoomableTreemap 0.2
 ## Major Changes
 * Added d3_nest2 to convert data to a hierarchy that d3 expects
-* Added tooltip to treemap that consider col_name (60a8a24d7b0fa3e32975199735c419bf38545260)
+* Added tooltip to treemap that consider col_name (60a8a2)
 
 ## Minor Changes
 * Added parameters for breadcrumb help text
 * Added parameter to enable custom number formating
 * Updated events to include hover and clicked and data for id, label and value
-* Fix bug where tibbles would not work with d3_nest2 (c1f70c22af3fd0660d74780cfa6b02342280bcad)
+* Fix bug where tibbles would not work with d3_nest2 (c1f70c)
 
 # d3RZoomableTreemap 0.1
 ## Features

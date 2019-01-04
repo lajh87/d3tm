@@ -22,6 +22,10 @@ ui <- fluidPage(
         tags$label("Hover Node ID:"),textOutput("hover_node_id",inline = T),
         tags$label("Hover Node Label:"),textOutput("hover_node_label",inline = T),
         tags$label("Hover Node Depth:"),textOutput("hover_node_depth",inline = T)
+      ),
+      fluidRow(
+        actionButton("reset_click_events", "Reset Click Events"),
+        actionButton("test", "Zoom To Node")
       )
       ),
       position = "right"
@@ -41,6 +45,20 @@ server <- function(input, output, session) {
   output$hover_node_id <- renderText({input$x1_hover_id})
   output$hover_node_label <- renderText(input$x1_hover_label)
   output$hover_node_depth <- renderText({input$x1_hover_depth})
+
+  observeEvent(input$reset_click_events,{
+
+    session$sendCustomMessage("resetInputValue", "x1_clicked_id")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_label")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_depth")
+
+  })
+
+  #https://shiny.rstudio.com/articles/js-send-message.html
+  observeEvent(input$test,{
+    session$sendCustomMessage("testShiny", "Test Message")
+  })
+
 
   }
 
