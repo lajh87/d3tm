@@ -1,5 +1,5 @@
 # d3Rtm 0.3
-* Rename from d3RZoomableTreemap to d3tm
+* Rename from d3RZoomableTreemap to d3tm [(d480b3)](https://gitlab.com/lajh87/d3tm/commit/d480b3f42f029ea9c58fa83b1ab2a43054ee8a5d")
 
 # d3RZoomableTreemap 0.2.1
 ## Bug Fixes (#a16ac5b)
