@@ -1,6 +1,6 @@
-Package: d3RZoomableTreemap
+Package: d3tm
 Title: A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data
-Version: 0.2.1
+Version: 0.3
 Authors@R: c(person("Luke", "Heley", role = c("aut", "cre"),
                      email = "lajh87@me.com"))
 Description: The treemap above uses interaction to reveal the hierarchy 
@@ -11,10 +11,10 @@ Description: The treemap above uses interaction to reveal the hierarchy
     data can be lazily-loaded and positioned on zoom.
 Imports: 
     htmlwidgets,
-    htmltools,
     tidyr,
     dplyr,
-    magrittr
+    magrittr,
+    jsonlite
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -24,5 +24,5 @@ Suggests:
     testthat
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
-URL: https://lajh87.gitlab.io/d3RZoomableTreemap/
-BugReports: https://gitlab.com/lajh87/d3RZoomableTreemap/issues
+URL: https://lajh87.gitlab.io/d3tm/
+BugReports: https://gitlab.com/lajh87/d3tm/issues

@@ -1,3 +1,10 @@
 ^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^docs$
+^_pkgdown.yml$
+^index.Rmd$
+^readme.md$
+^\.gitlab-ci.yml$
+^NEWS.md$
+

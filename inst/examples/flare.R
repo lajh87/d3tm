@@ -3,4 +3,4 @@
 
 json <- jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
                                        package = "d3RZoomableTreemap")))
-zoomable_treemap(json)
+ztm(json)

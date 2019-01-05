@@ -7,24 +7,22 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-```{r}
-if(!"d3RZoomableTreemap" %in% installed.packages()[,"Package"])
-  devtools::install_git("https://gitlab.com/lajh87/d3RZoomableTreemap")
+```{r,eval = FALSE}
+devtools::install_git("https://gitlab.com/lajh87/d3tm")
 ```
 
 ## Usage
 
-<div>
 ```{r}
-library(d3RZoomableTreemap)
+library(d3tm)
 data.frame(Titanic) %>%
  dplyr::select(Class,Age,Survived,Sex,Freq) %>%
   d3_nest2(value_col="Freq", root="Titanic",
            id_vars = c("Class", "Age", "Sex", "Survived")) %>%
-  zoomable_treemap(rmarkdown = TRUE)
+  ztm(rmarkdown = TRUE)
 
 ```
-</div>
+
 ## Detail
 
 Introduced by [Ben Shneiderman](http://www.cs.umd.edu/hcil/treemap-history/) 

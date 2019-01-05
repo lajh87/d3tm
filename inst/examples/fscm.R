@@ -1,5 +1,5 @@
 library(fscm)
-library(d3RZoomableTreemap)
+library(d3ztm)
 
 data("fscm_costs")
 data("fscm_labels")
@@ -32,7 +32,7 @@ json <- d3_nest2(data = data,
                  value_col = value_cols,
                  root = root)
 
-d3RZoomableTreemap::zoomable_treemap(
+ztm(
   data = json,format_string = "$.3s",
   header_background = "orange",
   header_height = 25,

@@ -1,3 +1,6 @@
+# d3Rtm 0.3
+* Rename from d3RZoomableTreemap to d3tm
+
 # d3RZoomableTreemap 0.2.1
 ## Bug Fixes (#a16ac5b)
 * Fixed shiny hover inputs

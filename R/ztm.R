@@ -4,26 +4,26 @@
 #'  \href{https://bost.ocks.org/mike/treemap/}{zoomable treemap}
 #'  as an htmlwidget in d3v5.
 #'
-#' @param \code{data} A json object
-#' @param \code{width} Width of the widget, in pixels
-#' @param \code{height} Height of the widget, in pixels
-#' @param \code{elementId} Element ID used for R Shiny package
-#' @param \code{background} Default background colour use if there is no color
+#' @param data A json object
+#' @param width Width of the widget, in pixels
+#' @param height Height of the widget, in pixels
+#' @param elementId Element ID used for R Shiny package
+#' @param background Default background colour use if there is no color
 #'     variable defined in the data. Takes hex of colour names.
-#' @param \code{header_background} The background colour either named of in a hex
+#' @param header_background The background colour either named of in a hex
 #'     e.g. "#bbb"
-#' @param \code{header_height} Height of the title, in pixels
-#' @param \code{header_fontsize} Font size of the title, in pixels
-#' @param \code{format_string} D3 number format
-#' @param \code{zoom_in_helptext} The help text displayed on the header bar
-#' @param \code{zoom_out_helptext} Zoom out helptext
-#' @param \code{tooltip_background}  Background colour of the tooltip
-#' @param \code{rmarkdown} Specific whether is an Rmarkdown document, to correct
+#' @param header_height Height of the title, in pixels
+#' @param header_fontsize Font size of the title, in pixels
+#' @param format_string D3 number format
+#' @param zoom_in_helptext The help text displayed on the header bar
+#' @param zoom_out_helptext Zoom out helptext
+#' @param tooltip_background  Background colour of the tooltip
+#' @param rmarkdown Specific whether is an Rmarkdown document, to correct
 #'     tooltip location.
 #'
 #' @export
 #' @example inst/examples/titanic.R
-zoomable_treemap <- function(
+ztm <- function(
   data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
                                          package = "d3RZoomableTreemap"))),
   width = "100%",
@@ -64,14 +64,14 @@ zoomable_treemap <- function(
       padding = 0,
       browser.fill = TRUE
     ),
-    package = "d3RZoomableTreemap",
+    package = "d3tm",
     elementId = elementId
   )
 
 }
 
 
-#' Shiny bindings for zoomable treemap
+#' Shiny Bindings for Zoomable Treemap
 #'
 #' Output and render functions for using zoomable treemap within Shiny
 #' applications and interactive Rmd documents.
@@ -108,19 +108,19 @@ zoomable_treemap <- function(
 #'
 #' If an event has not been triggered it is set to \code{NULL}.
 #'
-#' @name zoomable_treemap_shiny
+#' @name ztmShiny
 #'
 #' @export
-zoomable_treemap_output <- function(outputId, width = "100%", height = 500) {
+ztmOutput <- function(outputId, width = "100%", height = 500) {
   htmlwidgets::shinyWidgetOutput(outputId, "d3v5_zoomable_treemap", width, height,
-                                 package = "d3RZoomableTreemap")
+                                 package = "d3tm")
 }
 
-#' @rdname zoomable_treemap_shiny
+#' @rdname ztmShiny
 #' @export
-render_zoomable_treemap <- function(expr, env = parent.frame(), quoted = FALSE) {
+renderZtm <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) {
     expr <- substitute(expr)
   } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, zoomable_treemap_output, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, ztmOutput, env, quoted = TRUE)
 }

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data • d3RZoomableTreemap</title>
+<title>A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data • d3tm</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -33,8 +33,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">d3RZoomableTreemap</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.1</span>
+        <a class="navbar-link" href="index.html">d3tm</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://gitlab.com/lajh87/d3RZoomableTreemap">
+  <a href="https://gitlab.com/lajh87/d3tm">
     <span class="fa fa-gitlab fa-lg"></span>
      
   </a>
@@ -70,7 +70,7 @@
 
       
       </header><script src="index_files/htmlwidgets-1.3/htmlwidgets.js"></script><link href="index_files/d3-5/treemap_style.css" rel="stylesheet">
-<script src="index_files/d3-5/d3.min.js"></script><script src="index_files/d3v5_zoomable_treemap-binding-0.2.1/d3v5_zoomable_treemap.js"></script><div class="row">
+<script src="index_files/d3-5/d3.min.js"></script><script src="index_files/d3v5_zoomable_treemap-binding-0.3/d3v5_zoomable_treemap.js"></script><div class="row">
   <div class="col-md-9 contents">
     
 
@@ -79,22 +79,19 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span>(<span class="op">!</span><span class="st">"d3RZoomableTreemap"</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[,<span class="st">"Package"</span>])
-  devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_git</a></span>(<span class="st">"https://gitlab.com/lajh87/d3RZoomableTreemap"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">install_git</a></span>(<span class="st">"https://gitlab.com/lajh87/d3tm"</span>)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(d3RZoomableTreemap)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(d3tm)
 <span class="kw">data.frame</span>(Titanic) <span class="op">%&gt;%</span>
-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(Class,Age,Survived,Sex,Freq) <span class="op">%&gt;%</span>
+<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(Class,Age,Survived,Sex,Freq) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/d3_nest2.html">d3_nest2</a></span>(<span class="dt">value_col=</span><span class="st">"Freq"</span>, <span class="dt">root=</span><span class="st">"Titanic"</span>,
            <span class="dt">id_vars =</span> <span class="kw">c</span>(<span class="st">"Class"</span>, <span class="st">"Age"</span>, <span class="st">"Sex"</span>, <span class="st">"Survived"</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/zoomable_treemap.html">zoomable_treemap</a></span>(<span class="dt">rmarkdown =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div id="htmlwidget-bb05eadc76feeeb6cda5" style="width:100%;height:432.632880098888px;" class="d3v5_zoomable_treemap html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bb05eadc76feeeb6cda5">{"x":{"data":{"children":[{"key":1,"name":"1st","children":[{"key":"1.2","name":"Child","col_name":"Age","children":[{"key":"1.2.2","name":"Male","col_name":"Sex","children":[{"key":"1.2.2.1","name":"No","col_name":"Survived","value":0},{"key":"1.2.2.2","name":"Yes","col_name":"Survived","value":5}]},{"key":"1.2.1","name":"Female","col_name":"Sex","children":[{"key":"1.2.1.1","name":"No","col_name":"Survived","value":0},{"key":"1.2.1.2","name":"Yes","col_name":"Survived","value":1}]}]},{"key":"1.1","name":"Adult","col_name":"Age","children":[{"key":"1.1.2","name":"Male","col_name":"Sex","children":[{"key":"1.1.2.1","name":"No","col_name":"Survived","value":118},{"key":"1.1.2.2","name":"Yes","col_name":"Survived","value":57}]},{"key":"1.1.1","name":"Female","col_name":"Sex","children":[{"key":"1.1.1.1","name":"No","col_name":"Survived","value":4},{"key":"1.1.1.2","name":"Yes","col_name":"Survived","value":140}]}]}],"col_name":"Class"},{"key":2,"name":"2nd","children":[{"key":"2.2","name":"Child","col_name":"Age","children":[{"key":"2.2.2","name":"Male","col_name":"Sex","children":[{"key":"2.2.2.1","name":"No","col_name":"Survived","value":0},{"key":"2.2.2.2","name":"Yes","col_name":"Survived","value":11}]},{"key":"2.2.1","name":"Female","col_name":"Sex","children":[{"key":"2.2.1.1","name":"No","col_name":"Survived","value":0},{"key":"2.2.1.2","name":"Yes","col_name":"Survived","value":13}]}]},{"key":"2.1","name":"Adult","col_name":"Age","children":[{"key":"2.1.2","name":"Male","col_name":"Sex","children":[{"key":"2.1.2.1","name":"No","col_name":"Survived","value":154},{"key":"2.1.2.2","name":"Yes","col_name":"Survived","value":14}]},{"key":"2.1.1","name":"Female","col_name":"Sex","children":[{"key":"2.1.1.1","name":"No","col_name":"Survived","value":13},{"key":"2.1.1.2","name":"Yes","col_name":"Survived","value":80}]}]}],"col_name":"Class"},{"key":3,"name":"3rd","children":[{"key":"3.2","name":"Child","col_name":"Age","children":[{"key":"3.2.2","name":"Male","col_name":"Sex","children":[{"key":"3.2.2.1","name":"No","col_name":"Survived","value":35},{"key":"3.2.2.2","name":"Yes","col_name":"Survived","value":13}]},{"key":"3.2.1","name":"Female","col_name":"Sex","children":[{"key":"3.2.1.1","name":"No","col_name":"Survived","value":17},{"key":"3.2.1.2","name":"Yes","col_name":"Survived","value":14}]}]},{"key":"3.1","name":"Adult","col_name":"Age","children":[{"key":"3.1.2","name":"Male","col_name":"Sex","children":[{"key":"3.1.2.1","name":"No","col_name":"Survived","value":387},{"key":"3.1.2.2","name":"Yes","col_name":"Survived","value":75}]},{"key":"3.1.1","name":"Female","col_name":"Sex","children":[{"key":"3.1.1.1","name":"No","col_name":"Survived","value":89},{"key":"3.1.1.2","name":"Yes","col_name":"Survived","value":76}]}]}],"col_name":"Class"},{"key":4,"name":"Crew","children":[{"key":"4.2","name":"Child","col_name":"Age","children":[{"key":"4.2.2","name":"Male","col_name":"Sex","children":[{"key":"4.2.2.1","name":"No","col_name":"Survived","value":0},{"key":"4.2.2.2","name":"Yes","col_name":"Survived","value":0}]},{"key":"4.2.1","name":"Female","col_name":"Sex","children":[{"key":"4.2.1.1","name":"No","col_name":"Survived","value":0},{"key":"4.2.1.2","name":"Yes","col_name":"Survived","value":0}]}]},{"key":"4.1","name":"Adult","col_name":"Age","children":[{"key":"4.1.2","name":"Male","col_name":"Sex","children":[{"key":"4.1.2.1","name":"No","col_name":"Survived","value":670},{"key":"4.1.2.2","name":"Yes","col_name":"Survived","value":192}]},{"key":"4.1.1","name":"Female","col_name":"Sex","children":[{"key":"4.1.1.1","name":"No","col_name":"Survived","value":3},{"key":"4.1.1.2","name":"Yes","col_name":"Survived","value":20}]}]}],"col_name":"Class"}],"name":"Titanic"},"background":"#bbb","header_background":"orange","header_height":25,"header_fontsize":"12px","format_string":",","zoom_in_helptext":" - Click on a Square to Zoom","zoom_out_helptext":" - Click here to Zoom Out","tooltip_background":"orange","rmarkdown":true},"evals":[],"jsHooks":[]}</script>
-</div>
+<span class="st">  </span><span class="kw"><a href="reference/ztm.html">ztm</a></span>(<span class="dt">rmarkdown =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div id="htmlwidget-e81bd959ae635ce4a2ed" style="width:100%;height:432.632880098888px;" class="d3v5_zoomable_treemap html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e81bd959ae635ce4a2ed">{"x":{"data":{"children":[{"key":1,"name":"1st","children":[{"key":"1.2","name":"Child","col_name":"Age","children":[{"key":"1.2.2","name":"Male","col_name":"Sex","children":[{"key":"1.2.2.1","name":"No","col_name":"Survived","value":0},{"key":"1.2.2.2","name":"Yes","col_name":"Survived","value":5}]},{"key":"1.2.1","name":"Female","col_name":"Sex","children":[{"key":"1.2.1.1","name":"No","col_name":"Survived","value":0},{"key":"1.2.1.2","name":"Yes","col_name":"Survived","value":1}]}]},{"key":"1.1","name":"Adult","col_name":"Age","children":[{"key":"1.1.2","name":"Male","col_name":"Sex","children":[{"key":"1.1.2.1","name":"No","col_name":"Survived","value":118},{"key":"1.1.2.2","name":"Yes","col_name":"Survived","value":57}]},{"key":"1.1.1","name":"Female","col_name":"Sex","children":[{"key":"1.1.1.1","name":"No","col_name":"Survived","value":4},{"key":"1.1.1.2","name":"Yes","col_name":"Survived","value":140}]}]}],"col_name":"Class"},{"key":2,"name":"2nd","children":[{"key":"2.2","name":"Child","col_name":"Age","children":[{"key":"2.2.2","name":"Male","col_name":"Sex","children":[{"key":"2.2.2.1","name":"No","col_name":"Survived","value":0},{"key":"2.2.2.2","name":"Yes","col_name":"Survived","value":11}]},{"key":"2.2.1","name":"Female","col_name":"Sex","children":[{"key":"2.2.1.1","name":"No","col_name":"Survived","value":0},{"key":"2.2.1.2","name":"Yes","col_name":"Survived","value":13}]}]},{"key":"2.1","name":"Adult","col_name":"Age","children":[{"key":"2.1.2","name":"Male","col_name":"Sex","children":[{"key":"2.1.2.1","name":"No","col_name":"Survived","value":154},{"key":"2.1.2.2","name":"Yes","col_name":"Survived","value":14}]},{"key":"2.1.1","name":"Female","col_name":"Sex","children":[{"key":"2.1.1.1","name":"No","col_name":"Survived","value":13},{"key":"2.1.1.2","name":"Yes","col_name":"Survived","value":80}]}]}],"col_name":"Class"},{"key":3,"name":"3rd","children":[{"key":"3.2","name":"Child","col_name":"Age","children":[{"key":"3.2.2","name":"Male","col_name":"Sex","children":[{"key":"3.2.2.1","name":"No","col_name":"Survived","value":35},{"key":"3.2.2.2","name":"Yes","col_name":"Survived","value":13}]},{"key":"3.2.1","name":"Female","col_name":"Sex","children":[{"key":"3.2.1.1","name":"No","col_name":"Survived","value":17},{"key":"3.2.1.2","name":"Yes","col_name":"Survived","value":14}]}]},{"key":"3.1","name":"Adult","col_name":"Age","children":[{"key":"3.1.2","name":"Male","col_name":"Sex","children":[{"key":"3.1.2.1","name":"No","col_name":"Survived","value":387},{"key":"3.1.2.2","name":"Yes","col_name":"Survived","value":75}]},{"key":"3.1.1","name":"Female","col_name":"Sex","children":[{"key":"3.1.1.1","name":"No","col_name":"Survived","value":89},{"key":"3.1.1.2","name":"Yes","col_name":"Survived","value":76}]}]}],"col_name":"Class"},{"key":4,"name":"Crew","children":[{"key":"4.2","name":"Child","col_name":"Age","children":[{"key":"4.2.2","name":"Male","col_name":"Sex","children":[{"key":"4.2.2.1","name":"No","col_name":"Survived","value":0},{"key":"4.2.2.2","name":"Yes","col_name":"Survived","value":0}]},{"key":"4.2.1","name":"Female","col_name":"Sex","children":[{"key":"4.2.1.1","name":"No","col_name":"Survived","value":0},{"key":"4.2.1.2","name":"Yes","col_name":"Survived","value":0}]}]},{"key":"4.1","name":"Adult","col_name":"Age","children":[{"key":"4.1.2","name":"Male","col_name":"Sex","children":[{"key":"4.1.2.1","name":"No","col_name":"Survived","value":670},{"key":"4.1.2.2","name":"Yes","col_name":"Survived","value":192}]},{"key":"4.1.1","name":"Female","col_name":"Sex","children":[{"key":"4.1.1.1","name":"No","col_name":"Survived","value":3},{"key":"4.1.1.2","name":"Yes","col_name":"Survived","value":20}]}]}],"col_name":"Class"}],"name":"Titanic"},"background":"#bbb","header_background":"orange","header_height":25,"header_fontsize":"12px","format_string":",","zoom_in_helptext":" - Click on a Square to Zoom","zoom_out_helptext":" - Click here to Zoom Out","tooltip_background":"orange","rmarkdown":true},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="detail" class="section level2">
 <h2 class="hasAnchor">
@@ -108,7 +105,7 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Report a bug at <br><a href="https://gitlab.com/lajh87/d3RZoomableTreemap/issues">https://​gitlab.com/​lajh87/​d3RZoomableTreemap/​issues</a>
+<li>Report a bug at <br><a href="https://gitlab.com/lajh87/d3tm/issues">https://​gitlab.com/​lajh87/​d3tm/​issues</a>
 </li>
 </ul>
 </div>

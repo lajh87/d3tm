@@ -1,4 +1,4 @@
 library(testthat)
-library(d3RZoomableTreemap)
+library(d3tm)
 
-test_check("d3RZoomableTreemap")
+test_check("d3tm")

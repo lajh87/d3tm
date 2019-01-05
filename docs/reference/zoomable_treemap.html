@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Zoomable Treemap — zoomable_treemap • d3RZoomableTreemap</title>
+<title>Zoomable Treemap — zoomable_treemap • d3tm</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -62,8 +62,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">d3RZoomableTreemap</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.1</span>
+        <a class="navbar-link" href="../index.html">d3tm</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
       </span>
     </div>
 
@@ -187,7 +187,7 @@ tooltip location.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data.frame</span>(<span class='no'>Titanic</span>) <span class='kw'>%&gt;%</span>
- <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>Class</span>,<span class='no'>Age</span>,<span class='no'>Survived</span>,<span class='no'>Sex</span>,<span class='no'>Freq</span>) <span class='kw'>%&gt;%</span>
+ <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/dplyr/topics/select'>select</a></span>(<span class='no'>Class</span>,<span class='no'>Age</span>,<span class='no'>Survived</span>,<span class='no'>Sex</span>,<span class='no'>Freq</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='d3_nest2.html'>d3_nest2</a></span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>,
            <span class='kw'>id_vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Class"</span>, <span class='st'>"Age"</span>, <span class='st'>"Survived"</span>, <span class='st'>"Sex"</span>)) <span class='kw'>%&gt;%</span>
   <span class='fu'>zoomable_treemap</span>()</div></pre>

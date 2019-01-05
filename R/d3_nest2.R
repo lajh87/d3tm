@@ -1,6 +1,7 @@
 #' Convert a data.frame to a 'd3.js' Hierarchy
 #'
 #' @param data A data frame
+#' @param id_vars The variables to nest
 #' @param value_col The name of the value column in the data frame
 #' @param root The name of the root
 #'
@@ -33,7 +34,7 @@ d3_nest2 <- function(data, id_vars, value_col = "value", root = "root"){
                                    "name" = nonnest_cols[i]) %>%
         dplyr::mutate(col_name = nonnest_cols[i])
 
-      data_nested <- tidyr::nest(data_nested, key, name,col_name, value,
+      data_nested <- tidyr::nest(data_nested, "key", "name","col_name", "value",
                                  .key = "children")
       data_nested <-  promote_na(data_nested)
       data_nested <-  dplyr::bind_rows(data_nested)
@@ -45,7 +46,8 @@ d3_nest2 <- function(data, id_vars, value_col = "value", root = "root"){
                                    "name" = nonnest_cols[i])  %>%
         dplyr::mutate(col_name = nonnest_cols[i])
 
-      data_nested <- tidyr::nest(data_nested, key, name, col_name, children,
+      data_nested <- tidyr::nest(data_nested,
+                                 "key", "name", "col_name", "children",
                                  .key = "children")
       data_nested <-  promote_na(data_nested)
       data_nested <-  dplyr::bind_rows(data_nested)
@@ -105,7 +107,6 @@ promote_na_one <- function(x) {
 #'@keywords internal
 #'@source d3r
 #'@author kent.russell@@timelyportfolio.com
-#'@export
 d3_json <- function(x = NULL, strip = TRUE) {
   xj <- jsonlite::toJSON(x, auto_unbox = TRUE, dataframe = "rows")
   if (strip) {

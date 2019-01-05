@@ -1,5 +1,5 @@
 library(shiny)
-library(d3RZoomableTreemap)
+library(d3tm)
 
 data("Titanic")
 json <- data.frame(Titanic) %>%
@@ -9,7 +9,7 @@ json <- data.frame(Titanic) %>%
 
 ui <- fluidPage(
   sidebarLayout(
-    mainPanel = mainPanel(zoomable_treemap_output("x1",width = "100%")),
+    mainPanel = mainPanel(ztmOutput("x1",width = "100%")),
     sidebarPanel = sidebarPanel(
       fluidRow(
         h4("Click Events"),
@@ -34,8 +34,8 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
 
-  output$x1 <- render_zoomable_treemap({
-    d3RZoomableTreemap::zoomable_treemap(json, background = "#bbb", header_background = "orange")
+  output$x1 <- renderZtm({
+    d3tm::ztmOutput(json, background = "#bbb", header_background = "orange")
   })
 
   output$clicked_node_id <- renderText({input$x1_clicked_id})

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert a data.frame to a 'd3.js' Hierarchy — d3_nest2 • d3tm</title>
+<title>Zoomable Treemap — ztm • d3tm</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Convert a data.frame to a 'd3.js' Hierarchy — d3_nest2" />
+<meta property="og:title" content="Zoomable Treemap — ztm" />
 
-<meta property="og:description" content="Convert a data.frame to a 'd3.js' Hierarchy" />
+<meta property="og:description" content="Implementation of a Mike Bostock's d3
+ zoomable treemap
+ as an htmlwidget in d3v5." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,59 +102,101 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert a data.frame to a 'd3.js' Hierarchy</h1>
+    <h1>Zoomable Treemap</h1>
     
-    <div class="hidden name"><code>d3_nest2.Rd</code></div>
+    <div class="hidden name"><code>ztm.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Convert a data.frame to a 'd3.js' Hierarchy</p>
+    <p>Implementation of a Mike Bostock's d3
+ <a href='https://bost.ocks.org/mike/treemap/'>zoomable treemap</a>
+ as an htmlwidget in d3v5.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>d3_nest2</span>(<span class='no'>data</span>, <span class='no'>id_vars</span>, <span class='kw'>value_col</span> <span class='kw'>=</span> <span class='st'>"value"</span>, <span class='kw'>root</span> <span class='kw'>=</span> <span class='st'>"root"</span>)</pre>
+    <pre class="usage"><span class='fu'>ztm</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='fu'>system.file</span>(<span class='st'>"examples/flare.json"</span>,
+  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3RZoomableTreemap"</span>))), <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#bbb"</span>,
+  <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>header_height</span> <span class='kw'>=</span> <span class='fl'>25</span>,
+  <span class='kw'>header_fontsize</span> <span class='kw'>=</span> <span class='st'>"12px"</span>, <span class='kw'>format_string</span> <span class='kw'>=</span> <span class='st'>","</span>,
+  <span class='kw'>zoom_in_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click on a Square to Zoom"</span>,
+  <span class='kw'>zoom_out_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click here to Zoom Out"</span>,
+  <span class='kw'>tooltip_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>rmarkdown</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>A data frame</p></td>
+      <td><p>A json object</p></td>
     </tr>
     <tr>
-      <th>id_vars</th>
-      <td><p>The variables to nest</p></td>
+      <th>width</th>
+      <td><p>Width of the widget, in pixels</p></td>
     </tr>
     <tr>
-      <th>value_col</th>
-      <td><p>The name of the value column in the data frame</p></td>
+      <th>height</th>
+      <td><p>Height of the widget, in pixels</p></td>
     </tr>
     <tr>
-      <th>root</th>
-      <td><p>The name of the root</p></td>
+      <th>elementId</th>
+      <td><p>Element ID used for R Shiny package</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>Default background colour use if there is no color
+variable defined in the data. Takes hex of colour names.</p></td>
+    </tr>
+    <tr>
+      <th>header_background</th>
+      <td><p>The background colour either named of in a hex
+e.g. "#bbb"</p></td>
+    </tr>
+    <tr>
+      <th>header_height</th>
+      <td><p>Height of the title, in pixels</p></td>
+    </tr>
+    <tr>
+      <th>header_fontsize</th>
+      <td><p>Font size of the title, in pixels</p></td>
+    </tr>
+    <tr>
+      <th>format_string</th>
+      <td><p>D3 number format</p></td>
+    </tr>
+    <tr>
+      <th>zoom_in_helptext</th>
+      <td><p>The help text displayed on the header bar</p></td>
+    </tr>
+    <tr>
+      <th>zoom_out_helptext</th>
+      <td><p>Zoom out helptext</p></td>
+    </tr>
+    <tr>
+      <th>tooltip_background</th>
+      <td><p>Background colour of the tooltip</p></td>
+    </tr>
+    <tr>
+      <th>rmarkdown</th>
+      <td><p>Specific whether is an Rmarkdown document, to correct
+tooltip location.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Serialised json</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data.frame</span>(<span class='no'>Titanic</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>Class</span>,<span class='no'>Age</span>,<span class='no'>Survived</span>,<span class='no'>Sex</span>,<span class='no'>Freq</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>d3_nest2</span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>,
+  <span class='fu'><a href='d3_nest2.html'>d3_nest2</a></span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>,
            <span class='kw'>id_vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Class"</span>, <span class='st'>"Age"</span>, <span class='st'>"Survived"</span>, <span class='st'>"Sex"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='ztm.html'>ztm</a></span>()</div></pre>
+  <span class='fu'>ztm</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
