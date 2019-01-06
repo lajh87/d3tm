@@ -4,6 +4,7 @@
 
 ## Bug Fixes
 * Fixed issue when rendering in a div that had style position equal to relative
+[(89cca7)](https://gitlab.com/lajh87/d3tm/commit/89cca7ae3ac7a35ea0010493f95c2e8a18464ae2)
 
 # d3RZoomableTreemap 0.2.1
 ## Bug Fixes (#a16ac5b)
