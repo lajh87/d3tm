@@ -25,7 +25,7 @@ Convert a data.frame to a 'd3.js' Hierarchy
 data.frame(Titanic) \%>\%
  dplyr::select(Class,Age,Survived,Sex,Freq) \%>\%
   d3_nest2(value_col="Freq", root="Titanic",
-           id_vars = c("Class", "Age", "Survived", "Sex")) \%>\%
+           id_vars = c("Class", "Age","Sex", "Survived")) \%>\%
   ztm()
 
 }

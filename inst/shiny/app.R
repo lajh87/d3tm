@@ -4,7 +4,7 @@ library(d3tm)
 data("Titanic")
 json <- data.frame(Titanic) %>%
   dplyr::select(Class,Sex,Age,Survived,Freq) %>%
-  d3_nest2(id_vars = c("Class", "Sex", "Age"),
+  d3_nest2(id_vars = c("Class", "Age","Sex", "Survived"),
            value_col="Freq", root="Titanic")
 
 ui <- fluidPage(

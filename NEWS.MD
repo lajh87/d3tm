@@ -5,6 +5,8 @@
 ## Bug Fixes
 * Fixed issue when rendering in a div that had style position equal to relative
 [(89cca7)](https://gitlab.com/lajh87/d3tm/commit/89cca7ae3ac7a35ea0010493f95c2e8a18464ae2)
+* Fixed issue where resizing the treemap window would revert back to starting level
+[(b7d57b)](https://gitlab.com/lajh87/d3tm/commit/b7d57b6e08035747ea48834ee5646010e2bcd47a)
 
 # d3RZoomableTreemap 0.2.1
 ## Bug Fixes (#a16ac5b)

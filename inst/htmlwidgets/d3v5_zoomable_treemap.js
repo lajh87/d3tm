@@ -227,7 +227,6 @@ HTMLWidgets.widget({
                      click_to_shiny_input(d);
                  });
 
-
                 //TEST ZOOM TO NODE
                 if( HTMLWidgets.shinyMode ){
                  Shiny.addCustomMessageHandler("testShiny",
