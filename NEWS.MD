@@ -1,10 +1,11 @@
-# d3Rtm 0.3
+# d3tm 0.3
 ## New Release (January 6th, 2019)
 ### Major Changes 
 * Rename from d3RZoomableTreemap to d3tm 
-[(d480b3)](https://gitlab.com/lajh87/d3tm/commit/d480b3f42f029ea9c58fa83b1ab2a43054ee8a5d")
-* Selected node is saved in the JavaScript variable `instance.index`.
-This can be reset with the Shiny custom message handler 'resetInstance'.
+[(d480b3)](https://gitlab.com/lajh87/d3tm/commit/d480b3f42f029ea9c58fa83b1ab2a43054ee8a5d)
+* Selected node is saved in the JavaScript variable `instance.index`
+This can be reset with the Shiny custom message handler 'resetInstance'
+[(c41a49)](https://gitlab.com/lajh87/d3tm/commit/c41a49e0938bc8123a9f2b68db4a0bf199304d43)
 
 ### Bug Fixes
 * Fixed issue when rendering in a div that had style position equal to relative
@@ -15,8 +16,7 @@ This can be reset with the Shiny custom message handler 'resetInstance'.
 # d3RZoomableTreemap 0.2.1
 ## Bug Fixes (#a16ac5b)
 * Fixed shiny hover inputs
-* Fixed tooltip bounding so it does not overflow container.
-* Ammended documentation
+* Fixed tooltip bounding so it does not overflow container
 
 # d3RZoomableTreemap 0.2
 ## Major Changes
