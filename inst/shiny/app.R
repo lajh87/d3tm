@@ -12,7 +12,7 @@ ui <- fluidPage(
     tags$br(),HTML("&nbsp"),
     tags$br(),
     column(
-      width = 6,
+      width = 12,
       fluidRow(ztmOutput("x1",width = "100%")),
       fluidRow(
         h4("Click Events"),
@@ -29,11 +29,7 @@ ui <- fluidPage(
       fluidRow(
         actionButton("reset_click_events", "Reset Click Events"),
         actionButton("test", "Zoom To Node")
-      )),
-    column(
-      width = 6,
-      ztmOutput("x2",width = "100%")
-    )
+      ))
   )
 
 

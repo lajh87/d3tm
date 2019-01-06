@@ -36,6 +36,7 @@ HTMLWidgets.widget({
 
   var draw = function(el, instance){
 
+
     var xR = instance.x;
     d3.select( el ).selectAll("*").remove();
 
@@ -171,11 +172,13 @@ HTMLWidgets.widget({
 
         function display(d) {
 
+
            // write text into grandparent
             // and activate click's handler
             grandparent
                 .datum(d.parent)
                 .on("click", function(d){
+                  instance.index = d;
                     transition(d);
                     click_to_shiny_input(d);
                 })
@@ -209,13 +212,17 @@ HTMLWidgets.widget({
                 .enter()
                 .append("g");
 
-
-
+                // for resize. If there already is data then transition to it
+                if(typeof instance.index !== "undefined"){
+                  transition(instance.index);
+                }
 
                  // add class and click handler to all g's with children
                 g.filter(function (d) {return d.children;})
                  .classed("children", true)
                  .on("click", function(d){
+                   console.log(d);
+                     instance.index = d;
                      transition(d);
                      click_to_shiny_input(d);
                  });
@@ -225,8 +232,8 @@ HTMLWidgets.widget({
                 if( HTMLWidgets.shinyMode ){
                  Shiny.addCustomMessageHandler("testShiny",
                    function(i){
-                    console.log(d.children[0]);
-                    transition(d.children[0]);
+
+                    draw(d.children[0].children[0], instance);
                  });
                 }
 
@@ -337,6 +344,8 @@ HTMLWidgets.widget({
             return g;
         }
 
+
+
         function click_to_shiny_input(d){
            // add a hook to Shiny
           if( HTMLWidgets.shinyMode ){
@@ -444,6 +453,7 @@ HTMLWidgets.widget({
 
 
     return {
+
       renderValue: function(x) {
 
         instance.x = x;
@@ -452,6 +462,7 @@ HTMLWidgets.widget({
       },
 
       resize: function(width, height) {
+          console.log(instance.index);
         instance = draw(el, instance);
       },
 
