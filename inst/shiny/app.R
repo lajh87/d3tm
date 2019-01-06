@@ -28,7 +28,7 @@ ui <- fluidPage(
       ),
       fluidRow(
         actionButton("reset_click_events", "Reset Click Events"),
-        actionButton("test", "Zoom To Node")
+        actionButton("test", "Reset Instance (View Console)")
       ))
   )
 
@@ -58,7 +58,7 @@ server <- function(input, output, session) {
 
   #https://shiny.rstudio.com/articles/js-send-message.html
   observeEvent(input$test,{
-    session$sendCustomMessage("testShiny", "Test Message")
+    session$sendCustomMessage("resetInstance","null")
   })
 
 
