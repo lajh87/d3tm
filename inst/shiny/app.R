@@ -12,8 +12,8 @@ ui <- fluidPage(
     tags$br(),HTML("&nbsp"),
     tags$br(),
     column(
-      width = 12,
-      fluidRow(ztmOutput("x1",width = "100%")),
+      width = 6,
+      ztmOutput("x1",width = "100%"),
       fluidRow(
         h4("Click Events"),
         tags$label("Clicked Node ID:"),textOutput("clicked_node_id",inline = T),
@@ -29,13 +29,21 @@ ui <- fluidPage(
       fluidRow(
         actionButton("reset_click_events", "Reset Click Events"),
         actionButton("test", "Reset Instance (View Console)")
-      ))
+      )),
+    column(
+      width = 6,
+      ztmOutput("x2", width = "100%")
+    )
   )
 
 
 server <- function(input, output, session) {
 
   output$x1 <- renderZtm({
+    d3tm::ztm(json, background = "#bbb", header_background = "orange")
+  })
+
+  output$x2 <- renderZtm({
     d3tm::ztm(json, background = "#bbb", header_background = "orange")
   })
 
@@ -58,7 +66,8 @@ server <- function(input, output, session) {
 
   #https://shiny.rstudio.com/articles/js-send-message.html
   observeEvent(input$test,{
-    session$sendCustomMessage("resetInstance","null")
+    session$sendCustomMessage("resetInstance","x1")
+    session$sendCustomMessage("resetInstance","x2")
   })
 
 
