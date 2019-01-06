@@ -39,9 +39,6 @@ server <- function(input, output, session) {
     d3tm::ztm(json, background = "#bbb", header_background = "orange")
   })
 
-  output$x2 <- renderZtm({
-    d3tm::ztm(json, background = "#bbb", header_background = "orange")
-  })
 
   output$clicked_node_id <- renderText({input$x1_clicked_id})
   output$clicked_node_label <- renderText(input$x1_clicked_label)
