@@ -104,15 +104,10 @@ ztm <- function(
 #'
 #' If an event has not been triggered it is set to \code{NULL}.
 #'
-#' Variables can be reset by calling a custom message in Shiny using:
+#' Variables can be reset by sending a custom message in Shiny using:
 #'
 #' \code{session$sendCustomMessage("resetInputValue", "OBJECTID_clicked_id")}
 #'
-#' The treemaps will return to the selected node following resize.
-#' This is achieved by storing the selected data as a variable and then
-#' transitioning to it. This can be reset in Shiny using:
-#'
-#' \code{session$sendCustomMessage("resetInstance", "null")}
 #'
 #' @name ztmShiny
 #'

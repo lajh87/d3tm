@@ -3,4 +3,7 @@ dependencies:
     version: 5
     src: htmlwidgets/lib/d3/v5.7.0
     script: d3.min.js
-    stylesheet: treemap_style.css
+  - name: ztm_stylesheet
+    version: 1
+    src: htmlwidgets/lib
+    stylesheet: ztm.css

@@ -3,9 +3,6 @@
 ### Major Changes 
 * Rename from d3RZoomableTreemap to d3tm 
 [(d480b3)](https://gitlab.com/lajh87/d3tm/commit/d480b3f42f029ea9c58fa83b1ab2a43054ee8a5d)
-* Selected node is saved in the JavaScript variable `instance.index`
-This can be reset with the Shiny custom message handler 'resetInstance'
-[(c41a49)](https://gitlab.com/lajh87/d3tm/commit/c41a49e0938bc8123a9f2b68db4a0bf199304d43)
 
 ### Bug Fixes
 * Fixed issue when rendering in a div that had style position equal to relative
@@ -14,20 +11,20 @@ This can be reset with the Shiny custom message handler 'resetInstance'
 [(b7d57b)](https://gitlab.com/lajh87/d3tm/commit/b7d57b6e08035747ea48834ee5646010e2bcd47a)
 
 # d3RZoomableTreemap 0.2.1
-## Bug Fixes (#a16ac5b)
+## Bug Fixes
 * Fixed shiny hover inputs
 * Fixed tooltip bounding so it does not overflow container
 
 # d3RZoomableTreemap 0.2
 ## Major Changes
 * Added d3_nest2 to convert data to a hierarchy that d3 expects
-* Added tooltip to treemap that consider col_name (60a8a2)
+* Added tooltip to treemap that consider col_name
 
 ## Minor Changes
 * Added parameters for breadcrumb help text
 * Added parameter to enable custom number formating
 * Updated events to include hover and clicked and data for id, label and value
-* Fix bug where tibbles would not work with d3_nest2 (c1f70c)
+* Fix bug where tibbles would not work with d3_nest2
 
 # d3RZoomableTreemap 0.1
 ## Features

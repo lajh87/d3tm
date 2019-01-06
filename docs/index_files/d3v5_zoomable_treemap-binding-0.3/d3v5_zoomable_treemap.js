@@ -7,8 +7,8 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
 
     var instance = { };
-
     var el = el;
+
 
     d3.formatDefaultLocale(
       {
@@ -33,17 +33,8 @@ HTMLWidgets.widget({
                   });
   }
 
-   if( HTMLWidgets.shinyMode ){
-    Shiny.addCustomMessageHandler('resetInstance',
-        function(d){instance.index = null;}
-        );
-  }
-
-  console.log(instance.index);
-
 
   var draw = function(el, instance){
-
 
     var xR = instance.x;
     d3.select( el ).selectAll("*").remove();
@@ -176,7 +167,6 @@ HTMLWidgets.widget({
         display(root);
 
 
-
         function display(d) {
 
 
@@ -186,8 +176,8 @@ HTMLWidgets.widget({
                 .datum(d.parent)
                 .on("click", function(d){
                   instance.index = d;
-                    transition(d);
-                    click_to_shiny_input(d);
+                  transition(d);
+                  click_to_shiny_input(d);
                 })
                 .on("mouseover", function(d){
                     hover_to_shiny_input(d);
@@ -219,29 +209,19 @@ HTMLWidgets.widget({
                 .enter()
                 .append("g");
 
-                // for resize. If there already is data then transition to it
-                if(typeof instance.index !== "undefined"){
-                  transition(instance.index);
-                }
+            // for resize. If there already is data then transition to it
+            if(resize === "true" && typeof instance.index !== "undefined"){
+                      transition(instance.index);
+                    }
 
                  // add class and click handler to all g's with children
                 g.filter(function (d) {return d.children;})
                  .classed("children", true)
                  .on("click", function(d){
-                   console.log(d);
                      instance.index = d;
                      transition(d);
                      click_to_shiny_input(d);
                  });
-
-                //TEST ZOOM TO NODE
-                if( HTMLWidgets.shinyMode ){
-                 Shiny.addCustomMessageHandler("testShiny",
-                   function(i){
-
-                    draw(d.children[0].children[0], instance);
-                 });
-                }
 
                g.selectAll(".child")
                 .data(function (d) {
@@ -455,19 +435,17 @@ HTMLWidgets.widget({
   };
 
 
-
     return {
 
       renderValue: function(x) {
 
         instance.x = x;
-        instance = draw(el, instance);
+        instance = draw(el, instance, resize = "false");
 
       },
 
       resize: function(width, height) {
-          console.log(instance.index);
-        instance = draw(el, instance);
+        instance = draw(el, instance, resize = "true");
       },
 
       instance: instance

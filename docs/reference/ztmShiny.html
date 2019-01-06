@@ -147,7 +147,7 @@ is useful if you want to save an expression in a variable.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>zoomable_treemap objects send input values to Shiny as the user interacts
+    <p>ztm objects send input values to Shiny as the user interacts
 with them.</p>
 <p>Object input names generally use this pattern:</p>
 <p><code>input$OBJECTID_EVENT_OBJCATEGORY</code></p>
@@ -161,6 +161,8 @@ return the name of the node to <code>input$ztm_clicked_label</code>.</p>
 <code>input$OBJECTID_hover_depth</code>
 <code>input$OBJECTID_hover_label</code></p>
 <p>If an event has not been triggered it is set to <code>NULL</code>.</p>
+<p>Variables can be reset by sending a custom message in Shiny using:</p>
+<p><code>session$sendCustomMessage("resetInputValue", "OBJECTID_clicked_id")</code></p>
     
 
   </div>

@@ -29,7 +29,7 @@ Output and render functions for using zoomable treemap within Shiny
 applications and interactive Rmd documents.
 }
 \details{
-zoomable_treemap objects send input values to Shiny as the user interacts
+ztm objects send input values to Shiny as the user interacts
 with them.
 
 Object input names generally use this pattern:
@@ -49,4 +49,8 @@ The full list of current supported events are:
 \code{input$OBJECTID_hover_label}
 
 If an event has not been triggered it is set to \code{NULL}.
+
+Variables can be reset by sending a custom message in Shiny using:
+
+\code{session$sendCustomMessage("resetInputValue", "OBJECTID_clicked_id")}
 }
