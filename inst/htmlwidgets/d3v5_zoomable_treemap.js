@@ -33,14 +33,6 @@ HTMLWidgets.widget({
                   });
   }
 
-   if( HTMLWidgets.shinyMode ){
-    Shiny.addCustomMessageHandler('resetInstance',
-        function(d){instance.index = null;}
-        );
-  }
-
-
-
 
   var draw = function(el, instance){
 
