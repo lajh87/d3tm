@@ -83,7 +83,7 @@ ztm <- function(
 #'
 #' @details
 #'
-#' zoomable_treemap objects send input values to Shiny as the user interacts
+#' ztm objects send input values to Shiny as the user interacts
 #' with them.
 #'
 #' Object input names generally use this pattern:
@@ -103,6 +103,16 @@ ztm <- function(
 #' \code{input$OBJECTID_hover_label}
 #'
 #' If an event has not been triggered it is set to \code{NULL}.
+#'
+#' Variables can be reset by calling a custom message in Shiny using:
+#'
+#' \code{session$sendCustomMessage("resetInputValue", "OBJECTID_clicked_id")}
+#'
+#' The treemaps will return to the selected node following resize.
+#' This is achieved by storing the selected data as a variable and then
+#' transitioning to it. This can be reset in Shiny using:
+#'
+#' \code{session$sendCustomMessage("resetInstance", "null")}
 #'
 #' @name ztmShiny
 #'

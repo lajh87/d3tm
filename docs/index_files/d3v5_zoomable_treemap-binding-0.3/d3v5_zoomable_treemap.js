@@ -33,6 +33,14 @@ HTMLWidgets.widget({
                   });
   }
 
+   if( HTMLWidgets.shinyMode ){
+    Shiny.addCustomMessageHandler('resetInstance',
+        function(d){instance.index = null;}
+        );
+  }
+
+  console.log(instance.index);
+
 
   var draw = function(el, instance){
 
@@ -87,7 +95,6 @@ HTMLWidgets.widget({
 
     var tooltip_bb = tooltip.node().getBoundingClientRect() ;
     var el_loc = el.getBoundingClientRect();
-
 
     function mousemove() {
 
@@ -272,8 +279,6 @@ HTMLWidgets.widget({
                 .attr("class", "parent")
                 .attr("id", function(d) { return d.data.key; })
                 .call(rect);
-
-
 
                 /* Adding a foreign object instead of a text object, allows for text wrapping */
                 g.append("foreignObject")

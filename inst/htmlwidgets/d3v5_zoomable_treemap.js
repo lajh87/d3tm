@@ -220,7 +220,7 @@ HTMLWidgets.widget({
                 .append("g");
 
                 // for resize. If there already is data then transition to it
-                if(typeof instance.index !== "undefined"){
+                if(instance.index !== "null"){
                   transition(instance.index);
                 }
 
