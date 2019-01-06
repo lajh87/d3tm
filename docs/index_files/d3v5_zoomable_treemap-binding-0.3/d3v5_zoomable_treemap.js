@@ -34,9 +34,6 @@ HTMLWidgets.widget({
   }
 
 
-
-
-
   var draw = function(el, instance){
 
     var xR = instance.x;
@@ -82,76 +79,68 @@ HTMLWidgets.widget({
                     .style("width", "200px")
                     .style("height", "75px");
 
+    // Mouseover functions
     function mouseover() {
       tooltip.style("display", "inline");
     }
 
-
     var tooltip_bb = tooltip.node().getBoundingClientRect() ;
+    var el_loc = el.getBoundingClientRect();
 
 
     function mousemove() {
 
-    var rect = this.getBoundingClientRect();
-
-
-      // hacky fix for wierd rmarkdown behaviour
-      if(xR.rmarkdown){
-       var
-        ox = d3.mouse(this)[0],
-        oy = d3.mouse(this)[1] + rect.height;
-      } else{
-        var
-         ox = d3.mouse(this)[0],
-         oy = d3.mouse(this)[1];
-      }
-
-      if(ox  > ( rect.width - tooltip_bb.width * 2)){
-        var ox = ox - tooltip_bb.width;
-      }
-
-      if(oy > (rect.height - tooltip_bb.height*2)){
-        var oy = oy - (tooltip_bb.height/2) +25 ;
-      } else{
-        if(oy < rect.height - tooltip_bb.height){
-        var oy = oy + tooltip_bb.height;
-        }
-      }
-
-
-      tooltip
-      .style("left", (ox) + 25 + "px")
-      .style("top", (oy) - 25 + "px");
+     function mousex (){
+       var ox = d3.event.pageX - el_loc.left + 6;
+       if(ox>(el_loc.width-tooltip_bb.width)){
+         ox = el_loc.width-tooltip_bb.width;
        }
+       return(ox);
+     }
+
+     function mousey (){
+       var oy = d3.event.pageY - el_loc.top + 6;
+       if(oy>(el_loc.height - tooltip_bb.height)){
+         oy = el_loc.height - tooltip_bb.height;
+       }
+       return(oy);
+     }
+
+     tooltip
+       .style("left", (mousex())  + "px")
+       .style("top", (mousey())  + "px");
+    }
 
     function mouseout() {
       tooltip.style("display", "none");
     }
 
     var svg = d3.select(el).append("svg")
-        .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.bottom + margin.top)
-                    .style("margin-left", -margin.left + "px")
-                    .style("margin.right", -margin.right + "px")
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                    .style("shape-rendering", "crispEdges")
-                    .on("mouseover", mouseover)
-                    .on("mousemove", mousemove)
-                    .on("mouseout", mouseout);
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.bottom + margin.top)
+                .style("margin-left", -margin.left + "px")
+                .style("margin.right", -margin.right + "px")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .style("shape-rendering", "crispEdges")
+                .style("position", "relative")
+                .on("mouseover", mouseover)
+                .on("mousemove", mousemove)
+                .on("mouseout", mouseout);
+
 
     var grandparent = svg.append("g")
-            .attr("class", "grandparent");
+               .attr("class", "grandparent");
 
         grandparent.append("rect")
-            .attr("y", -margin.top)
-            .attr("width", width)
-            .attr("height", margin.top);
+              .attr("y", -margin.top)
+              .attr("width", width)
+              .attr("height", margin.top);
 
         grandparent.append("text")
-            .attr("x", 6)
-            .attr("y", 6 - margin.top)
-            .attr("dy", ".75em");
+              .attr("x", 6)
+              .attr("y", 6 - margin.top)
+              .attr("dy", ".75em");
 
         grandparent.append("foreignObject")
             .attr("x", 0)
@@ -217,8 +206,8 @@ HTMLWidgets.widget({
 
             var g = g1.selectAll("g")
                 .data(d.children)
-                .enter().
-                append("g");
+                .enter()
+                .append("g");
 
 
 

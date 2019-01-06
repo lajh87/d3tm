@@ -1,5 +1,5 @@
 library(fscm)
-library(d3ztm)
+library(d3tm)
 
 data("fscm_costs")
 data("fscm_labels")

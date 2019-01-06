@@ -18,8 +18,6 @@
 #' @param zoom_in_helptext The help text displayed on the header bar
 #' @param zoom_out_helptext Zoom out helptext
 #' @param tooltip_background  Background colour of the tooltip
-#' @param rmarkdown Specific whether is an Rmarkdown document, to correct
-#'     tooltip location.
 #'
 #' @export
 #' @example inst/examples/titanic.R
@@ -36,8 +34,7 @@ ztm <- function(
   format_string = ",",
   zoom_in_helptext = " - Click on a Square to Zoom",
   zoom_out_helptext = " - Click here to Zoom Out",
-  tooltip_background = "orange",
-  rmarkdown = FALSE
+  tooltip_background = "orange"
 ){
 
   # forward options using x
@@ -50,8 +47,7 @@ ztm <- function(
     format_string = format_string,
     zoom_in_helptext = zoom_in_helptext,
     zoom_out_helptext = zoom_out_helptext,
-    tooltip_background = tooltip_background,
-    rmarkdown = rmarkdown
+    tooltip_background = tooltip_background
   )
 
   # create widget
@@ -124,3 +120,5 @@ renderZtm <- function(expr, env = parent.frame(), quoted = FALSE) {
   } # force quoted
   htmlwidgets::shinyRenderWidget(expr, ztmOutput, env, quoted = TRUE)
 }
+
+

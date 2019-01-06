@@ -12,7 +12,7 @@
   header_fontsize = "12px", format_string = ",",
   zoom_in_helptext = " - Click on a Square to Zoom",
   zoom_out_helptext = " - Click here to Zoom Out",
-  tooltip_background = "orange", rmarkdown = FALSE)
+  tooltip_background = "orange")
 }
 \arguments{
 \item{data}{A json object}
@@ -40,9 +40,6 @@ e.g. "#bbb"}
 \item{zoom_out_helptext}{Zoom out helptext}
 
 \item{tooltip_background}{Background colour of the tooltip}
-
-\item{rmarkdown}{Specific whether is an Rmarkdown document, to correct
-tooltip location.}
 }
 \description{
 Implementation of a Mike Bostock's d3

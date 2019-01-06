@@ -1,3 +1,23 @@
+/* pointer events for tooltip on child */
+.d3v5_zoomable_treemap{
+  position: relative;
+}
+.tooltip {
+  position: absolute;
+  text-align: left;
+  padding: 2px;
+  font: 12px sans-serif;
+  border: 1px;
+  border-radius: 8px;
+  pointer-events: none;
+  overflow: none;
+}
+
+.parent{
+  pointer-events: none;
+ }
+
+
 /* basic rectangle styling */
 rect {
   stroke: #fff;
@@ -50,18 +70,3 @@ rect.parent,
   font-size:10px;
 }
 
-/* pointer events for tooltip on child */
-div.tooltip {
-  position: absolute;
-  text-align: left;
-  padding: 2px;
-  font: 12px sans-serif;
-  border: 1px;
-  border-radius: 8px;
-  pointer-events: none;
-  overflow: none;
-}
-
-.parent{
-  pointer-events: none;
- }
