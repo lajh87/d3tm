@@ -4,8 +4,7 @@ library(d3tm)
 data("Titanic")
 json <- data.frame(Titanic) %>%
   dplyr::select(Class,Sex,Age,Survived,Freq) %>%
-  d3_nest2(id_vars = c("Class", "Age","Sex", "Survived"),
-           value_col="Freq", root="Titanic")
+  d3_nest2(value_col="Freq", root="Titanic")
 
 ui <- fluidPage(
     headerPanel("Test App"),
@@ -16,18 +15,23 @@ ui <- fluidPage(
       fluidRow(ztmOutput("x1",width = "100%")),
       fluidRow(
         h4("Click Events"),
-        tags$label("Clicked Node ID:"),textOutput("clicked_node_id",inline = T),
-        tags$label("Clicked Node Label:"),textOutput("clicked_node_label",inline = T),
-        tags$label("Clicked Node Depth:"),textOutput("clicked_node_depth",inline = T)
+        tags$label("Parent Clicked Label:"),textOutput("x1_clicked_parent_label",inline = T),
+        tags$label("Parent Clicked Depth:"),textOutput("x1_clicked_parent_depth",inline = T),
+        tags$br(),
+        tags$label("Child Clicked Label:"),textOutput("x1_clicked_child_label",inline = T),
+        tags$label("Child Clicked Depth:"),textOutput("x1_clicked_child_depth",inline = T)
+
       ),
       fluidRow(
         h4("Hover Events"),
-        tags$label("Hover Node ID:"),textOutput("hover_node_id",inline = T),
-        tags$label("Hover Node Label:"),textOutput("hover_node_label",inline = T),
-        tags$label("Hover Node Depth:"),textOutput("hover_node_depth",inline = T)
+        tags$label("Parent Hover Label:"),textOutput("x1_hover_parent_label",inline = T),
+        tags$label("Parent Hover Depth:"),textOutput("x1_hover_parent_depth",inline = T),
+        tags$br(),
+        tags$label("Child Hover Label:"),textOutput("x1_hover_child_label",inline = T),
+        tags$label("Child Hover Depth:"),textOutput("x1_hover_child_depth",inline = T)
       ),
       fluidRow(
-        actionButton("reset_click_events", "Reset Click Events")
+        actionButton("x1_reset_click_events", "Reset Click Events")
       )),
     column(
       width = 6,
@@ -42,26 +46,29 @@ server <- function(input, output, session) {
     d3tm::ztm(json, background = "#bbb", header_background = "orange")
   })
 
+  output$x1_clicked_child_label <- renderText(input$x1_clicked_child_label)
+  output$x1_clicked_child_depth <- renderText({input$x1_clicked_child_depth})
+  output$x1_hover_child_label <- renderText(input$x1_hover_child_label)
+  output$x1_hover_child_depth <- renderText({input$x1_hover_child_depth})
+
+  output$x1_clicked_parent_label <- renderText(input$x1_clicked_parent_label)
+  output$x1_clicked_parent_depth <- renderText({input$x1_clicked_parent_depth})
+  output$x1_hover_parent_label <- renderText(input$x1_hover_parent_label)
+  output$x1_hover_parent_depth <- renderText({input$x1_hover_parent_depth})
+
+  observeEvent(input$x1_reset_click_events,{
+    session$sendCustomMessage("resetInputValue", "x1_clicked_child_label")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_child_depth")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_parent_label")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_parent_depth")
+
+  })
+
+
   output$x2 <- renderZtm({
     d3tm::ztm(json, background = "#bbb", header_background = "orange")
   })
 
-
-  output$clicked_node_id <- renderText({input$x1_clicked_id})
-  output$clicked_node_label <- renderText(input$x1_clicked_label)
-  output$clicked_node_depth <- renderText({input$x1_clicked_depth})
-
-  output$hover_node_id <- renderText({input$x1_hover_id})
-  output$hover_node_label <- renderText(input$x1_hover_label)
-  output$hover_node_depth <- renderText({input$x1_hover_depth})
-
-  observeEvent(input$reset_click_events,{
-
-    session$sendCustomMessage("resetInputValue", "x1_clicked_id")
-    session$sendCustomMessage("resetInputValue", "x1_clicked_label")
-    session$sendCustomMessage("resetInputValue", "x1_clicked_depth")
-
-  })
 
 
   }

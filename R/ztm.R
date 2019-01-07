@@ -36,7 +36,7 @@ ztm <- function(
   zoom_in_helptext = " - Click on a Square to Zoom",
   zoom_out_helptext = " - Click here to Zoom Out",
   tooltip_background = "orange",
-  colnames = c("Class", "Age", "Survived", "Sex"),
+  colnames = NULL,
   value_label = "Value"
 ){
 

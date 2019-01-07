@@ -1,3 +1,11 @@
+# dtm 0.3.1
+## New Release (January 7th, 2019)
+### Major Changes
+* Removed column names from data in `d3_nest2` and added a variable to pass to
+the htmlWidget which places the vector into an array that is indexed based on depth
+[(a94f49)](https://gitlab.com/lajh87/d3tm/commit/a94f4929770d4b5aa209a68ca339a7b6faaf0293)
+
+
 # d3tm 0.3
 ## New Release (January 6th, 2019)
 ### Major Changes 
