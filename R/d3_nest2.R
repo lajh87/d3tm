@@ -9,32 +9,25 @@
 #' @export
 #'
 #' @example inst/examples/titanic.R
-d3_nest2 <- function(data, id_vars, value_col = "value", root = "root"){
+d3_nest2 <- function(data,  value_col = "value", root = "root"){
 
-  if(!inherits(data, "data.frame")) stop("Input data must be a data.frame")
+  if(!inherits(data, "data.frame"))
+    stop("Input data must be a data.frame")
+
   data <- as.data.frame(data)
-  data <- data[,c(id_vars, value_col)]
 
   if(value_col != "value")
     data <- data %>% dplyr::rename(value = dplyr::contains(value_col))
-
-  nonnest_cols <- dplyr::setdiff(colnames(data), "value")
   data <- dplyr::mutate_if(data, is.factor, as.character)
+  nonnest_cols <- dplyr::setdiff(colnames(data), "value")
 
-  id_matrix <- create_id_matrix(data, nonnest_cols)
-  names(id_matrix) <- paste0(nonnest_cols, "_id")
-  id_cols <- colnames(id_matrix)
-
-  data <- dplyr::bind_cols(id_matrix,data)
 
   for (i in rev(seq_along(nonnest_cols))) {
     if(i == length(nonnest_cols)){
       data_nested <- dplyr::rename(.data = data,
-                                   "key" = id_cols[i],
-                                   "name" = nonnest_cols[i]) %>%
-        dplyr::mutate(col_name = nonnest_cols[i])
+                                   "name" = nonnest_cols[i])
 
-      data_nested <- tidyr::nest(data_nested, "key", "name","col_name", "value",
+      data_nested <- tidyr::nest(data_nested, "name","value",
                                  .key = "children")
       data_nested <-  promote_na(data_nested)
       data_nested <-  dplyr::bind_rows(data_nested)
@@ -42,12 +35,9 @@ d3_nest2 <- function(data, id_vars, value_col = "value", root = "root"){
 
     }else{
       data_nested <- dplyr::rename(.data = data_nested,
-                                   "key" = id_cols[i],
-                                   "name" = nonnest_cols[i])  %>%
-        dplyr::mutate(col_name = nonnest_cols[i])
+                                   "name" = nonnest_cols[i])
 
-      data_nested <- tidyr::nest(data_nested,
-                                 "key", "name", "col_name", "children",
+      data_nested <- tidyr::nest(data_nested, "name", "children",
                                  .key = "children")
       data_nested <-  promote_na(data_nested)
       data_nested <-  dplyr::bind_rows(data_nested)
@@ -56,27 +46,10 @@ d3_nest2 <- function(data, id_vars, value_col = "value", root = "root"){
 
   data_nested$name = root
 
-  d3_json(data_nested, strip = TRUE)
+  xj <- jsonlite::toJSON(data_nested, auto_unbox = TRUE, dataframe = "rows")
 
+  return(substr(xj, 2, nchar(xj) - 1))
 }
-
-#' @keywords internal
-create_id_matrix <- function(data, cols){
-
-  id_matrix <- sapply(cols, function(x){
-    dplyr::group_indices(data, get(x))
-  })
-
-  id_matrix <- lapply(seq_along(cols), function(i){
-    if(i == 1) {
-      x <- list(id_matrix[,i])
-    } else{
-      x <- list(apply(id_matrix[,1:i], 1, paste, collapse = "."))
-    }
-    return(x)
-  }) %>%
-    data.frame(stringsAsFactors = F)
-  }
 
 #'@keywords internal
 #'@source d3r
@@ -95,7 +68,8 @@ promote_na_one <- function(x) {
   if (length(na_child_loc)) {
     na_child <- x$children[[1]][na_child_loc, ]
     x <-
-      dplyr::bind_cols(x, na_child[1, setdiff(colnames(na_child), c("name", "children", "colname"))])
+      dplyr::bind_cols(x, na_child[1, setdiff(colnames(na_child),
+                                              c("name", "children", "colname"))])
     x$children[[1]] <- x$children[[1]][-na_child_loc, ]
     x
   }
@@ -104,15 +78,4 @@ promote_na_one <- function(x) {
   }
 }
 
-#'@keywords internal
-#'@source d3r
-#'@author kent.russell@@timelyportfolio.com
-d3_json <- function(x = NULL, strip = TRUE) {
-  xj <- jsonlite::toJSON(x, auto_unbox = TRUE, dataframe = "rows")
-  if (strip) {
-    substr(xj, 2, nchar(xj) - 1)
-  }
-  else {
-    xj
-  }
-}
+

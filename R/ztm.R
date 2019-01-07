@@ -18,12 +18,13 @@
 #' @param zoom_in_helptext The help text displayed on the header bar
 #' @param zoom_out_helptext Zoom out helptext
 #' @param tooltip_background  Background colour of the tooltip
+#' @param colnames Names of the columns (for use in the tooltip)
 #'
 #' @export
 #' @example inst/examples/titanic.R
 ztm <- function(
   data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
-                                         package = "d3RZoomableTreemap"))),
+                                         package = "d3tm"))),
   width = "100%",
   height = NULL,
   elementId = NULL,
@@ -34,7 +35,9 @@ ztm <- function(
   format_string = ",",
   zoom_in_helptext = " - Click on a Square to Zoom",
   zoom_out_helptext = " - Click here to Zoom Out",
-  tooltip_background = "orange"
+  tooltip_background = "orange",
+  colnames = c("Class", "Age", "Survived", "Sex"),
+  value_label = "Value"
 ){
 
   # forward options using x
@@ -47,7 +50,9 @@ ztm <- function(
     format_string = format_string,
     zoom_in_helptext = zoom_in_helptext,
     zoom_out_helptext = zoom_out_helptext,
-    tooltip_background = tooltip_background
+    tooltip_background = tooltip_background,
+    colnames = colnames,
+    value_label = value_label
   )
 
   # create widget
