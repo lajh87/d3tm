@@ -43,7 +43,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   output$x1 <- renderZtm({
-    d3tm::ztm(json, background = "#bbb", header_background = "orange")
+    d3tm::ztm(json, colnames = c("Class", "Sex", "Adult","Survived"))
   })
 
   output$x1_clicked_child_index <- renderText(input$x1_clicked_child_index)
@@ -66,7 +66,7 @@ server <- function(input, output, session) {
 
 
   output$x2 <- renderZtm({
-    d3tm::ztm(json, background = "#bbb", header_background = "orange")
+    d3tm::ztm(json, colnames = c("Class", "Sex", "Adult","Survived"))
   })
 
   }

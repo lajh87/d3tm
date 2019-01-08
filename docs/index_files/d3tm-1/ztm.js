@@ -304,14 +304,20 @@
             }
           }
 
-        function hover_to_shiny_input(d, i, parentIndex){
+        function showArrayElements(d){
+          data.map(function(d) {return d.data.name;}).join(', ');
+        }
+
+
+
+        function hover_to_shiny_input(d, i){
 
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_hover_child_index', i);
+            Shiny.onInputChange(el.id + '_hover_child_index', showArrayElements(root.path(d)));
             Shiny.onInputChange(el.id + '_hover_child_label', d.data.name);
             Shiny.onInputChange(el.id + '_hover_child_depth', d.depth);
 
-            Shiny.onInputChange(el.id + '_hover_parent_index', parentIndex);
+            Shiny.onInputChange(el.id + '_hover_parent_index', i);
             Shiny.onInputChange(el.id + '_hover_parent_label', d.parent.data.name);
             Shiny.onInputChange(el.id + '_hover_parent_depth', d.parent.depth);
             }
