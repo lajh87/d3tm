@@ -294,44 +294,44 @@
             return g;
         }
 
-        function click_to_shiny_input(d,i){
+        function click_to_shiny_input(d){
            // add a hook to Shiny
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_clicked_child_index', i);
+            Shiny.onInputChange(el.id + '_clicked_child_index', path(d));
             Shiny.onInputChange(el.id + '_clicked_child_label', d.data.name);
             Shiny.onInputChange(el.id + '_clicked_child_depth', d.depth);
             }
           }
 
-          function path(d){
-             var res = "";
-             var sep = ", ";
-             d.ancestors().reverse().forEach(function(i){
-               res += i.data.name  + sep;
-             });
-            return res
-                   .split(sep)
-                   .filter(function(i){
-                      return i!== "";
-                    })
-                    .join(sep);
-        }
 
-
-        function hover_to_shiny_input(d, i){
+        function hover_to_shiny_input(d){
 
           if( HTMLWidgets.shinyMode ){
             Shiny.onInputChange(el.id + '_hover_child_index', path(d));
             Shiny.onInputChange(el.id + '_hover_child_label', d.data.name);
             Shiny.onInputChange(el.id + '_hover_child_depth', d.depth);
 
-            Shiny.onInputChange(el.id + '_hover_parent_index', i);
+            Shiny.onInputChange(el.id + '_hover_parent_index', path(d.parent));
             Shiny.onInputChange(el.id + '_hover_parent_label', d.parent.data.name);
             Shiny.onInputChange(el.id + '_hover_parent_depth', d.parent.depth);
             }
           }
 
-        function mouseout_to_shiny_input(df){
+          function path(d){
+           var res = "";
+           var sep = ", ";
+           d.ancestors().reverse().forEach(function(i){
+             res += i.data.name  + sep;
+           });
+          return res
+                 .split(sep)
+                 .filter(function(i){
+                    return i!== "";
+                  })
+                  .join(sep);
+          }
+
+        function mouseout_to_shiny_input(d){
           if( HTMLWidgets.shinyMode ){
             Shiny.onInputChange(el.id + '_hover_child_index', null);
             Shiny.onInputChange(el.id + '_hover_child_label', null);
@@ -342,10 +342,6 @@
             Shiny.onInputChange(el.id + '_hover_parent_depth', null);
             }
           }
-
-        function getContrast50(hexcolor){
-            return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff/3) ? 'black':'white';
-        }
 
         function getRGBComponents(color) {
             return d3.rgb(color);
