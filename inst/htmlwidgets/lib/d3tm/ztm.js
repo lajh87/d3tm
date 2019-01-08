@@ -54,7 +54,10 @@
     function mousemove() {
 
      function mousex (){
-       var ox = d3.event.pageX - el_loc.left + 6;
+       var ox = d3.event.pageX - el_loc.left + 10;
+       if(ox > el_loc.width/2){
+         ox = ox - tooltip_bb.width-10;
+       }
        if(ox>(el_loc.width-tooltip_bb.width)){
          ox = el_loc.width-tooltip_bb.width;
        }
@@ -62,7 +65,10 @@
      }
 
      function mousey (){
-       var oy = d3.event.pageY - el_loc.top + 6;
+       var oy = d3.event.pageY - el_loc.top + 10;
+       if(oy > el_loc.height/2){
+         oy = oy - tooltip_bb.height - 10;
+       }
        if(oy>(el_loc.height - tooltip_bb.height)){
          oy = el_loc.height - tooltip_bb.height;
        }
@@ -302,7 +308,6 @@
             Shiny.onInputChange(el.id + '_clicked_child_depth', d.depth);
             }
           }
-
 
         function hover_to_shiny_input(d){
 
