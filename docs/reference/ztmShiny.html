@@ -34,6 +34,8 @@
 
 <meta property="og:description" content="Output and render functions for using zoomable treemap within Shiny
 applications and interactive Rmd documents." />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -62,7 +64,7 @@ applications and interactive Rmd documents." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">d3tm</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.1</span>
       </span>
     </div>
 
@@ -154,16 +156,18 @@ with them.</p>
 <p>So for <code>zoomable_treemap_output("ztm")</code> clicking on a square would
 return the name of the node to <code>input$ztm_clicked_label</code>.</p>
 <p>The full list of current supported events are:</p>
-<p><code>input$OBJECTID_clicked_id</code>
-<code>input$OBJECTID_clicked_depth</code>
-<code>input$OBJECTID_clicked_label</code>
-<code>input$OBJECTID_hover_parent_index</code>
-<code>input$OBJECTID_hover_parent_depth</code>
-<code>input$OBJECTID_hover_parent_label</code>
-<code>input$OBJECTID_hover_child_index</code>
-<code>input$OBJECTID_hover_child_depth</code>
-<code>input$OBJECTID_hover_child_label</code></p>
-<p>If an event has not been triggered it is set to <code>NULL</code>.</p>
+<ul>
+<li><p><code>input$OBJECTID_clicked_child_id</code></p></li>
+<li><p><code>input$OBJECTID_clicked_child_depth</code></p></li>
+<li><p><code>input$OBJECTID_clicked_child_label</code></p></li>
+<li><p><code>input$OBJECTID_hover_parent_index</code></p></li>
+<li><p><code>input$OBJECTID_hover_parent_depth</code></p></li>
+<li><p><code>input$OBJECTID_hover_parent_label</code></p></li>
+<li><p><code>input$OBJECTID_hover_child_index</code></p></li>
+<li><p><code>input$OBJECTID_hover_child_depth</code></p></li>
+<li><p><code>input$OBJECTID_hover_child_label</code></p></li>
+</ul>
+    <p>If an event has not been triggered it is set to <code>NULL</code>.</p>
 <p>Variables can be reset by sending a custom message in Shiny using:</p>
 <p><code>session$sendCustomMessage("resetInputValue", "OBJECTID_clicked_id")</code></p>
     

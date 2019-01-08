@@ -41,15 +41,17 @@ return the name of the node to \code{input$ztm_clicked_label}.
 
 The full list of current supported events are:
 
-\code{input$OBJECTID_clicked_id}
-\code{input$OBJECTID_clicked_depth}
-\code{input$OBJECTID_clicked_label}
-\code{input$OBJECTID_hover_parent_index}
-\code{input$OBJECTID_hover_parent_depth}
-\code{input$OBJECTID_hover_parent_label}
-\code{input$OBJECTID_hover_child_index}
-\code{input$OBJECTID_hover_child_depth}
-\code{input$OBJECTID_hover_child_label}
+\itemize{
+\item \code{input$OBJECTID_clicked_child_id}
+\item \code{input$OBJECTID_clicked_child_depth}
+\item \code{input$OBJECTID_clicked_child_label}
+\item \code{input$OBJECTID_hover_parent_index}
+\item \code{input$OBJECTID_hover_parent_depth}
+\item \code{input$OBJECTID_hover_parent_label}
+\item \code{input$OBJECTID_hover_child_index}
+\item \code{input$OBJECTID_hover_child_depth}
+\item \code{input$OBJECTID_hover_child_label}
+}
 
 If an event has not been triggered it is set to \code{NULL}.
 
