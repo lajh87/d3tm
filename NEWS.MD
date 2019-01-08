@@ -4,7 +4,11 @@
 * Removed column names from data in `d3_nest2` and added a variable to pass to
 the htmlWidget which places the vector into an array that is indexed based on depth
 [(a94f49)](https://gitlab.com/lajh87/d3tm/commit/a94f4929770d4b5aa209a68ca339a7b6faaf0293)
-
+* Added parent _and_ child click and hover events for Shiny
+[(0cd2cd)](https://gitlab.com/lajh87/d3tm/commit/0cd2cdc9cfffcb67c03ebeed6c45d2a0b6f99b98)
+* Removed key field from `d3_nest2` and added Shiny bindings for for click and 
+hover events
+[]()
 
 # d3tm 0.3
 ## New Release (January 6th, 2019)

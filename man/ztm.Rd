@@ -6,13 +6,14 @@
 \usage{
 
   ztm(data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
-  package = "d3RZoomableTreemap"))), width = "100\%", height = NULL,
+  package = "d3tm"))), width = "100\%", height = NULL,
   elementId = NULL, background = "#bbb",
   header_background = "orange", header_height = 25,
   header_fontsize = "12px", format_string = ",",
   zoom_in_helptext = " - Click on a Square to Zoom",
   zoom_out_helptext = " - Click here to Zoom Out",
-  tooltip_background = "orange")
+  tooltip_background = "orange", colnames = NULL,
+  value_label = "Value")
 }
 \arguments{
 \item{data}{A json object}
@@ -40,6 +41,8 @@ e.g. "#bbb"}
 \item{zoom_out_helptext}{Zoom out helptext}
 
 \item{tooltip_background}{Background colour of the tooltip}
+
+\item{colnames}{Names of the columns (for use in the tooltip)}
 }
 \description{
 Implementation of a Mike Bostock's d3
@@ -49,8 +52,7 @@ Implementation of a Mike Bostock's d3
 \examples{
 data.frame(Titanic) \%>\%
  dplyr::select(Class,Age,Survived,Sex,Freq) \%>\%
-  d3_nest2(value_col="Freq", root="Titanic",
-           id_vars = c("Class", "Age","Sex", "Survived")) \%>\%
+  d3_nest2(value_col="Freq", root="Titanic") \%>\%
   ztm()
 
 }

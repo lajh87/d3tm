@@ -7,8 +7,6 @@ HTMLWidgets.widget({
   factory: function(el, width, height) {
 
     var instance = { };
-    var el = el;
-
 
     d3.formatDefaultLocale(
       {
@@ -26,13 +24,13 @@ HTMLWidgets.widget({
         "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
       }
     );
+
   if( HTMLWidgets.shinyMode ){
     Shiny.addCustomMessageHandler('resetInputValue',
                 function(variableName){
                   Shiny.onInputChange(variableName, null);
                   });
   }
-
 
   var draw = function(el, instance){
 
@@ -127,7 +125,6 @@ HTMLWidgets.widget({
                 .on("mousemove", mousemove)
                 .on("mouseout", mouseout);
 
-
     var grandparent = svg.append("g")
                .attr("class", "grandparent");
 
@@ -166,23 +163,21 @@ HTMLWidgets.widget({
 
         display(root);
 
-
         function display(d) {
 
+          // Define labels based on depth
+          var parentLabel =  xR.colnames ? xR.colnames[d.depth] : "Parent";
+          var childLabel =   xR.colnames ? xR.colnames[d.depth+1] : "Child";
 
-           // write text into grandparent
+             // write text into grandparent
             // and activate click's handler
             grandparent
                 .datum(d.parent)
-                .on("click", function(d){
+                .on("click", function(d,i){
                   instance.index = d;
                   transition(d);
-                  click_to_shiny_input(d);
-                })
-                .on("mouseover", function(d){
-                    hover_to_shiny_input(d);
-                    })
-                .on("mouseout", mouseout_to_shiny_input);
+                  click_to_shiny_input(d,i);
+                });
 
             // grandparent color
             grandparent
@@ -217,10 +212,10 @@ HTMLWidgets.widget({
                  // add class and click handler to all g's with children
                 g.filter(function (d) {return d.children;})
                  .classed("children", true)
-                 .on("click", function(d){
+                 .on("click", function(d,i){
                      instance.index = d;
                      transition(d);
-                     click_to_shiny_input(d);
+                     click_to_shiny_input(d,i);
                  });
 
                g.selectAll(".child")
@@ -232,20 +227,26 @@ HTMLWidgets.widget({
                   .attr("class", "child")
                   .call(rect);
 
+              // Add tooltip and shiny event data when mouseover the child
               g.selectAll(".child")
-                .on("mouseover", function(d) {
-                    hover_to_shiny_input(d);
+                .on("mouseover", function(d,i) {
+                  var sel = d.parent.data.name;
+                  var parentIndex = d.parent.parent.children.findIndex(function(d){
+                    return d.data.name === sel;
+                  });
+                  hover_to_shiny_input(d,i, parentIndex);
                     var tooltip_child = d.data.name;
                         tooltip_parent = d.parent.data.name;
                         tooltip_child_value = formatNumber(d.value).replace(/G/,"B");
                         tooltip_parent_value = formatNumber(d.parent.value).replace(/G/,"B");
-                        parent_name = d.parent.data.col_name ? d.parent.data.col_name + ": " : "";
-                        child_name = d.data.col_name ? d.data.col_name + ": " : "";
+                        tooltip_parent_label = parentLabel;
+                        tooltip_child_label = childLabel;
+
                      tooltip
                        .html(function(d) {
-                       return  parent_name + "<b>" + tooltip_parent + "</b><br>" +
-                               child_name + "<b>" + tooltip_child  + "</b><br>" +
-                               "value: <b>" + tooltip_child_value + "</b>";
+                       return   tooltip_parent_label + ": <b>" + tooltip_parent + "</b><br>" +
+                                tooltip_child_label +  ": <b>" + tooltip_child  + "</b><br>" +
+                                xR.value_label + ": <b>" + tooltip_child_value + "</b>";
                        })
                       .style("opacity", 0.9);
                      })
@@ -254,29 +255,28 @@ HTMLWidgets.widget({
                    tooltip.style("opacity", 0);
                    });
 
+
                 // add title to parents
-              g.append("rect")
-                .attr("class", "parent")
-                .attr("id", function(d) { return d.data.key; })
-                .call(rect);
+                g.append("rect")
+                 .attr("class", "parent")
+                 .call(rect);
 
                 /* Adding a foreign object instead of a text object, allows for text wrapping */
                 g.append("foreignObject")
-                .call(rect)
-                .attr("class", "foreignobj")
-                .style("pointer-events", "none")
-                .append("xhtml:div")
-                .attr("dy", ".75em")
-                .html(function (d) {
+                 .call(rect)
+                 .attr("class", "foreignobj")
+                 .style("pointer-events", "none")
+                 .append("xhtml:div")
+                 .attr("dy", ".75em")
+                 .html(function (d) {
                     return '' +
                         '<font color = ' +idealTextColor(d.data.color ? d.data.color : xR.background) + '>' +
                         '<p class="title"> ' + d.data.name + '</p>' +
                         '<p>' + formatNumber(d.value).replace(/G/,"B") + '</p>' +
                         '</font>'
                     ;
-                })
-                .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
-
+                 })
+                 .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
 
             function transition(d) {
                 if (transitioning || !d) return;
@@ -328,51 +328,58 @@ HTMLWidgets.widget({
             return g;
         }
 
-
-
-        function click_to_shiny_input(d){
+        function click_to_shiny_input(d,i){
            // add a hook to Shiny
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_clicked_id', d.data.key);
-            Shiny.onInputChange(el.id + '_clicked_label', d.data.name);
-            Shiny.onInputChange(el.id + '_clicked_depth', d.depth);
+            Shiny.onInputChange(el.id + '_clicked_child_index', i);
+            Shiny.onInputChange(el.id + '_clicked_child_label', d.data.name);
+            Shiny.onInputChange(el.id + '_clicked_child_depth', d.depth);
             }
           }
 
-          function hover_to_shiny_input(d){
+        function hover_to_shiny_input(d, i, parentIndex){
+
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_hover_id', d.data.key);
-            Shiny.onInputChange(el.id + '_hover_label', d.data.name);
-            Shiny.onInputChange(el.id + '_hover_depth', d.depth);
+            Shiny.onInputChange(el.id + '_hover_child_index', i);
+            Shiny.onInputChange(el.id + '_hover_child_label', d.data.name);
+            Shiny.onInputChange(el.id + '_hover_child_depth', d.depth);
+
+            Shiny.onInputChange(el.id + '_hover_parent_index', parentIndex);
+            Shiny.onInputChange(el.id + '_hover_parent_label', d.parent.data.name);
+            Shiny.onInputChange(el.id + '_hover_parent_depth', d.parent.depth);
             }
           }
 
-          function mouseout_to_shiny_input(df){
-            if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_hover_id', null);
-            Shiny.onInputChange(el.id + '_hover_label', null);
-            Shiny.onInputChange(el.id + '_hover_depth', null);
+        function mouseout_to_shiny_input(df){
+          if( HTMLWidgets.shinyMode ){
+            Shiny.onInputChange(el.id + '_hover_child_index', null);
+            Shiny.onInputChange(el.id + '_hover_child_label', null);
+            Shiny.onInputChange(el.id + '_hover_child_depth', null);
+
+            Shiny.onInputChange(el.id + '_hover_parent_index', null);
+            Shiny.onInputChange(el.id + '_hover_parent_label', null);
+            Shiny.onInputChange(el.id + '_hover_parent_depth', null);
             }
           }
 
-          function getContrast50(hexcolor){
-              return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff/3) ? 'black':'white';
-          }
+        function getContrast50(hexcolor){
+            return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff/3) ? 'black':'white';
+        }
 
-          function getRGBComponents(color) {
-              return d3.rgb(color);
-          }
+        function getRGBComponents(color) {
+            return d3.rgb(color);
+        }
 
-          function idealTextColor(bgColor) {
-              var nThreshold = 105;
-              var components = getRGBComponents(bgColor);
-              var bgDelta = (components.r * 0.299) + (components.g * 0.587) + (components.b * 0.114);
-              return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
-           }
+        function idealTextColor(bgColor) {
+            var nThreshold = 105;
+            var components = getRGBComponents(bgColor);
+            var bgDelta = (components.r * 0.299) + (components.g * 0.587) + (components.b * 0.114);
+            return ((255 - bgDelta) < nThreshold) ? "#000000" : "#ffffff";
+         }
 
         function text(text) {
            text.attr("x", function (d) {return x(d.x) + 6;})
-                .attr("y", function (d) {return y(d.y) + 6;})
+               .attr("y", function (d) {return y(d.y) + 6;});
          }
 
         function rect(rect) {
@@ -394,7 +401,7 @@ HTMLWidgets.widget({
                 });
         }
 
-        function foreign(foreign) { /* added */
+        function foreign(foreign) {
             foreign
                 .attr("x", function (d) {
                     return x(d.x0);
@@ -412,16 +419,15 @@ HTMLWidgets.widget({
 
         function name(d) {
             return breadcrumbs(d) +
-                (d.parent
-                ? xR.zoom_out_helptext
-                : xR.zoom_in_helptext);
+                (d.parent  ? xR.zoom_out_helptext : xR.zoom_in_helptext);
         }
 
         function breadcrumbs(d) {
             var res = "";
             var sep = " > ";
             d.ancestors().reverse().forEach(function(i){
-                res += i.data.name + " (" + formatNumber(i.value).replace(/G/,"B") + ")" + sep;
+                res += i.data.name + " (" + formatNumber(i.value)
+                                              .replace(/G/,"B") + ")" + sep;
             });
             return res
                 .split(sep)

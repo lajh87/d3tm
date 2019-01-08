@@ -111,7 +111,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>d3_nest2</span>(<span class='no'>data</span>, <span class='no'>id_vars</span>, <span class='kw'>value_col</span> <span class='kw'>=</span> <span class='st'>"value"</span>, <span class='kw'>root</span> <span class='kw'>=</span> <span class='st'>"root"</span>)</pre>
+    <pre class="usage"><span class='fu'>d3_nest2</span>(<span class='no'>data</span>, <span class='kw'>value_col</span> <span class='kw'>=</span> <span class='st'>"value"</span>, <span class='kw'>root</span> <span class='kw'>=</span> <span class='st'>"root"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -121,16 +121,16 @@
       <td><p>A data frame</p></td>
     </tr>
     <tr>
-      <th>id_vars</th>
-      <td><p>The variables to nest</p></td>
-    </tr>
-    <tr>
       <th>value_col</th>
       <td><p>The name of the value column in the data frame</p></td>
     </tr>
     <tr>
       <th>root</th>
       <td><p>The name of the root</p></td>
+    </tr>
+    <tr>
+      <th>id_vars</th>
+      <td><p>The variables to nest</p></td>
     </tr>
     </table>
     
@@ -142,8 +142,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data.frame</span>(<span class='no'>Titanic</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>Class</span>,<span class='no'>Age</span>,<span class='no'>Survived</span>,<span class='no'>Sex</span>,<span class='no'>Freq</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>d3_nest2</span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>,
-           <span class='kw'>id_vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Class"</span>, <span class='st'>"Age"</span>,<span class='st'>"Sex"</span>, <span class='st'>"Survived"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'>d3_nest2</span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='ztm.html'>ztm</a></span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -4,16 +4,16 @@
 \alias{d3_nest2}
 \title{Convert a data.frame to a 'd3.js' Hierarchy}
 \usage{
-d3_nest2(data, id_vars, value_col = "value", root = "root")
+d3_nest2(data, value_col = "value", root = "root")
 }
 \arguments{
 \item{data}{A data frame}
 
-\item{id_vars}{The variables to nest}
-
 \item{value_col}{The name of the value column in the data frame}
 
 \item{root}{The name of the root}
+
+\item{id_vars}{The variables to nest}
 }
 \value{
 Serialised json
@@ -24,8 +24,7 @@ Convert a data.frame to a 'd3.js' Hierarchy
 \examples{
 data.frame(Titanic) \%>\%
  dplyr::select(Class,Age,Survived,Sex,Freq) \%>\%
-  d3_nest2(value_col="Freq", root="Titanic",
-           id_vars = c("Class", "Age","Sex", "Survived")) \%>\%
+  d3_nest2(value_col="Freq", root="Titanic") \%>\%
   ztm()
 
 }

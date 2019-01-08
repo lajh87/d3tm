@@ -157,9 +157,12 @@ return the name of the node to <code>input$ztm_clicked_label</code>.</p>
 <p><code>input$OBJECTID_clicked_id</code>
 <code>input$OBJECTID_clicked_depth</code>
 <code>input$OBJECTID_clicked_label</code>
-<code>input$OBJECTID_hover_id</code>
-<code>input$OBJECTID_hover_depth</code>
-<code>input$OBJECTID_hover_label</code></p>
+<code>input$OBJECTID_hover_parent_index</code>
+<code>input$OBJECTID_hover_parent_depth</code>
+<code>input$OBJECTID_hover_parent_label</code>
+<code>input$OBJECTID_hover_child_index</code>
+<code>input$OBJECTID_hover_child_depth</code>
+<code>input$OBJECTID_hover_child_label</code></p>
 <p>If an event has not been triggered it is set to <code>NULL</code>.</p>
 <p>Variables can be reset by sending a custom message in Shiny using:</p>
 <p><code>session$sendCustomMessage("resetInputValue", "OBJECTID_clicked_id")</code></p>

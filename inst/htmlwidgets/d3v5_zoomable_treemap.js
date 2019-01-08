@@ -173,10 +173,10 @@ HTMLWidgets.widget({
             // and activate click's handler
             grandparent
                 .datum(d.parent)
-                .on("click", function(d){
+                .on("click", function(d,i){
                   instance.index = d;
                   transition(d);
-                  click_to_shiny_input(d);
+                  click_to_shiny_input(d,i);
                 });
 
             // grandparent color
@@ -212,10 +212,10 @@ HTMLWidgets.widget({
                  // add class and click handler to all g's with children
                 g.filter(function (d) {return d.children;})
                  .classed("children", true)
-                 .on("click", function(d){
+                 .on("click", function(d,i){
                      instance.index = d;
                      transition(d);
-                     click_to_shiny_input(d);
+                     click_to_shiny_input(d,i);
                  });
 
                g.selectAll(".child")
@@ -229,8 +229,12 @@ HTMLWidgets.widget({
 
               // Add tooltip and shiny event data when mouseover the child
               g.selectAll(".child")
-                .on("mouseover", function(d) {
-                  hover_to_shiny_input(d);
+                .on("mouseover", function(d,i) {
+                  var sel = d.parent.data.name;
+                  var parentIndex = d.parent.parent.children.findIndex(function(d){
+                    return d.data.name === sel;
+                  });
+                  hover_to_shiny_input(d,i, parentIndex);
                     var tooltip_child = d.data.name;
                         tooltip_parent = d.parent.data.name;
                         tooltip_child_value = formatNumber(d.value).replace(/G/,"B");
@@ -324,20 +328,23 @@ HTMLWidgets.widget({
             return g;
         }
 
-        function click_to_shiny_input(d){
+        function click_to_shiny_input(d,i){
            // add a hook to Shiny
           if( HTMLWidgets.shinyMode ){
+            Shiny.onInputChange(el.id + '_clicked_child_index', i);
             Shiny.onInputChange(el.id + '_clicked_child_label', d.data.name);
             Shiny.onInputChange(el.id + '_clicked_child_depth', d.depth);
-            Shiny.onInputChange(el.id + '_clicked_parent_label', d.parent.data.name);
-            Shiny.onInputChange(el.id + '_clicked_parent_depth', d.parent.depth);
             }
           }
 
-        function hover_to_shiny_input(d){
+        function hover_to_shiny_input(d, i, parentIndex){
+
           if( HTMLWidgets.shinyMode ){
+            Shiny.onInputChange(el.id + '_hover_child_index', i);
             Shiny.onInputChange(el.id + '_hover_child_label', d.data.name);
             Shiny.onInputChange(el.id + '_hover_child_depth', d.depth);
+
+            Shiny.onInputChange(el.id + '_hover_parent_index', parentIndex);
             Shiny.onInputChange(el.id + '_hover_parent_label', d.parent.data.name);
             Shiny.onInputChange(el.id + '_hover_parent_depth', d.parent.depth);
             }
@@ -345,8 +352,11 @@ HTMLWidgets.widget({
 
         function mouseout_to_shiny_input(df){
           if( HTMLWidgets.shinyMode ){
+            Shiny.onInputChange(el.id + '_hover_child_index', null);
             Shiny.onInputChange(el.id + '_hover_child_label', null);
             Shiny.onInputChange(el.id + '_hover_child_depth', null);
+
+            Shiny.onInputChange(el.id + '_hover_parent_index', null);
             Shiny.onInputChange(el.id + '_hover_parent_label', null);
             Shiny.onInputChange(el.id + '_hover_parent_depth', null);
             }
@@ -369,7 +379,7 @@ HTMLWidgets.widget({
 
         function text(text) {
            text.attr("x", function (d) {return x(d.x) + 6;})
-                .attr("y", function (d) {return y(d.y) + 6;});
+               .attr("y", function (d) {return y(d.y) + 6;});
          }
 
         function rect(rect) {

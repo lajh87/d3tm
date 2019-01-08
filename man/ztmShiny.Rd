@@ -44,9 +44,12 @@ The full list of current supported events are:
 \code{input$OBJECTID_clicked_id}
 \code{input$OBJECTID_clicked_depth}
 \code{input$OBJECTID_clicked_label}
-\code{input$OBJECTID_hover_id}
-\code{input$OBJECTID_hover_depth}
-\code{input$OBJECTID_hover_label}
+\code{input$OBJECTID_hover_parent_index}
+\code{input$OBJECTID_hover_parent_depth}
+\code{input$OBJECTID_hover_parent_label}
+\code{input$OBJECTID_hover_child_index}
+\code{input$OBJECTID_hover_child_depth}
+\code{input$OBJECTID_hover_child_label}
 
 If an event has not been triggered it is set to \code{NULL}.
 

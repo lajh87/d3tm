@@ -15,20 +15,20 @@ ui <- fluidPage(
       fluidRow(ztmOutput("x1",width = "100%")),
       fluidRow(
         h4("Click Events"),
-        tags$label("Parent Clicked Label:"),textOutput("x1_clicked_parent_label",inline = T),
-        tags$label("Parent Clicked Depth:"),textOutput("x1_clicked_parent_depth",inline = T),
-        tags$br(),
-        tags$label("Child Clicked Label:"),textOutput("x1_clicked_child_label",inline = T),
-        tags$label("Child Clicked Depth:"),textOutput("x1_clicked_child_depth",inline = T)
+        tags$label("Click Index:"), textOutput("x1_clicked_child_index",inline = T),
+        tags$label("Click Label:"), textOutput("x1_clicked_child_label",inline = T),
+        tags$label("Click Depth:"), textOutput("x1_clicked_child_depth",inline = T)
 
       ),
       fluidRow(
         h4("Hover Events"),
-        tags$label("Parent Hover Label:"),textOutput("x1_hover_parent_label",inline = T),
-        tags$label("Parent Hover Depth:"),textOutput("x1_hover_parent_depth",inline = T),
+        tags$label("Parent Hover Index:"), textOutput("x1_hover_parent_index",inline = T),
+        tags$label("Parent Hover Label:"), textOutput("x1_hover_parent_label",inline = T),
+        tags$label("Parent Hover Depth:"), textOutput("x1_hover_parent_depth",inline = T),
         tags$br(),
-        tags$label("Child Hover Label:"),textOutput("x1_hover_child_label",inline = T),
-        tags$label("Child Hover Depth:"),textOutput("x1_hover_child_depth",inline = T)
+        tags$label("Child Hover Index:"), textOutput("x1_hover_child_index", inline = T),
+        tags$label("Child Hover Label:"), textOutput("x1_hover_child_label",inline = T),
+        tags$label("Child Hover Depth:"), textOutput("x1_hover_child_depth",inline = T)
       ),
       fluidRow(
         actionButton("x1_reset_click_events", "Reset Click Events")
@@ -46,21 +46,23 @@ server <- function(input, output, session) {
     d3tm::ztm(json, background = "#bbb", header_background = "orange")
   })
 
+  output$x1_clicked_child_index <- renderText(input$x1_clicked_child_index)
   output$x1_clicked_child_label <- renderText(input$x1_clicked_child_label)
   output$x1_clicked_child_depth <- renderText({input$x1_clicked_child_depth})
+
+  output$x1_hover_child_index <- renderText(input$x1_hover_child_index)
   output$x1_hover_child_label <- renderText(input$x1_hover_child_label)
   output$x1_hover_child_depth <- renderText({input$x1_hover_child_depth})
 
-  output$x1_clicked_parent_label <- renderText(input$x1_clicked_parent_label)
-  output$x1_clicked_parent_depth <- renderText({input$x1_clicked_parent_depth})
+  output$x1_hover_parent_index <- renderText(input$x1_hover_parent_index)
   output$x1_hover_parent_label <- renderText(input$x1_hover_parent_label)
   output$x1_hover_parent_depth <- renderText({input$x1_hover_parent_depth})
 
   observeEvent(input$x1_reset_click_events,{
+    session$sendCustomMessage("resetInputValue", "x1_clicked_child_index")
     session$sendCustomMessage("resetInputValue", "x1_clicked_child_label")
     session$sendCustomMessage("resetInputValue", "x1_clicked_child_depth")
-    session$sendCustomMessage("resetInputValue", "x1_clicked_parent_label")
-    session$sendCustomMessage("resetInputValue", "x1_clicked_parent_depth")
+
 
   })
 

@@ -17,9 +17,8 @@ devtools::install_git("https://gitlab.com/lajh87/d3tm")
 library(d3tm)
 data.frame(Titanic) %>%
  dplyr::select(Class,Age,Survived,Sex,Freq) %>%
-  d3_nest2(value_col="Freq", root="Titanic",
-           id_vars = c("Class", "Age", "Sex", "Survived")) %>%
-  ztm()
+  d3_nest2(value_col="Freq", root="Titanic") %>%
+  ztm(colnames = c("Class", "Age", "Sex", "Survived"))
 
 ```
 

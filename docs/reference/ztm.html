@@ -116,13 +116,14 @@
     </div>
 
     <pre class="usage"><span class='fu'>ztm</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>toJSON</a></span>(<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='fu'>system.file</span>(<span class='st'>"examples/flare.json"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3RZoomableTreemap"</span>))), <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"d3tm"</span>))), <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"#bbb"</span>,
   <span class='kw'>header_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>header_height</span> <span class='kw'>=</span> <span class='fl'>25</span>,
   <span class='kw'>header_fontsize</span> <span class='kw'>=</span> <span class='st'>"12px"</span>, <span class='kw'>format_string</span> <span class='kw'>=</span> <span class='st'>","</span>,
   <span class='kw'>zoom_in_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click on a Square to Zoom"</span>,
   <span class='kw'>zoom_out_helptext</span> <span class='kw'>=</span> <span class='st'>" - Click here to Zoom Out"</span>,
-  <span class='kw'>tooltip_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>)</pre>
+  <span class='kw'>tooltip_background</span> <span class='kw'>=</span> <span class='st'>"orange"</span>, <span class='kw'>colnames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>value_label</span> <span class='kw'>=</span> <span class='st'>"Value"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,14 +178,17 @@ e.g. "#bbb"</p></td>
       <th>tooltip_background</th>
       <td><p>Background colour of the tooltip</p></td>
     </tr>
+    <tr>
+      <th>colnames</th>
+      <td><p>Names of the columns (for use in the tooltip)</p></td>
+    </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data.frame</span>(<span class='no'>Titanic</span>) <span class='kw'>%&gt;%</span>
  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>Class</span>,<span class='no'>Age</span>,<span class='no'>Survived</span>,<span class='no'>Sex</span>,<span class='no'>Freq</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='d3_nest2.html'>d3_nest2</a></span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>,
-           <span class='kw'>id_vars</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Class"</span>, <span class='st'>"Age"</span>,<span class='st'>"Sex"</span>, <span class='st'>"Survived"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='d3_nest2.html'>d3_nest2</a></span>(<span class='kw'>value_col</span><span class='kw'>=</span><span class='st'>"Freq"</span>, <span class='kw'>root</span><span class='kw'>=</span><span class='st'>"Titanic"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>ztm</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
