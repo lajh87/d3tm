@@ -118,7 +118,6 @@ ztm <- function(
 #'
 #' \code{session$sendCustomMessage("resetInputValue", "OBJECTID_clicked_id")}
 #'
-#'
 #' @name ztmShiny
 #'
 #' @export

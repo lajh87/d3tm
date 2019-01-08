@@ -62,16 +62,12 @@ server <- function(input, output, session) {
     session$sendCustomMessage("resetInputValue", "x1_clicked_child_index")
     session$sendCustomMessage("resetInputValue", "x1_clicked_child_label")
     session$sendCustomMessage("resetInputValue", "x1_clicked_child_depth")
-
-
   })
 
 
   output$x2 <- renderZtm({
     d3tm::ztm(json, background = "#bbb", header_background = "orange")
   })
-
-
 
   }
 

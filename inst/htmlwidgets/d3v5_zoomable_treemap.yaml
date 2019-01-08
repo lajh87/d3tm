@@ -3,7 +3,8 @@ dependencies:
     version: 5
     src: htmlwidgets/lib/d3/v5.7.0
     script: d3.min.js
-  - name: ztm_stylesheet
+  - name: d3tm
     version: 1
-    src: htmlwidgets/lib
+    src: htmlwidgets/lib/d3tm
+    script: ztm.js
     stylesheet: ztm.css

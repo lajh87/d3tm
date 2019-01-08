@@ -10,6 +10,7 @@ the htmlWidget which places the vector into an array that is indexed based on de
 hover events
 [(99b0c2)](https://gitlab.com/lajh87/d3tm/commit/99b0c23075c3f1c4e11bd0ef68441f9ac4792a21)
 
+
 # d3tm 0.3
 ## New Release (January 6th, 2019)
 ### Major Changes 

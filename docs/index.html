@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">d3tm</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.1.1</span>
       </span>
     </div>
 
@@ -70,8 +70,8 @@
 <!--/.navbar -->
 
       
-      </header><script src="index_files/htmlwidgets-1.3/htmlwidgets.js"></script><script src="index_files/d3-5/d3.min.js"></script><link href="index_files/ztm_stylesheet-1/ztm.css" rel="stylesheet">
-<script src="index_files/d3v5_zoomable_treemap-binding-0.3.1/d3v5_zoomable_treemap.js"></script><div class="row">
+      </header><script src="index_files/htmlwidgets-1.3/htmlwidgets.js"></script><script src="index_files/d3-5/d3.min.js"></script><link href="index_files/d3tm-1/ztm.css" rel="stylesheet">
+<script src="index_files/d3tm-1/ztm.js"></script><script src="index_files/d3v5_zoomable_treemap-binding-0.3.1.1/d3v5_zoomable_treemap.js"></script><div class="row">
   <div class="col-md-9 contents">
     
 
@@ -81,7 +81,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#d3tm" class="anchor"></a>d3tm <img src="reference/figures/logo.png" align="right" height="140/">
 </h1></div>
-<p>R implementation of <a href="https://bost.ocks.org/mike/treemap/">Mike Bostocks’s D3 Zoomable Treemap</a>.</p>
+<p>R implementation of <a href="https://bost.ocks.org/mike/">Mike Bostocks’s</a> <a href="https://d3js.org/">D3</a> <a href="https://bost.ocks.org/mike/treemap/">Zoomable Treemap</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -95,8 +95,8 @@
 <span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(Class,Age,Survived,Sex,Freq) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/d3_nest2.html">d3_nest2</a></span>(<span class="dt">value_col=</span><span class="st">"Freq"</span>, <span class="dt">root=</span><span class="st">"Titanic"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="reference/ztm.html">ztm</a></span>(<span class="dt">colnames =</span> <span class="kw">c</span>(<span class="st">"Class"</span>, <span class="st">"Age"</span>, <span class="st">"Sex"</span>, <span class="st">"Survived"</span>))</code></pre></div>
-<div id="htmlwidget-541e55882a7ceb3be34c" style="width:100%;height:432.632880098888px;" class="d3v5_zoomable_treemap html-widget"></div>
-<script type="application/json" data-for="htmlwidget-541e55882a7ceb3be34c">{"x":{"data":{"children":[{"name":"1st","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":0},{"name":"Female","value":0}]},{"name":"Yes","children":[{"name":"Male","value":5},{"name":"Female","value":1}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":118},{"name":"Female","value":4}]},{"name":"Yes","children":[{"name":"Male","value":57},{"name":"Female","value":140}]}]}]},{"name":"2nd","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":0},{"name":"Female","value":0}]},{"name":"Yes","children":[{"name":"Male","value":11},{"name":"Female","value":13}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":154},{"name":"Female","value":13}]},{"name":"Yes","children":[{"name":"Male","value":14},{"name":"Female","value":80}]}]}]},{"name":"3rd","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":35},{"name":"Female","value":17}]},{"name":"Yes","children":[{"name":"Male","value":13},{"name":"Female","value":14}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":387},{"name":"Female","value":89}]},{"name":"Yes","children":[{"name":"Male","value":75},{"name":"Female","value":76}]}]}]},{"name":"Crew","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":0},{"name":"Female","value":0}]},{"name":"Yes","children":[{"name":"Male","value":0},{"name":"Female","value":0}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":670},{"name":"Female","value":3}]},{"name":"Yes","children":[{"name":"Male","value":192},{"name":"Female","value":20}]}]}]}],"name":"Titanic"},"background":"#bbb","header_background":"orange","header_height":25,"header_fontsize":"12px","format_string":",","zoom_in_helptext":" - Click on a Square to Zoom","zoom_out_helptext":" - Click here to Zoom Out","tooltip_background":"orange","colnames":["Class","Age","Sex","Survived"],"value_label":"Value"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-511b0f0fab403cf227c1" style="width:100%;height:432.632880098888px;" class="d3v5_zoomable_treemap html-widget"></div>
+<script type="application/json" data-for="htmlwidget-511b0f0fab403cf227c1">{"x":{"data":{"children":[{"name":"1st","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":0},{"name":"Female","value":0}]},{"name":"Yes","children":[{"name":"Male","value":5},{"name":"Female","value":1}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":118},{"name":"Female","value":4}]},{"name":"Yes","children":[{"name":"Male","value":57},{"name":"Female","value":140}]}]}]},{"name":"2nd","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":0},{"name":"Female","value":0}]},{"name":"Yes","children":[{"name":"Male","value":11},{"name":"Female","value":13}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":154},{"name":"Female","value":13}]},{"name":"Yes","children":[{"name":"Male","value":14},{"name":"Female","value":80}]}]}]},{"name":"3rd","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":35},{"name":"Female","value":17}]},{"name":"Yes","children":[{"name":"Male","value":13},{"name":"Female","value":14}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":387},{"name":"Female","value":89}]},{"name":"Yes","children":[{"name":"Male","value":75},{"name":"Female","value":76}]}]}]},{"name":"Crew","children":[{"name":"Child","children":[{"name":"No","children":[{"name":"Male","value":0},{"name":"Female","value":0}]},{"name":"Yes","children":[{"name":"Male","value":0},{"name":"Female","value":0}]}]},{"name":"Adult","children":[{"name":"No","children":[{"name":"Male","value":670},{"name":"Female","value":3}]},{"name":"Yes","children":[{"name":"Male","value":192},{"name":"Female","value":20}]}]}]}],"name":"Titanic"},"background":"#bbb","header_background":"orange","header_height":25,"header_fontsize":"12px","format_string":",","zoom_in_helptext":" - Click on a Square to Zoom","zoom_out_helptext":" - Click here to Zoom Out","tooltip_background":"orange","colnames":["Class","Age","Sex","Survived"],"value_label":"Value"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="detail" class="section level2">
 <h2 class="hasAnchor">
