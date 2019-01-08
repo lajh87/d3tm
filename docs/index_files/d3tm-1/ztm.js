@@ -54,7 +54,10 @@
     function mousemove() {
 
      function mousex (){
-       var ox = d3.event.pageX - el_loc.left + 6;
+       var ox = d3.event.pageX - el_loc.left + 10;
+       if(ox > el_loc.width/2){
+         ox = ox - tooltip_bb.width-10;
+       }
        if(ox>(el_loc.width-tooltip_bb.width)){
          ox = el_loc.width-tooltip_bb.width;
        }
@@ -62,7 +65,10 @@
      }
 
      function mousey (){
-       var oy = d3.event.pageY - el_loc.top + 6;
+       var oy = d3.event.pageY - el_loc.top + 10;
+       if(oy > el_loc.height/2){
+         oy = oy - tooltip_bb.height - 10;
+       }
        if(oy>(el_loc.height - tooltip_bb.height)){
          oy = el_loc.height - tooltip_bb.height;
        }
@@ -190,30 +196,29 @@
                   .call(rect);
 
               // Add tooltip and shiny event data when mouseover the child
-                if(d.depth === root.height-1){
-                  parentLabel = xR.colnames ? xR.colnames[d.depth-1] : "Parent";
-                  childLabel = xR.colnames ? xR.colnames[d.depth] : "Child";
-                } else{
-                   parentLabel = xR.colnames ? xR.colnames[d.depth] : "Parent";
-                   childLabel = xR.colnames ? xR.colnames[d.depth+1] : "Child";
-                }
 
               g.selectAll(".child")
                 .on("mouseover", function(d,i) {
-                  var sel = d.parent.data.name;
-                  var parentIndex = d.parent.parent.children.findIndex(function(d){
-                    return d.data.name === sel;
-                  });
-                  hover_to_shiny_input(d,i, parentIndex);
+
+                  hover_to_shiny_input(d,i);
                     var tooltip_child = d.data.name;
                         tooltip_parent = d.parent.data.name;
                         tooltip_child_value = formatNumber(d.value).replace(/G/,"B");
                         tooltip_parent_value = formatNumber(d.parent.value).replace(/G/,"B");
 
+                     if(d.depth -1 ===root.height){
+                        parentLabel = xR.colnames ? xR.colnames[d.depth-3] : "Parent";
+                        childLabel = xR.colnames ? xR.colnames[d.depth-2] : "Child";
+
+                      } else{
+                        parentLabel = xR.colnames ? xR.colnames[d.depth-2] : "Parent";
+                        childLabel = xR.colnames ? xR.colnames[d.depth-1] : "Child";
+                      }
+
                      tooltip
                        .html(function(d) {
-                       return   parentLabel + ": <b>" + tooltip_parent + "</b><br>" +
-                                childLabel +  ": <b>" + tooltip_child  + "</b><br>" +
+                       return    parentLabel + ": <b>" + tooltip_parent + "</b><br>" +
+                                 childLabel + ": <b>" + tooltip_child  + "</b><br>" +
                                 xR.value_label + ": <b>" + tooltip_child_value + "</b>";
                        })
                       .style("opacity", 0.9);
@@ -295,35 +300,43 @@
             return g;
         }
 
-        function click_to_shiny_input(d,i){
+        function click_to_shiny_input(d){
            // add a hook to Shiny
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_clicked_child_index', i);
+            Shiny.onInputChange(el.id + '_clicked_child_index', path(d));
             Shiny.onInputChange(el.id + '_clicked_child_label', d.data.name);
             Shiny.onInputChange(el.id + '_clicked_child_depth', d.depth);
             }
           }
 
-        function showArrayElements(d){
-          data.map(function(d) {return d.data.name;}).join(', ');
-        }
-
-
-
-        function hover_to_shiny_input(d, i){
+        function hover_to_shiny_input(d){
 
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_hover_child_index', showArrayElements(root.path(d)));
+            Shiny.onInputChange(el.id + '_hover_child_index', path(d));
             Shiny.onInputChange(el.id + '_hover_child_label', d.data.name);
             Shiny.onInputChange(el.id + '_hover_child_depth', d.depth);
 
-            Shiny.onInputChange(el.id + '_hover_parent_index', i);
+            Shiny.onInputChange(el.id + '_hover_parent_index', path(d.parent));
             Shiny.onInputChange(el.id + '_hover_parent_label', d.parent.data.name);
             Shiny.onInputChange(el.id + '_hover_parent_depth', d.parent.depth);
             }
           }
 
-        function mouseout_to_shiny_input(df){
+          function path(d){
+           var res = "";
+           var sep = ", ";
+           d.ancestors().reverse().forEach(function(i){
+             res += i.data.name  + sep;
+           });
+          return res
+                 .split(sep)
+                 .filter(function(i){
+                    return i!== "";
+                  })
+                  .join(sep);
+          }
+
+        function mouseout_to_shiny_input(d){
           if( HTMLWidgets.shinyMode ){
             Shiny.onInputChange(el.id + '_hover_child_index', null);
             Shiny.onInputChange(el.id + '_hover_child_label', null);
@@ -334,10 +347,6 @@
             Shiny.onInputChange(el.id + '_hover_parent_depth', null);
             }
           }
-
-        function getContrast50(hexcolor){
-            return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff/3) ? 'black':'white';
-        }
 
         function getRGBComponents(color) {
             return d3.rgb(color);
@@ -411,4 +420,4 @@
         }
 
         return instance;
-  };
+  }

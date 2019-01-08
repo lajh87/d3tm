@@ -42,9 +42,9 @@ return the name of the node to \code{input$ztm_clicked_label}.
 The full list of current supported events are:
 
 \itemize{
-\item \code{input$OBJECTID_clicked_child_id}
-\item \code{input$OBJECTID_clicked_child_depth}
-\item \code{input$OBJECTID_clicked_child_label}
+\item \code{input$OBJECTID_clicked_id}
+\item \code{input$OBJECTID_clicked_depth}
+\item \code{input$OBJECTID_clicked_label}
 \item \code{input$OBJECTID_hover_parent_index}
 \item \code{input$OBJECTID_hover_parent_depth}
 \item \code{input$OBJECTID_hover_parent_label}

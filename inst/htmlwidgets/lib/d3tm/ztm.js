@@ -303,9 +303,9 @@
         function click_to_shiny_input(d){
            // add a hook to Shiny
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_clicked_child_index', path(d));
-            Shiny.onInputChange(el.id + '_clicked_child_label', d.data.name);
-            Shiny.onInputChange(el.id + '_clicked_child_depth', d.depth);
+            Shiny.onInputChange(el.id + '_clicked_index', path(d));
+            Shiny.onInputChange(el.id + '_clicked_label', d.data.name);
+            Shiny.onInputChange(el.id + '_clicked_depth', d.depth);
             }
           }
 

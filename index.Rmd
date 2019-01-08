@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# d3tm <img src="man/figures/logo.png" align="right" height=140/>
+# d3tm
 
 R implementation of [Mike Bostocks's](https://bost.ocks.org/mike/) 
 [D3](https://d3js.org/) [Zoomable Treemap](https://bost.ocks.org/mike/treemap/).  

@@ -9,6 +9,8 @@ the htmlWidget which places the vector into an array that is indexed based on de
 * Removed key field from `d3_nest2` and added Shiny bindings for for click and 
 hover events
 [(99b0c2)](https://gitlab.com/lajh87/d3tm/commit/99b0c23075c3f1c4e11bd0ef68441f9ac4792a21)
+* Update the tooltip so that it switches sides when it gets halfway across the 
+element [(c5eeb2)](https://gitlab.com/lajh87/d3tm/commit/c5eeb20fbdf5b234314fa9f8c8ef2742bb6a6207)
 
 
 # d3tm 0.3

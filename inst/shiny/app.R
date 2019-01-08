@@ -18,7 +18,6 @@ ui <- fluidPage(
         tags$label("Click Index:"), textOutput("x1_clicked_child_index",inline = T),
         tags$label("Click Label:"), textOutput("x1_clicked_child_label",inline = T),
         tags$label("Click Depth:"), textOutput("x1_clicked_child_depth",inline = T)
-
       ),
       fluidRow(
         h4("Hover Events"),
