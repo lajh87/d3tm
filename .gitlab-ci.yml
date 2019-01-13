@@ -1,11 +1,16 @@
-image: r-base
+image: rocker/tidyverse
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - r-pkgs/
 
 testthat:
   stage: test
   script:
-      - R -e 'install.packages(c("testthat"))'
-      - R CMD build . --no-build-vignettes --no-manual
-      - R CMD check *tar.gz --no-build-vignettes --no-manual
+    - R -e 'install.packages(c("htmlwidgets","jsonlite"))'
+    - R -e 'devtools::check()'
 
 pages:
   stage: deploy
