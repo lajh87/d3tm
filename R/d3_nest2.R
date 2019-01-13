@@ -1,7 +1,6 @@
 #' Convert a data.frame to a 'd3.js' Hierarchy
 #'
 #' @param data A data frame
-#' @param id_vars The variables to nest
 #' @param value_col The name of the value column in the data frame
 #' @param root The name of the root
 #'

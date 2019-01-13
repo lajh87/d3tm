@@ -43,6 +43,8 @@ e.g. "#bbb"}
 \item{tooltip_background}{Background colour of the tooltip}
 
 \item{colnames}{Names of the columns (for use in the tooltip)}
+
+\item{value_label}{The label for the value column (in the tooltip)}
 }
 \description{
 Implementation of a Mike Bostock's d3

@@ -10,3 +10,9 @@
 
 # To Do
 * Update shiny application to test selecting nodes
+* Continuous integration test
+    * Pass documentation to gitlab pages
+    * Clone to a test rig
+    * Build
+    * Check
+    

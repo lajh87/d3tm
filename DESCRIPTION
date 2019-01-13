@@ -21,7 +21,9 @@ LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    callr,
+    RSelenium
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 URL: https://lajh87.gitlab.io/d3tm/

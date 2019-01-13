@@ -19,6 +19,7 @@
 #' @param zoom_out_helptext Zoom out helptext
 #' @param tooltip_background  Background colour of the tooltip
 #' @param colnames Names of the columns (for use in the tooltip)
+#' @param value_label The label for the value column (in the tooltip)
 #'
 #' @export
 #' @example inst/examples/titanic.R

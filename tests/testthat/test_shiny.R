@@ -3,7 +3,7 @@ context("test shiny")
 # Load Shiny
 shiny_test <- callr::r_process$new(
   callr::r_process_options(func = function(){
-    shiny::runApp(system.file("shiny", package = "d3tm"),
+    shiny::runApp("shiny",
                   port = 4446L,
                   launch.browser = FALSE)
   })
@@ -19,7 +19,7 @@ opts <- callr::r_process_options(
   stderr = tempfile("webdriver-stderr-", fileext = ".log")
 )
 
-handle <- callr::r_process$new(opts)
+selenium <- callr::r_process$new(opts)
 Sys.sleep(5)
 
 # Connect with Chrome Headless
@@ -40,7 +40,7 @@ test_that("Test Application Has Loaded",{
   rD$close()
 })
 
-handle$kill()
-rm(handle, rD)
+selenium$kill()
+rm(selenium, rD)
 gc()
 

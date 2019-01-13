@@ -12,8 +12,6 @@ d3_nest2(data, value_col = "value", root = "root")
 \item{value_col}{The name of the value column in the data frame}
 
 \item{root}{The name of the root}
-
-\item{id_vars}{The variables to nest}
 }
 \value{
 Serialised json
