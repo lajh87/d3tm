@@ -11,8 +11,10 @@
 # To Do
 * Update shiny application to test selecting nodes
 * Continuous integration test
-    * Pass documentation to gitlab pages
-    * Clone to a test rig
-    * Build
-    * Check
-    
+    * build
+    * test 
+    * deploy 
+
+"If all jobs of test succeed, the deploy jobs are executed in parallel."
+See <https://docs.gitlab.com/ee/ci/yaml/> 
+<https://blog.methodsconsultants.com/posts/developing-r-packages-with-usethis-and-gitlab-ci-part-ii/>    
