@@ -1,3 +1,5 @@
+image: r-base
+
 testthat:
   stage: test
   script:
