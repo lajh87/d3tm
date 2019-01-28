@@ -6,11 +6,6 @@ cache:
   paths:
   - r-pkgs/
 
-testthat:
-  stage: test
-  script:
-    - R -e 'install.packages(c("htmlwidgets","jsonlite", "RSelenium"))'
-    - R -e 'devtools::check()'
 
 pages:
   stage: deploy
