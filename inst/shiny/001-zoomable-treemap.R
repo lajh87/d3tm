@@ -15,9 +15,9 @@ ui <- fluidPage(
       fluidRow(ztmOutput("x1",width = "100%")),
       fluidRow(
         h4("Click Events"),
-        tags$label("Click Index:"), textOutput("x1_clicked_child_index",inline = T),
-        tags$label("Click Label:"), textOutput("x1_clicked_child_label",inline = T),
-        tags$label("Click Depth:"), textOutput("x1_clicked_child_depth",inline = T)
+        tags$label("Click Index:"), textOutput("x1_clicked_index",inline = T),
+        tags$label("Click Label:"), textOutput("x1_clicked_label",inline = T),
+        tags$label("Click Depth:"), textOutput("x1_clicked_depth",inline = T)
       ),
       fluidRow(
         h4("Hover Events"),
@@ -45,9 +45,9 @@ server <- function(input, output, session) {
     d3tm::ztm(json, colnames = c("Class", "Sex", "Adult","Survived"))
   })
 
-  output$x1_clicked_child_index <- renderText(input$x1_clicked_child_index)
-  output$x1_clicked_child_label <- renderText(input$x1_clicked_child_label)
-  output$x1_clicked_child_depth <- renderText({input$x1_clicked_child_depth})
+  output$x1_clicked_index <- renderText(input$x1_clicked_index)
+  output$x1_clicked_label <- renderText(input$x1_clicked_label)
+  output$x1_clicked_depth <- renderText({input$x1_clicked_depth})
 
   output$x1_hover_child_index <- renderText(input$x1_hover_child_index)
   output$x1_hover_child_label <- renderText(input$x1_hover_child_label)
@@ -58,9 +58,9 @@ server <- function(input, output, session) {
   output$x1_hover_parent_depth <- renderText({input$x1_hover_parent_depth})
 
   observeEvent(input$x1_reset_click_events,{
-    session$sendCustomMessage("resetInputValue", "x1_clicked_child_index")
-    session$sendCustomMessage("resetInputValue", "x1_clicked_child_label")
-    session$sendCustomMessage("resetInputValue", "x1_clicked_child_depth")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_index")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_label")
+    session$sendCustomMessage("resetInputValue", "x1_clicked_depth")
   })
 
 
