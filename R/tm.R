@@ -33,10 +33,8 @@ tm <- function(
   header_height = 25,
   header_fontsize = "12px",
   format_string = ",",
-  zoom_in_helptext = " - Click on a Square to Zoom",
-  zoom_out_helptext = " - Click here to Zoom Out",
   tooltip_background = "orange",
-  colnames = NULL,
+  tooltip_label = "Category",
   value_label = "Value"
 ){
 
@@ -48,10 +46,10 @@ tm <- function(
     header_height = header_height,
     header_fontsize = header_fontsize,
     format_string = format_string,
-    zoom_in_helptext = zoom_in_helptext,
-    zoom_out_helptext = zoom_out_helptext,
+    zoom_in_helptext = "",
+    zoom_out_helptext = "",
     tooltip_background = tooltip_background,
-    colnames = colnames,
+    tooltip_label = tooltip_label,
     value_label = value_label
   )
 

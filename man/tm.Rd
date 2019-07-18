@@ -10,9 +10,7 @@
   elementId = NULL, background = "#bbb",
   header_background = "orange", header_height = 25,
   header_fontsize = "12px", format_string = ",",
-  zoom_in_helptext = " - Click on a Square to Zoom",
-  zoom_out_helptext = " - Click here to Zoom Out",
-  tooltip_background = "orange", colnames = NULL,
+  tooltip_background = "orange", tooltip_label = "Category",
   value_label = "Value")
 }
 \arguments{
@@ -36,15 +34,15 @@ e.g. "#bbb"}
 
 \item{format_string}{D3 number format}
 
+\item{tooltip_background}{Background colour of the tooltip}
+
+\item{value_label}{The label for the value column (in the tooltip)}
+
 \item{zoom_in_helptext}{The help text displayed on the header bar}
 
 \item{zoom_out_helptext}{Zoom out helptext}
 
-\item{tooltip_background}{Background colour of the tooltip}
-
 \item{colnames}{Names of the columns (for use in the tooltip)}
-
-\item{value_label}{The label for the value column (in the tooltip)}
 }
 \description{
 Implementation of a Treemap

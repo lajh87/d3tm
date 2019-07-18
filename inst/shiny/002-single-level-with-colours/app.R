@@ -3,21 +3,16 @@ library(tidyverse)
 library(d3tm)
 
 
-# Multiple Levels
-json <- data.frame(Titanic) %>%
-  dplyr::select(Class,Sex,Age,Survived,Freq) %>%
-  d3_nest2(value_col="Freq", root="Titanic")
-#tm(json)
-
-
-# Single Level
+# Build Data
 json <- data.frame(Titanic) %>%
   dplyr::select(Class, Freq) %>%
   dplyr::group_by(Class) %>%
-  dplyr::summarise(Freq = sum(Freq)) %>%
-  d3_nest2(value_col="Freq", root="Titanic")
+  dplyr::summarise(value = sum(Freq)) %>%
+  d3_nest2(root = "Titanic Passengers")
 
-#tm(json)
+json <- jsonlite::fromJSON(json)
+json$children$color <- c("#FF5733","#FF5733","#FF5733", "#000")
+json <- jsonlite::toJSON(json,auto_unbox = TRUE,dataframe = "rows")
 
 
 ui <- fluidPage(

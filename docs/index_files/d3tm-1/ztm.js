@@ -228,6 +228,7 @@
                    tooltip.style("opacity", 0);
                    });
 
+
                 // add title to parents
                 g.append("rect")
                  .attr("class", "parent")
@@ -249,6 +250,15 @@
                     ;
                  })
                  .attr("class", "textdiv"); //textdiv class allows us to style the text easily with CSS
+
+              // Add Click Handler to catch single level treemap
+
+                g.selectAll(".child")
+                  .on("click", function(d,i){
+                    click_to_shiny_input(d,i);
+                  });
+
+
 
             function transition(d) {
                 if (transitioning || !d) return;
@@ -303,11 +313,14 @@
         function click_to_shiny_input(d){
            // add a hook to Shiny
           if( HTMLWidgets.shinyMode ){
-            Shiny.onInputChange(el.id + '_clicked_child_index', path(d));
-            Shiny.onInputChange(el.id + '_clicked_child_label', d.data.name);
-            Shiny.onInputChange(el.id + '_clicked_child_depth', d.depth);
+            Shiny.onInputChange(el.id + '_clicked_index', path(d));
+            Shiny.onInputChange(el.id + '_clicked_label', d.data.name);
+            Shiny.onInputChange(el.id + '_clicked_depth', d.depth);
+
             }
           }
+
+
 
         function hover_to_shiny_input(d){
 

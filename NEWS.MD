@@ -1,3 +1,8 @@
+# dtm 0.3.2
+## New Release (July 19th, 2019)
+### Major Changes
+* Added a no zoomable version of the treemap
+
 # dtm 0.3.1
 ## New Release (January 7th, 2019)
 ### Major Changes
