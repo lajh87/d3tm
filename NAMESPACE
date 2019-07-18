@@ -2,7 +2,10 @@
 
 export("%>%")
 export(d3_nest2)
+export(renderTm)
 export(renderZtm)
+export(tm)
+export(tmOutput)
 export(ztm)
 export(ztmOutput)
 importFrom(magrittr,"%>%")

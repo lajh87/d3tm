@@ -18,7 +18,7 @@ d3_nest2 <- function(data,  value_col = "value", root = "root"){
   if(value_col != "value")
     data <- data %>% dplyr::rename(value = dplyr::contains(value_col))
   data <- dplyr::mutate_if(data, is.factor, as.character)
-  nonnest_cols <- dplyr::setdiff(colnames(data), "value")
+  nonnest_cols <- dplyr::setdiff(colnames(data), c("value"))
 
 
   for (i in rev(seq_along(nonnest_cols))) {

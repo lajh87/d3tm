@@ -3,33 +3,24 @@ library(tidyverse)
 library(d3tm)
 
 
-# Multiple Levels
 json <- data.frame(Titanic) %>%
   dplyr::select(Class,Sex,Age,Survived,Freq) %>%
-  d3_nest2(value_col="Freq", root="Titanic")
-#tm(json)
-
-
-# Single Level
-json <- data.frame(Titanic) %>%
-  dplyr::select(Class, Freq) %>%
-  dplyr::group_by(Class) %>%
-  dplyr::summarise(Freq = sum(Freq)) %>%
+  dplyr::mutate(color = "#FF5733") %>%
   d3_nest2(value_col="Freq", root="Titanic")
 
-#tm(json)
+ztm(json)
 
 
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(tableOutput("data")),
-    mainPanel(tmOutput("treemap"))
+    mainPanel(ztmOutput("treemap"))
   )
 )
 
 server <- function(input, output, session) {
 
-  output$treemap <- renderTm(tm(json))
+  output$treemap <- renderZtm(ztm(json))
 
   data <- reactiveValues(events = data.frame(Click = NA, Hover = NA))
 
