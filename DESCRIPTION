@@ -3,14 +3,11 @@ Title: A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data
 Version: 0.3.1.1
 Authors@R: c(person("Luke", "Heley", role = c("aut", "cre"),
                      email = "lajh87@me.com"),
-                     person("Tomas", "Westlake", role = "ctb", email = "tom.westlake121@gmail.com"
+                     person("Tomas", "Westlake", role = "ctb", 
+                     email = "tom.westlake121@gmail.com"
                      ))
 Description: The treemap above uses interaction to reveal the hierarchy 
-    incrementally: clicking on a node zooms in. Only two levels of the hierarchy 
-    are visible at a time. This allows the layout’s aspect ratio to be optimized 
-    for the current view, rather than computing a global layout. 
-    It also allows the exploration of arbitrarily-large datasets: 
-    data can be lazily-loaded and positioned on zoom.
+    incrementally: clicking on a node zooms in. 
 Imports: 
     htmlwidgets,
     tidyr,
