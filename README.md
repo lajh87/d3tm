@@ -4,9 +4,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of d3tm is to ...
+The goal of d3tm is to create a zoomable treemap capable of handling unbalanced hierachical data.
 
-## Installation
+## Installation (TODO)
 
 You can install the released version of d3tm from [CRAN](https://CRAN.R-project.org) with:
 
@@ -14,7 +14,7 @@ You can install the released version of d3tm from [CRAN](https://CRAN.R-project.
 install.packages("d3tm")
 ```
 
-## Example
+## Example  (TODO)
 
 This is a basic example which shows you how to solve a common problem:
 
@@ -23,3 +23,10 @@ library(d3tm)
 ## basic example code
 ```
 
+## Plan
+
+1. Get zoomable treemap code working.
+2. Add shiny interactivity.
+3. Build demonstration apps.
+4. Deploy at work.
+5. Disemminate code to interested persons.

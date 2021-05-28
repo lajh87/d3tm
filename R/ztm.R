@@ -5,11 +5,12 @@
 #' @import htmlwidgets
 #'
 #' @export
-ztm <- function(message, width = NULL, height = NULL, elementId = NULL) {
+ztm <- function(data = jsonlite::read_json(system.file("flare-2.json", package = "d3tm")),
+                width = NULL, height = NULL, elementId = NULL) {
 
   # forward options using x
   x = list(
-    message = message
+    data = data
   )
 
   # create widget
