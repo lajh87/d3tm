@@ -1,9 +1,15 @@
-# dtm 0.3.2
+# d3tm 0.4
+## New Release (May 28th, 2021)
+### Major Changes
+* Re-factored code for more consistent performance.
+
+
+# d3tm 0.3.2
 ## New Release (July 19th, 2019)
 ### Major Changes
 * Added a no zoomable version of the treemap
 
-# dtm 0.3.1
+# d3tm 0.3.1
 ## New Release (January 7th, 2019)
 ### Major Changes
 * Removed column names from data in `d3_nest2` and added a variable to pass to
