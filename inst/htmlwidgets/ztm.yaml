@@ -6,5 +6,5 @@ dependencies:
   - name: d3tm
     version: 1
     src: htmlwidgets/lib/ztm
-    script: ztm.js
+    script: d3v6ztm.js
     stylesheet: ztm.css

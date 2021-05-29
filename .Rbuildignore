@@ -8,3 +8,4 @@
 ^\.gitlab-ci.yml$
 ^NEWS.md$
 
+^README\.Rmd$

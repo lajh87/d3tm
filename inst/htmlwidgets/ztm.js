@@ -37,10 +37,10 @@ HTMLWidgets.widget({
 
       renderValue: function(x) {
         instance.x = x,
-        instance = draw(el, instance);
+        instance = draw(el, instance, width, height);
       },
 
-      resize: function(width, height) {
+      resize: function(x, width, height) {
 
       },
 

@@ -4,7 +4,12 @@
 \alias{ztm}
 \title{<Add Title>}
 \usage{
-ztm(message, width = NULL, height = NULL, elementId = NULL)
+ztm(
+  data = jsonlite::read_json(system.file("json/flare-2.json", package = "d3tm")),
+  width = "100\%",
+  height = 400,
+  elementId = NULL
+)
 }
 \description{
 <Add Description>

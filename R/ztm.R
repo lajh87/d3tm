@@ -1,12 +1,13 @@
-#' <Add Title>
+#' Zoomable Treemap
 #'
-#' <Add Description>
+#' A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data
 #'
 #' @import htmlwidgets
 #'
 #' @export
-ztm <- function(data = jsonlite::read_json(system.file("flare-2.json", package = "d3tm")),
-                width = NULL, height = NULL, elementId = NULL) {
+#' @examples \dontrun{ztm()}
+ztm <- function(data = jsonlite::read_json(system.file("json/flare-2.json", package = "d3tm")),
+                width = "100%", height = 400, elementId = NULL) {
 
   # forward options using x
   x = list(
