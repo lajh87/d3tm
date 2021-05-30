@@ -1,5 +1,4 @@
-
-function draw(el, instance, width, height){
+function draw(el, data){
 
   // Remove existing instances
   d3.select( el ).selectAll("*").remove();
@@ -13,15 +12,11 @@ function draw(el, instance, width, height){
     return;
   }
 
-  var data = instance.x.data;
-
   var margin = { top: 0, right: 0, bottom: 30.5, left: 0 },
-  width = width - margin.left - margin.right,
-  height = height - margin.top - margin.bottom;
+  width = el.getBoundingClientRect().width - margin.left - margin.right,
+  height = el.getBoundingClientRect().height - margin.top - margin.bottom;
 
-  var container = d3.select(el).append("div").style("position", "relative");
-
-  var svg = container
+  var svg = d3.select(el).style("position", "relative")
             .append("svg")
             .attr("viewBox", [0.5, -30.5, width, height + 30])
             .style("font", "10px sans-serif");
@@ -41,6 +36,7 @@ function draw(el, instance, width, height){
 
   let group = svg.append("g")
       .call(render, treemap(data))
+
 
   function render(group, root) {
 
@@ -81,6 +77,8 @@ function draw(el, instance, width, height){
     node.on("mouseover", (event, d) => mouseover_to_shiny_input(d))
         .on("mouseout", (event, d) => mouseout_to_shiny_input(d))
         .on("click", (event, d) => d === root ? zoomout(root) : zoomin(d));
+
+    children_to_shiny_input(node, root);
 
     group.call(position, root);
   }
@@ -164,6 +162,17 @@ function draw(el, instance, width, height){
       Shiny.onInputChange(el.id + '_mouseover_id', null);
       }
     }
+
+  function children_to_shiny_input(node, root){
+    const childrenArray = [];
+    node.data().forEach(d => d !== root ? childrenArray.push(d.data.id) : null);
+
+
+    if( HTMLWidgets.shinyMode ){
+      Shiny.onInputChange(el.id + '_children', childrenArray);
+      }
+  }
+
 }
 
 

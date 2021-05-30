@@ -7,5 +7,5 @@
 ^readme.md$
 ^\.gitlab-ci.yml$
 ^NEWS.md$
-
 ^README\.Rmd$
+^\.Rhistory$
