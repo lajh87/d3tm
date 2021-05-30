@@ -1,0 +1,10 @@
+dependencies:
+  - name: d3
+    version: 6
+    src: htmlwidgets/lib/d3/
+    script: d3.v6.min.js
+  - name: d3tm
+    version: 1
+    src: htmlwidgets/lib/ztm
+    script: d3v6ztm.js
+    stylesheet: ztm.css

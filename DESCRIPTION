@@ -1,18 +1,12 @@
 Package: d3tm
 Title: A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data
-Version: 0.3.2
+Version: 0.4
 Authors@R: c(person("Luke", "Heley", role = c("aut", "cre"),
-                     email = "lajh87@me.com"),
-                     person("Tomas", "Westlake", role = "ctb", 
-                     email = "tom.westlake121@gmail.com"
-                     ))
-Description: The treemap above uses interaction to reveal the hierarchy 
-    incrementally: clicking on a node zooms in. 
+                     email = "lajh87@me.com"))
+Description: An R implementation of Mike Bostock's d3 treemap that supports 
+    zooming: click any cell to zoom in, or the top to zoom out.
 Imports: 
     htmlwidgets,
-    tidyr,
-    dplyr,
-    magrittr,
     jsonlite
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -20,7 +14,9 @@ LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
-    callr
-RoxygenNote: 6.1.1
+    callr,
+    r2d3,
+    shiny
+RoxygenNote: 7.1.1
 URL: https://lajh87.gitlab.io/d3tm/
 BugReports: https://gitlab.com/lajh87/d3tm/issues

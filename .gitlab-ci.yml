@@ -1,12 +1,3 @@
-image: rocker/tidyverse
-
-# Cache modules in between jobs
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-  - r-pkgs/
-
-
 pages:
   stage: deploy
   script:

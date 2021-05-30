@@ -2,60 +2,15 @@
 % Please edit documentation in R/ztm.R
 \name{ztm}
 \alias{ztm}
-\title{Zoomable Treemap}
+\title{<Add Title>}
 \usage{
-
-  ztm(data = jsonlite::toJSON(jsonlite::fromJSON(system.file("examples/flare.json",
-  package = "d3tm"))), width = "100\%", height = NULL,
-  elementId = NULL, background = "#bbb",
-  header_background = "orange", header_height = 25,
-  header_fontsize = "12px", format_string = ",",
-  zoom_in_helptext = " - Click on a Square to Zoom",
-  zoom_out_helptext = " - Click here to Zoom Out",
-  tooltip_background = "orange", colnames = NULL,
-  value_label = "Value")
-}
-\arguments{
-\item{data}{A json object}
-
-\item{width}{Width of the widget, in pixels}
-
-\item{height}{Height of the widget, in pixels}
-
-\item{elementId}{Element ID used for R Shiny package}
-
-\item{background}{Default background colour use if there is no color
-variable defined in the data. Takes hex of colour names.}
-
-\item{header_background}{The background colour either named of in a hex
-e.g. "#bbb"}
-
-\item{header_height}{Height of the title, in pixels}
-
-\item{header_fontsize}{Font size of the title, in pixels}
-
-\item{format_string}{D3 number format}
-
-\item{zoom_in_helptext}{The help text displayed on the header bar}
-
-\item{zoom_out_helptext}{Zoom out helptext}
-
-\item{tooltip_background}{Background colour of the tooltip}
-
-\item{colnames}{Names of the columns (for use in the tooltip)}
-
-\item{value_label}{The label for the value column (in the tooltip)}
+ztm(
+  data = jsonlite::read_json(system.file("json/flare-2.json", package = "d3tm")),
+  width = "100\%",
+  height = 400,
+  elementId = NULL
+)
 }
 \description{
-Implementation of a Mike Bostock's d3
- \href{https://bost.ocks.org/mike/treemap/}{zoomable treemap}
- as an htmlwidget in d3v5.
-}
-\examples{
-library(d3tm)
-data.frame(Titanic) \%>\%
- dplyr::select(Class,Age,Survived,Sex,Freq) \%>\%
-  d3_nest2(value_col="Freq", root="Titanic") \%>\%
-  ztm()
-
+<Add Description>
 }
