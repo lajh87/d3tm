@@ -35,8 +35,7 @@ function draw(el, data){
       .sort((a, b) => b.value - a.value))
 
   let group = svg.append("g")
-      .call(render, treemap(data))
-
+      .call(render, treemap(data));
 
   function render(group, root) {
 
@@ -45,8 +44,6 @@ function draw(el, data){
       .data(root.children.concat(root))
       .join("g");
 
-    node.filter(d => d === root ? d.parent : d.children)
-        .attr("cursor", "pointer");
 
     node.append("title")
         .text(d => d.ancestors().reverse().map(d => d.data.name).join("/"));
@@ -54,7 +51,8 @@ function draw(el, data){
     node.append("rect")
          .attr("id", d=>  d.data.id)
         .attr("fill", d => d === root ? "#fff" : d.children ? "#ccc" : "#ddd")
-        .attr("stroke", "#fff");
+        .attr("stroke", "#fff")
+        .attr("cursor", "pointer");
 
     node.append("clipPath")
         .attr("id", d=> "clip-" + d.data.id)
@@ -174,7 +172,3 @@ function draw(el, data){
   }
 
 }
-
-
-
-

@@ -42,12 +42,13 @@ HTMLWidgets.widget({
 
       resize: function(width, height) {
 
-       draw(el, data);
+       draw(el, data)
 
       },
 
       instance: instance
 
     };
+
   }
 });
