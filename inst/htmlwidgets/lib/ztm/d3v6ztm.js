@@ -1,5 +1,4 @@
-function draw(el, data){
-
+function draw(el, instance, resize){
 
   // Remove existing instances
   d3.select( el ).selectAll("*").remove();
@@ -12,6 +11,7 @@ function draw(el, data){
   ){
     return;
   }
+  var data = instance.x.data;
 
   var margin = { top: 0, right: 0, bottom: 30.5, left: 0 },
   width = el.getBoundingClientRect().width - margin.left - margin.right,
@@ -24,7 +24,6 @@ function draw(el, data){
 
   // Adapted from https://observablehq.com/@d3/zoomable-treemap
   format = d3.format(",d")
-  color = d3.scaleOrdinal(d3.schemeCategory10)
 
   const x = d3.scaleLinear().rangeRound([0, width]);
   const y = d3.scaleLinear().rangeRound([0, height]);
@@ -38,10 +37,7 @@ function draw(el, data){
   let group = svg.append("g")
       .call(render, treemap(data));
 
-    console.log(zoomin(d3.select("#node-flare\\.vis").data()[0]));
-
-
-
+  if(resize) zoomin(instance.node);
 
   function render(group, root) {
 
@@ -97,11 +93,11 @@ function draw(el, data){
 
   // When zooming in, draw the new nodes on top, and fade them in.
   function zoomin(d) {
-    console.log(d);
 
     click_to_shiny_input(d);
 
     if(d.children === undefined) return undefined;
+    instance.node = d;
 
     const group0 = group.attr("pointer-events", "none");
     const group1 = group = svg.append("g").call(render, d);
@@ -124,6 +120,8 @@ function draw(el, data){
     click_to_shiny_input(d.parent);
 
     if(d.parent === null) return null;
+
+    instance.node = d;
 
     const group0 = group.attr("pointer-events", "none");
     const group1 = group = svg.insert("g", "*").call(render, d.parent);
@@ -172,12 +170,11 @@ function draw(el, data){
     const childrenArray = [];
     node.data().forEach(d => d !== root ? childrenArray.push(d.data.id) : null);
 
-
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_children', childrenArray);
       }
   }
 
-
+  return instance;
 
 }

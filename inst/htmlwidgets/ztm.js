@@ -6,7 +6,7 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
-    var instance = { }, node;
+    var instance = { };
 
     d3.formatDefaultLocale(
       {
@@ -31,25 +31,18 @@ HTMLWidgets.widget({
                 function(variableName){
                   Shiny.onInputChange(variableName, null);
                   });
-
-     Shiny.addCustomMessageHandler('shinySelect',
-                function(selector){
-                  node = d3.select("#node-flare\\.vis");
-                  });
-
-
   }
 
     return {
 
       renderValue: function(x) {
-        data = x.data,
-        instance = draw(el, x.data, node);
+        instance.x = x,
+        instance = draw(el, instance, resize = false);
       },
 
       resize: function(width, height) {
 
-       draw(el, data, node)
+       instance = draw(el, instance, resize = true);
 
       },
 
