@@ -1,5 +1,6 @@
 function draw(el, data){
 
+
   // Remove existing instances
   d3.select( el ).selectAll("*").remove();
 
@@ -37,6 +38,11 @@ function draw(el, data){
   let group = svg.append("g")
       .call(render, treemap(data));
 
+    console.log(zoomin(d3.select("#node-flare\\.vis").data()[0]));
+
+
+
+
   function render(group, root) {
 
     const node = group
@@ -44,6 +50,7 @@ function draw(el, data){
       .data(root.children.concat(root))
       .join("g");
 
+    node.attr("id", d => "node-"+d.data.id);
 
     node.append("title")
         .text(d => d.ancestors().reverse().map(d => d.data.name).join("/"));
@@ -74,10 +81,9 @@ function draw(el, data){
 
     node.on("mouseover", (event, d) => mouseover_to_shiny_input(d))
         .on("mouseout", (event, d) => mouseout_to_shiny_input(d))
-        .on("click", (event, d) => d === root ? zoomout(root) : zoomin(d));
+        .on("click", (event, d) => d === root ? zoomout(root) : zoomin(d))
 
     children_to_shiny_input(node, root);
-
     group.call(position, root);
   }
 
@@ -91,6 +97,7 @@ function draw(el, data){
 
   // When zooming in, draw the new nodes on top, and fade them in.
   function zoomin(d) {
+    console.log(d);
 
     click_to_shiny_input(d);
 
@@ -170,5 +177,7 @@ function draw(el, data){
       Shiny.onInputChange(el.id + '_children', childrenArray);
       }
   }
+
+
 
 }

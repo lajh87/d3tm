@@ -5,6 +5,7 @@ ui <- fluidPage(
   titlePanel("Zoomable Treemap Shiny Interactions"),
   sidebarLayout(
     sidebarPanel(
+      uiOutput("zoom_to_node"),
       uiOutput("highlight"),
       h4("Events"),
       tags$span(tags$label("Clicked ID: "), textOutput("ztm_1_clicked_id")),
@@ -25,6 +26,16 @@ server <- function(input, output, session) {
     session$sendCustomMessage("resetInputValue", "ztm_1_clicked_id")
   })
   output$ztm_1_mouseover_id <- renderText(input$ztm_1_mouseover_id)
+
+
+  output$zoom_to_node <- renderUI({
+    tagList(
+      selectInput("zoom_to_node", "Zoom to Node",input$ztm_1_children),
+      actionButton("ztn_confirm", "Confirm")
+      )
+  })
+
+  observeEvent(input$ztn_confirm, {session$sendCustomMessage("shinySelect", input$zoom_to_node)})
 
   output$highlight <- renderUI({
     selectInput("highlight", "Highlight",input$ztm_1_children)
