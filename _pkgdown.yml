@@ -3,12 +3,9 @@ authors:
     href: https://lajh87.gitlab.io
 navbar:
   structure:
-    left: home
-    right: gitlab
+    left:  [home, reference, news]
+    right: [github]
   components:
-    home:
-      icon: fa-home fa-lg
-      href: index.html
-    gitlab:
-      icon: fa-gitlab fa-lg
+    github:
+      icon: fab fa-gitlab fa-lg
       href: https://gitlab.com/lajh87/d3tm
