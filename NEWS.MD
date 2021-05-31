@@ -4,6 +4,7 @@
 * Rebuilt the Zoomable Treemap (ZTM) based on d3 version 6 with click and mouseover/mouseout events.
 * Added div container with relative position for more consistent tooltip performance.
 * Removed the non-zoomable version of the treemap.
+* Added a zoom to node feature
 
 
 # d3tm 0.3.2
