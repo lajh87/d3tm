@@ -159,18 +159,22 @@ function draw(el, instance, resize){
   function click_to_shiny_input(d){
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_clicked_id', d.data.id);
+      Shiny.onInputChange(el.id + '_clicked_depth', d.depth);
       }
     }
 
   function mouseover_to_shiny_input(d){
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_mouseover_id', d.data.id);
+      Shiny.onInputChange(el.id + '_mouseover_depth', d.depth);
+      Shiny.onInputChange(el.id + '_mouseover_parent_id', d.parent.data.id);
       }
     }
 
   function mouseout_to_shiny_input(d){
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_mouseover_id', null);
+      Shiny.onInputChange(el.id + '_mouseover_depth', null);
       }
     }
 

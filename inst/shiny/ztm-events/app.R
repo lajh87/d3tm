@@ -12,6 +12,9 @@ ui <- fluidPage(
       tags$span(tags$b("Clicked ID: "),
                 textOutput("ztm_1_clicked_id",inline = TRUE)),
       tags$br(),
+      tags$span(tags$b("Clicked Depth: "),
+                textOutput("ztm_1_clicked_depth",inline = TRUE)),
+      tags$br(),
       tags$span(tags$b("Mouseover ID: "),
                 textOutput("ztm_1_mouseover_id",inline = TRUE)),
       tags$br(),
@@ -19,7 +22,7 @@ ui <- fluidPage(
       tags$br(),
       textOutput("ztm_1_children"),
       tags$br(),
-      actionButton("ztm_1_reset_click_events", "Resest Click Events")
+      actionButton("ztm_1_reset_click_events", "Reset Click Events")
       ),
     mainPanel(
       ztmOutput("ztm_1", width = "100%", height = 400)
@@ -31,8 +34,10 @@ server <- function(input, output, session) {
 
   output$ztm_1 <- renderZtm(ztm())
   output$ztm_1_clicked_id <- renderText(input$ztm_1_clicked_id)
+  output$ztm_1_clicked_depth <- renderText(input$ztm_1_clicked_depth)
   observeEvent(input$ztm_1_reset_click_events,{
     session$sendCustomMessage("resetInputValue", "ztm_1_clicked_id")
+    session$sendCustomMessage("resetInputValue", "ztm_1_clicked_depth")
   })
   output$ztm_1_mouseover_id <- renderText(input$ztm_1_mouseover_id)
   output$ztm_1_children <- renderText(input$ztm_1_children)

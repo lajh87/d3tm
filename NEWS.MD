@@ -1,3 +1,8 @@
+# d3tm 0.4.1
+## New Release (May 28th, 2021)
+### Minor Changes
+* Added back depth id on click
+
 # d3tm 0.4
 ## New Release (May 28th, 2021)
 ### Major Changes
