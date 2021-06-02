@@ -1,6 +1,5 @@
 function draw(el, instance, resize){
 
-
   // Remove existing instances
   d3.select( el ).selectAll("*").remove();
 
@@ -45,8 +44,7 @@ function draw(el, instance, resize){
 
   Shiny.addCustomMessageHandler('zoom2node', function(node_id){
      zoomin(check_offspring(return_node(root, node_id, "id")));
-    Shiny.onInputChange(el.id + '_clicked_id', node_id);
-
+     Shiny.onInputChange(el.id + '_clicked_id', node_id);
     })
 
   function render(group, root) {
