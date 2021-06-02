@@ -31,18 +31,21 @@ function draw(el, instance, resize){
   treemap = data => d3.treemap()
       .tile(tile)(d3.hierarchy(data)
       .sum(d => d.value)
-      .eachBefore(function(d) { d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name; })
+      .eachBefore(function(d) { d.data.id = (d.parent ? d.parent.data.id + "-" : "") + d.data.name; })
       .sort((a, b) => b.value - a.value))
 
+  var root = treemap(data);
+
   let group = svg.append("g")
-      .call(render, treemap(data));
-
-  console.log(data.children[0]);
-
-  console.log(jsonPath(data, "$.children"));
-
+      .call(render, root);
 
   if(resize) zoomin(instance.node);
+  ztm_data_id_to_shiny_input(data, "id");
+
+  Shiny.addCustomMessageHandler('zoom2node', function(node_id){
+     zoomin(check_offspring(return_node(root, node_id, "id")));
+     Shiny.onInputChange(el.id + '_clicked_id', node_id);
+    })
 
   function render(group, root) {
 
@@ -156,18 +159,22 @@ function draw(el, instance, resize){
   function click_to_shiny_input(d){
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_clicked_id', d.data.id);
+      Shiny.onInputChange(el.id + '_clicked_depth', d.depth);
       }
     }
 
   function mouseover_to_shiny_input(d){
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_mouseover_id', d.data.id);
+      Shiny.onInputChange(el.id + '_mouseover_depth', d.depth);
+      Shiny.onInputChange(el.id + '_mouseover_parent_id', d.parent.data.id);
       }
     }
 
   function mouseout_to_shiny_input(d){
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_mouseover_id', null);
+      Shiny.onInputChange(el.id + '_mouseover_depth', null);
       }
     }
 
@@ -178,7 +185,51 @@ function draw(el, instance, resize){
     if( HTMLWidgets.shinyMode ){
       Shiny.onInputChange(el.id + '_children', childrenArray);
       }
+    }
+
+   function ztm_data_id_to_shiny_input(root){
+     const data_ids = return_key_value(root, "id");
+     if( HTMLWidgets.shinyMode ){
+      Shiny.onInputChange(el.id + '_data_ids', data_ids);
+      }
+    }
+
+ function return_key_value(obj, key) {
+    var values = [];
+
+    function extract_key_value(obj, key){
+        values.push(obj[key]);
+        if(obj.children)
+            obj.children.forEach(child => {extract_key_value(child, key)})
+    }
+
+    extract_key_value(obj, key);
+
+    return values;
+
   }
+
+
+  // return a obj from nested json if a key is equal to a specified value
+  function return_node(obj, value, key) {
+    if (obj.data[key] === value) {
+        return obj;
+    } else {
+        if (obj.children) {
+            for (var i in obj.children) {
+                const node = return_node(obj.children[i], value, key);
+                if (node) return node;
+            }
+        }
+    }
+  }
+
+  function check_offspring(node){
+    if(!node.children){
+        return node.parent;
+    } else
+    return node;
+}
 
   return instance;
 

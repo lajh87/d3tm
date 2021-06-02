@@ -9,10 +9,10 @@ unbalanced hierachical data.
 ## Installation
 
 You can install the development version of d3tm from
-[GitLab](https://https://gitlab.com/) with:
+[GitHub](https://https://github.com/lajh87/d3tm.git) with:
 
 ``` r
-devtools::install_git("https://gitlab.com/lajh87/d3tm.git")
+devtools::install_github("https://github.com/lajh87/d3tm.git")
 ```
 
 ## Example
@@ -23,3 +23,7 @@ This is a basic example which shows you how to solve a common problem:
 library(d3tm)
 ztm()
 ```
+
+## Shiny
+
+See the [ShinyApp](https://lukeheley.shinyapps.io/ztm-events/) here.
