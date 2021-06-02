@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-#' @examples \dontrun{ztm()}
+#' @examples if(interactive()) ztm()
 ztm <- function(data = jsonlite::read_json(system.file("json/flare-2.json", package = "d3tm")),
                 width = "100%", height = 400, elementId = NULL) {
 

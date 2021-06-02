@@ -30,8 +30,7 @@ HTMLWidgets.widget({
     Shiny.addCustomMessageHandler('resetInputValue',
                 function(variableName){
                   Shiny.onInputChange(variableName, null);
-                  })
-
+                  });
   }
 
     return {

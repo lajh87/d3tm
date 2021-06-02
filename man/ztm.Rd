@@ -2,7 +2,7 @@
 % Please edit documentation in R/ztm.R
 \name{ztm}
 \alias{ztm}
-\title{<Add Title>}
+\title{Zoomable Treemap}
 \usage{
 ztm(
   data = jsonlite::read_json(system.file("json/flare-2.json", package = "d3tm")),
@@ -12,5 +12,8 @@ ztm(
 )
 }
 \description{
-<Add Description>
+A Zoomable Treemap Capable of Handling Unbalanced Hierarchical Data
+}
+\examples{
+if(interactive()) ztm()
 }

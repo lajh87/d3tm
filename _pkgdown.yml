@@ -1,0 +1,11 @@
+authors:
+  Luke Heley:
+    href: https://lajh87.gitlab.io
+navbar:
+  structure:
+    left:  [home, reference, news]
+    right: [github]
+  components:
+    github:
+      icon: fab fa-gitlab fa-lg
+      href: https://gitlab.com/lajh87/d3tm
