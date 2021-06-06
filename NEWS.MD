@@ -1,3 +1,9 @@
+# d3tm 0.4.2
+## New Release (June 6th, 2021)
+### Minor Changes
+* Added a function to convert data frame to tree structure.
+
+
 # d3tm 0.4.1
 ## New Release (May 28th, 2021)
 ### Minor Changes
