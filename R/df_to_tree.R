@@ -49,7 +49,7 @@ df_to_tree <- function(df, stringPath = "path", stringSep = "/",
     }))
 
     ## Loop through children and for each child if they have children then
-    ##  extract children. If not the extract the leaf values.
+    ##  extract children recursively. If not the extract the leaf values.
     purrr::map(children, function(child){
       if(has_children(l, j, child)){
         list(name = child, children = filter_children(l, j+1, child))
