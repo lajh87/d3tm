@@ -4,7 +4,7 @@
 <!-- badges: end -->
 
 The goal of d3tm is to generated a zoomable treemap capable of handling
-unbalanced hierachical data.
+unbalanced hierarchical data.
 
 ## Installation
 
