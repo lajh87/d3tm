@@ -63,7 +63,8 @@ function draw(el, instance, resize){
          .attr("id", d=>  d.data.id)
         .attr("fill", d => d === root ? "#fff" : d.children ? "#ccc" : "#ddd")
         .attr("stroke", "#fff")
-        .attr("cursor", "pointer");
+        .attr("cursor", "pointer")
+        .attr("class", "parent");
 
     node.append("clipPath")
         .attr("id", d=> "clip-" + d.data.id)
@@ -83,12 +84,25 @@ function draw(el, instance, resize){
         .attr("font-weight", (d, i, nodes) => i === nodes.length - 1 ? "normal" : null)
         .text(d => d);
 
+
     node.on("mouseover", (event, d) => mouseover_to_shiny_input(d))
         .on("mouseout", (event, d) => mouseout_to_shiny_input(d))
         .on("click", (event, d) => d === root ? zoomout(root) : zoomin(d))
 
     children_to_shiny_input(node, root);
+
     group.call(position, root);
+
+    node.selectAll(".child")
+            .data(function (d) {
+                return d.children || [d];
+            })
+            .enter().append("g")
+            .append("rect")
+            .attr("class", "child")
+            .attr("fill", d => d === root ? "#fff" : d.children ? "#ccc" : "#ddd")
+            .call(position, node.data());
+
   }
 
   function position(group, root) {

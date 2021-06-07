@@ -1,1 +1,21 @@
+/* basic rectangle styling */
+rect {
+  stroke: #fff;
+  cursor: pointer;
+}
+
+rect.parent,
+.grandparent rect {
+  stroke-width: 1.5px;
+}
+
+/* when you hover on a square highlight the children */
+.children:hover rect.child {
+  opacity: 1;
+  stroke-width: 0.5px;
+}
+
+.children:hover rect.parent{
+  opacity: 0;
+}
 
